@@ -88,17 +88,22 @@
   </build>
 
   <dependencies>
-    <dependency>
+    <!--dependency>
       <groupId>org.activiti</groupId>
       <artifactId>activiti-common-rest</artifactId>
       <version>5.14</version>
-    </dependency>
-    <dependency>
+    </dependency-->
+
+    <!--dependency>
       <groupId>org.activiti</groupId>
       <artifactId>activiti-simple-workflow</artifactId>
       <version>5.14</version>
+    </dependency-->
+     <dependency>
+      <groupId>org.activiti</groupId>
+      <artifactId>activiti-engine</artifactId>
+      <version>5.14</version>
     </dependency>
-
     <!-- Logging, using Log4j as SLF4J implementation -->
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -175,6 +180,18 @@
       <artifactId>httpmime</artifactId>
       <version>4.3.5</version>
       <scope>test</scope>
+    </dependency>
+
+     <dependency>
+  <groupId>com.fasterxml.jackson.core</groupId>
+  <artifactId>jackson-core</artifactId>
+  <version>2.7.2</version>
+</dependency>
+
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.7.2</version>
     </dependency>
     
     <!-- SPRING -->
@@ -262,6 +279,8 @@
       <version>8.1.16.v20140903</version>
       <scope>test</scope>
     </dependency>
+
+
   </dependencies>
 
   <profiles>
