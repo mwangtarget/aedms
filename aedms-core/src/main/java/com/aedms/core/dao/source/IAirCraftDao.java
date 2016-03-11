@@ -1,6 +1,6 @@
-package org.aedms.core.dao.source;
+package com.aedms.core.dao.source;
 
-import org.aedms.core.entities.source.AirCraft;
+import com.aedms.core.entities.source.AirCraft;
 
 public interface IAirCraftDao {
 	

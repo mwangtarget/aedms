@@ -1,4 +1,4 @@
-package org.aedms.core.dao;
+package com.aedms.core.dao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

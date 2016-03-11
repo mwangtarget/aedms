@@ -1,4 +1,4 @@
-package org.aedms.core.config;
+package com.aedms.core.config;
 
 import java.util.Properties;
 import javax.sql.DataSource;

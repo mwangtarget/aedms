@@ -1,4 +1,4 @@
-package org.aedms.core.entities.source;
+package com.aedms.core.entities.source;
 
 import java.io.Serializable;
 import java.util.Date;

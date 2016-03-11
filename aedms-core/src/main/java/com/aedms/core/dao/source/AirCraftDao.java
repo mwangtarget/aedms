@@ -1,7 +1,7 @@
-package org.aedms.core.dao.source;
+package com.aedms.core.dao.source;
 
-import org.aedms.core.dao.AbstractDao;
-import org.aedms.core.entities.source.AirCraft;
+import com.aedms.core.dao.AbstractDao;
+import com.aedms.core.entities.source.AirCraft;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package org.aedms;
+package com.aedms;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

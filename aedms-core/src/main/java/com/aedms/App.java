@@ -1,4 +1,4 @@
-package org.aedms;
+package com.aedms;
 
 /**
  * Hello world!
