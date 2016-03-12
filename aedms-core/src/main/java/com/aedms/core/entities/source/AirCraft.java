@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -29,34 +30,34 @@ public class AirCraft implements Serializable {
     @Column(name = "ID")
     private Long id;
 
-    @Column(name = "FLEET")
+    @Column(name = "FLEET", length = 20, nullable = true)
     private String fleet;
 
-    @Column(name = "SUB_FLEET")
+    @Column(name = "SUB_FLEET", length = 20, nullable = true)
     private String subFleet;
 
-    @Column(name = "SERIAL_NO")
+    @Column(name = "SERIAL_NO", length = 20, nullable = true)
     private String serialNo;
 
-    @Column(name = "REGISTER_NO")
+    @Column(name = "REGISTER_NO", length = 6, nullable = true)
     private String registerNo;
 
-    @Column(name = "MODEL")
+    @Column(name = "MODEL", length = 6)
     private String model;
 
-    @Column(name = "SN")
+    @Column(name = "SN", length = 20)
     private String SN;
 
-    @Column(name = "LN")
+    @Column(name = "LN", length = 20)
     private String LN;
 
-    @Column(name = "VARIABLE_NO")
+    @Column(name = "VARIABLE_NO", length = 5)
     private String variableNo;
 
-    @Column(name = "VIRFRAME_NO")
+    @Column(name = "VIRFRAME_NO", length = 5)
     private String virframeNo;
 
-    @Column(name = "IPC_REF_NO")
+    @Column(name = "IPC_REF_NO", length = 5)
     private String ipcRefNo;
 
     @Column(name = "MANUFACTURE_DATE")
@@ -67,41 +68,41 @@ public class AirCraft implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date leasingDeliveryDate;
 
-    @Column(name = "SEL_CAL")
+    @Column(name = "SEL_CAL", length = 5)
     private String selCal;
 
     @Column(name = "TENANCY_TERM")
-    private String tenancyTerm;
+    private int tenancyTerm;
 
-    @Column(name = "TYPE_CERTIFICATE")
+    @Column(name = "TYPE_CERTIFICATE", length = 5)
     private String typeCertificate;
 
-    @Column(name = "AFM_CERTIFICATE")
+    @Column(name = "AFM_CERTIFICATE", length = 5)
     private String afmCertificate;
 
-    @Column(name = "OPERATOR_BASE")
+    @Column(name = "OPERATOR_BASE", length = 20)
     private String operatorBase;
 
-    @Column(name = "OWNER")
+    @Column(name = "OWNER", length = 20)
     private String owner;
 
-    @Column(name = "ENGINE_TYPE")
+    @Column(name = "ENGINE_TYPE", length = 20)
     private String engineType;
 
     @OneToOne
-    @Column(name = "ENGINE_ONE_ID")
+    @JoinColumn(name = "ENGINE_ONE_ID")
     private Engine engineOneId;
 
     @OneToOne
-    @Column(name = "ENGINE_TWO_ID")
+    @JoinColumn(name = "ENGINE_TWO_ID")
     private Engine engineTwoId;
 
     @OneToOne
-    @Column(name = "ENGINE_THREE_ID")
+    @JoinColumn(name = "ENGINE_THREE_ID")
     private Engine engineThreeId;
 
     @OneToOne
-    @Column(name = "ENGINE_FOUR_ID")
+    @JoinColumn(name = "ENGINE_FOUR_ID")
     private Engine engineFourId;
 
     @Column(name = "SEAT_COUNT")
@@ -116,7 +117,7 @@ public class AirCraft implements Serializable {
     @Column(name = "ECONOMY_SEAT_COUNT")
     private int economySeatCount;
 
-    @Column(name = "MANUFACTURER")
+    @Column(name = "MANUFACTURER", length = 30)
     private String manufacturer;
 
     @Column(name = "ENGINE_MAX_THRUST")
@@ -140,9 +141,9 @@ public class AirCraft implements Serializable {
     @Column(name = "WEIGHT_ZERO_FUEL")
     private int weightZeroFuel;
 
-    @Column(name = "APU_INFO_ID")
     @OneToOne
-    private APU apuInfo;
+    @JoinColumn(name = "APU_ID")
+    private APU apu;
 
     /**
      * @return the id
@@ -338,20 +339,6 @@ public class AirCraft implements Serializable {
      */
     public void setSelCal(String selCal) {
         this.selCal = selCal;
-    }
-
-    /**
-     * @return the tenancyTerm
-     */
-    public String getTenancyTerm() {
-        return tenancyTerm;
-    }
-
-    /**
-     * @param tenancyTerm the tenancyTerm to set
-     */
-    public void setTenancyTerm(String tenancyTerm) {
-        this.tenancyTerm = tenancyTerm;
     }
 
     /**
@@ -595,20 +582,6 @@ public class AirCraft implements Serializable {
     }
 
     /**
-     * @return the apuInfo
-     */
-    public APU getApuInfo() {
-        return apuInfo;
-    }
-
-    /**
-     * @param apuInfo the apuInfo to set
-     */
-    public void setApuInfo(APU apuInfo) {
-        this.apuInfo = apuInfo;
-    }
-
-    /**
      * @return the engineOneId
      */
     public Engine getEngineOneId() {
@@ -662,5 +635,33 @@ public class AirCraft implements Serializable {
      */
     public void setEngineFourId(Engine engineFourId) {
         this.engineFourId = engineFourId;
+    }
+
+    /**
+     * @return the apu
+     */
+    public APU getApu() {
+        return apu;
+    }
+
+    /**
+     * @param apu the apu to set
+     */
+    public void setApu(APU apu) {
+        this.apu = apu;
+    }
+
+    /**
+     * @return the tenancyTerm
+     */
+    public int getTenancyTerm() {
+        return tenancyTerm;
+    }
+
+    /**
+     * @param tenancyTerm the tenancyTerm to set
+     */
+    public void setTenancyTerm(int tenancyTerm) {
+        this.tenancyTerm = tenancyTerm;
     }
 }
