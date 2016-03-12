@@ -140,8 +140,8 @@ public class AirCraft implements Serializable {
     @Column(name = "WEIGHT_ZERO_FUEL")
     private int weightZeroFuel;
 
-    @Column(name = "APU_INFO_ID")
     @OneToOne
+    @Column(name = "APU_INFO_ID")
     private APU apuInfo;
 
     /**
