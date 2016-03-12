@@ -11,7 +11,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.aedms.core.config.ConfigCore;
-import com.aedms.core.entities.source.AirCraft;
 import com.aedms.core.entities.source.Engine;
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.destination.DataSourceDestination;
