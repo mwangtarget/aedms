@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
@@ -26,7 +27,8 @@ public class AirCraft implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "BASIC_SEQ", allocationSize = 1, sequenceName = "BASIC_SEQ")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "BASIC_SEQ")
     @Column(name = "ID")
     private Long id;
 
