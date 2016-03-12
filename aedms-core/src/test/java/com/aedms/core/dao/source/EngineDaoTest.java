@@ -1,5 +1,6 @@
 package com.aedms.core.dao.source;
 
+import static org.testng.AssertJUnit.assertNotNull;
 import static org.testng.AssertJUnit.assertEquals;
 import javax.sql.DataSource;
 
@@ -37,9 +38,9 @@ public class EngineDaoTest extends AbstractTransactionalTestNGSpringContextTests
 		Operation operation = sequenceOf(
 				deleteAllFrom("ENGINE"),
 				insertInto("ENGINE")
-					.columns("id","fleet")
-					.values(1,"B777")
-					.values(2,"A320")
+					.columns("fleet")
+					.values("B777")
+					.values("A320")
 					.build()
 					);
 		DbSetup dbSetup = new DbSetup(new DataSourceDestination(dataSource), operation);
@@ -53,4 +54,18 @@ public class EngineDaoTest extends AbstractTransactionalTestNGSpringContextTests
 		assertEquals(engine.getFleet(), "B777");
 	}
 	
+	@Test
+	public void testSimpleInsert(){
+		Engine engine = new Engine();
+		engine.setFleet("B777");
+		engine.setModel("ABC");
+		engineDao.saveEngine(engine);
+
+		assertNotNull(Long.toString(engine.getId()),"ID of Engine after persistence");
+		
+		Engine postInsertEngine = engineDao.getEngine(engine.getId());
+		assertEquals(engine.getId(),postInsertEngine.getId());
+		assertEquals(engine.getFleet(),"B777");
+		assertEquals(engine.getModel(),"ABC");
+	}
 }

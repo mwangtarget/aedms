@@ -2,6 +2,8 @@ package com.aedms.core.dao.source;
 
 import com.aedms.core.dao.AbstractDao;
 import com.aedms.core.entities.source.AirCraft;
+import com.aedms.core.entities.source.Engine;
+
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
@@ -12,8 +14,12 @@ public class AirCraftDao extends AbstractDao implements IAirCraftDao {
 
 	@Override
 	public Long saveAirCraft(AirCraft airCraft) {
-		// TODO Auto-generated method stub
-		return null;
+		Long id = 0L;
+		getSession().save(airCraft);
+		getSession().flush();
+		getSession().getTransaction().commit();
+		id = airCraft.getId();
+		return id;
 	}
 
 	@Override
@@ -36,8 +42,7 @@ public class AirCraftDao extends AbstractDao implements IAirCraftDao {
 
 	@Override
 	public AirCraft getAirCraft(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return (AirCraft) getSession().get(AirCraft.class, id);
 	} 
 
 }

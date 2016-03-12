@@ -27,8 +27,7 @@ public class AirCraft implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @SequenceGenerator(name = "BASIC_SEQ", allocationSize = 1, sequenceName = "BASIC_SEQ")
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "BASIC_SEQ")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
 
@@ -74,7 +73,7 @@ public class AirCraft implements Serializable {
     private String selCal;
 
     @Column(name = "TENANCY_TERM")
-    private int tenancyTerm;
+    private Integer tenancyTerm;
 
     @Column(name = "TYPE_CERTIFICATE", length = 5)
     private String typeCertificate;
@@ -93,55 +92,55 @@ public class AirCraft implements Serializable {
 
     @OneToOne
     @JoinColumn(name = "ENGINE_ONE_ID")
-    private Engine engineOneId;
+    private Engine engineOne;
 
     @OneToOne
     @JoinColumn(name = "ENGINE_TWO_ID")
-    private Engine engineTwoId;
+    private Engine engineTwo;
 
     @OneToOne
     @JoinColumn(name = "ENGINE_THREE_ID")
-    private Engine engineThreeId;
+    private Engine engineThree;
 
     @OneToOne
     @JoinColumn(name = "ENGINE_FOUR_ID")
-    private Engine engineFourId;
+    private Engine engineFour;
 
     @Column(name = "SEAT_COUNT")
-    private int seatCount;
+    private Integer seatCount;
 
     @Column(name = "FIRST_SEAT_COUNT")
-    private int firstSeatCount;
+    private Integer firstSeatCount;
 
-    @Column(name = "BUS_SEAT_COUNT")
-    private int busSeatCount;
+    @Column(name = "BUS_SEAT_COUNT", nullable=true)
+    private Integer busSeatCount;
 
     @Column(name = "ECONOMY_SEAT_COUNT")
-    private int economySeatCount;
+    private Integer economySeatCount;
 
     @Column(name = "MANUFACTURER", length = 30)
     private String manufacturer;
 
     @Column(name = "ENGINE_MAX_THRUST")
-    private int engineMaxThrust;
+    private Integer engineMaxThrust;
 
     @Column(name = "FUEL_CAPACITY")
-    private int fuelCapacity;
+    private Integer fuelCapacity;
 
     @Column(name = "WEIGHT_MAX_TAKEOFF")
-    private int weigthMaxTakeOff;
+    private Integer weigthMaxTakeOff;
 
     @Column(name = "WEIGHT_MAX_LANDING")
-    private int weightMaxLanding;
+    private Integer weightMaxLanding;
 
     @Column(name = "WEIGHT_MAX_TAXI")
-    private int weightMaxTaxi;
+    private Integer weightMaxTaxi;
 
     @Column(name = "WEIGHT_EMPTY")
-    private int weightEmpty;
+    private Integer weightEmpty;
 
     @Column(name = "WEIGHT_ZERO_FUEL")
-    private int weightZeroFuel;
+    private Integer weightZeroFuel;
 
     @OneToOne
     @JoinColumn(name = "APU_ID")
@@ -418,28 +417,28 @@ public class AirCraft implements Serializable {
     /**
      * @return the seatCount
      */
-    public int getSeatCount() {
+    public Integer getSeatCount() {
         return seatCount;
     }
 
     /**
      * @param seatCount the seatCount to set
      */
-    public void setSeatCount(int seatCount) {
+    public void setSeatCount(Integer seatCount) {
         this.seatCount = seatCount;
     }
 
     /**
      * @return the firstSeatCount
      */
-    public int getFirstSeatCount() {
+    public Integer getFirstSeatCount() {
         return firstSeatCount;
     }
 
     /**
      * @param firstSeatCount the firstSeatCount to set
      */
-    public void setFirstSeatCount(int firstSeatCount) {
+    public void setFirstSeatCount(Integer firstSeatCount) {
         this.firstSeatCount = firstSeatCount;
     }
 
@@ -453,21 +452,21 @@ public class AirCraft implements Serializable {
     /**
      * @param busSeatCount the busSeatCount to set
      */
-    public void setBusSeatCount(int busSeatCount) {
+    public void setBusSeatCount(Integer busSeatCount) {
         this.busSeatCount = busSeatCount;
     }
 
     /**
      * @return the economySeatCount
      */
-    public int getEconomySeatCount() {
+    public Integer getEconomySeatCount() {
         return economySeatCount;
     }
 
     /**
      * @param economySeatCount the economySeatCount to set
      */
-    public void setEconomySeatCount(int economySeatCount) {
+    public void setEconomySeatCount(Integer economySeatCount) {
         this.economySeatCount = economySeatCount;
     }
 
@@ -488,155 +487,155 @@ public class AirCraft implements Serializable {
     /**
      * @return the engineMaxThrust
      */
-    public int getEngineMaxThrust() {
+    public Integer getEngineMaxThrust() {
         return engineMaxThrust;
     }
 
     /**
      * @param engineMaxThrust the engineMaxThrust to set
      */
-    public void setEngineMaxThrust(int engineMaxThrust) {
+    public void setEngineMaxThrust(Integer engineMaxThrust) {
         this.engineMaxThrust = engineMaxThrust;
     }
 
     /**
      * @return the fuelCapacity
      */
-    public int getFuelCapacity() {
+    public Integer getFuelCapacity() {
         return fuelCapacity;
     }
 
     /**
      * @param fuelCapacity the fuelCapacity to set
      */
-    public void setFuelCapacity(int fuelCapacity) {
+    public void setFuelCapacity(Integer fuelCapacity) {
         this.fuelCapacity = fuelCapacity;
     }
 
     /**
      * @return the weigthMaxTakeOff
      */
-    public int getWeigthMaxTakeOff() {
+    public Integer getWeigthMaxTakeOff() {
         return weigthMaxTakeOff;
     }
 
     /**
      * @param weigthMaxTakeOff the weigthMaxTakeOff to set
      */
-    public void setWeigthMaxTakeOff(int weigthMaxTakeOff) {
+    public void setWeigthMaxTakeOff(Integer weigthMaxTakeOff) {
         this.weigthMaxTakeOff = weigthMaxTakeOff;
     }
 
     /**
      * @return the weightMaxLanding
      */
-    public int getWeightMaxLanding() {
+    public Integer getWeightMaxLanding() {
         return weightMaxLanding;
     }
 
     /**
      * @param weightMaxLanding the weightMaxLanding to set
      */
-    public void setWeightMaxLanding(int weightMaxLanding) {
+    public void setWeightMaxLanding(Integer weightMaxLanding) {
         this.weightMaxLanding = weightMaxLanding;
     }
 
     /**
      * @return the weightMaxTaxi
      */
-    public int getWeightMaxTaxi() {
+    public Integer getWeightMaxTaxi() {
         return weightMaxTaxi;
     }
 
     /**
      * @param weightMaxTaxi the weightMaxTaxi to set
      */
-    public void setWeightMaxTaxi(int weightMaxTaxi) {
+    public void setWeightMaxTaxi(Integer weightMaxTaxi) {
         this.weightMaxTaxi = weightMaxTaxi;
     }
 
     /**
      * @return the weightEmpty
      */
-    public int getWeightEmpty() {
+    public Integer getWeightEmpty() {
         return weightEmpty;
     }
 
     /**
      * @param weightEmpty the weightEmpty to set
      */
-    public void setWeightEmpty(int weightEmpty) {
+    public void setWeightEmpty(Integer weightEmpty) {
         this.weightEmpty = weightEmpty;
     }
 
     /**
      * @return the weightZeroFuel
      */
-    public int getWeightZeroFuel() {
+    public Integer getWeightZeroFuel() {
         return weightZeroFuel;
     }
 
     /**
      * @param weightZeroFuel the weightZeroFuel to set
      */
-    public void setWeightZeroFuel(int weightZeroFuel) {
+    public void setWeightZeroFuel(Integer weightZeroFuel) {
         this.weightZeroFuel = weightZeroFuel;
     }
 
     /**
      * @return the engineOneId
      */
-    public Engine getEngineOneId() {
-        return engineOneId;
+    public Engine getEngineOne() {
+        return engineOne;
     }
 
     /**
      * @param engineOneId the engineOneId to set
      */
-    public void setEngineOneId(Engine engineOneId) {
-        this.engineOneId = engineOneId;
+    public void setEngineOne(Engine engineOne) {
+        this.engineOne = engineOne;
     }
 
     /**
      * @return the engineTwoId
      */
-    public Engine getEngineTwoId() {
-        return engineTwoId;
+    public Engine getEngineTwo() {
+        return engineTwo;
     }
 
     /**
      * @param engineTwoId the engineTwoId to set
      */
-    public void setEngineTwoId(Engine engineTwoId) {
-        this.engineTwoId = engineTwoId;
+    public void setEngineTwo(Engine engineTwo) {
+        this.engineTwo = engineTwo;
     }
 
     /**
      * @return the engineThreeId
      */
-    public Engine getEngineThreeId() {
-        return engineThreeId;
+    public Engine getEngineThree() {
+        return engineThree;
     }
 
     /**
      * @param engineThreeId the engineThreeId to set
      */
-    public void setEngineThreeId(Engine engineThreeId) {
-        this.engineThreeId = engineThreeId;
+    public void setEngineThree(Engine engineThree) {
+        this.engineThree = engineThree;
     }
 
     /**
      * @return the engineFourId
      */
-    public Engine getEngineFourId() {
-        return engineFourId;
+    public Engine getEngineFour() {
+        return engineFour;
     }
 
     /**
      * @param engineFourId the engineFourId to set
      */
-    public void setEngineFourId(Engine engineFourId) {
-        this.engineFourId = engineFourId;
+    public void setEngineFour(Engine engineFour) {
+        this.engineFour = engineFour;
     }
 
     /**
@@ -656,14 +655,14 @@ public class AirCraft implements Serializable {
     /**
      * @return the tenancyTerm
      */
-    public int getTenancyTerm() {
+    public Integer getTenancyTerm() {
         return tenancyTerm;
     }
 
     /**
      * @param tenancyTerm the tenancyTerm to set
      */
-    public void setTenancyTerm(int tenancyTerm) {
+    public void setTenancyTerm(Integer tenancyTerm) {
         this.tenancyTerm = tenancyTerm;
     }
 }

@@ -24,10 +24,9 @@ public class LandingGear implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @SequenceGenerator(name = "BASIC_SEQ", allocationSize = 1, sequenceName = "BASIC_SEQ")
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "BASIC_SEQ")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    private long ID;
+    private long id;
     
     @Column(name = "MODEL")
     private String model;
@@ -55,15 +54,15 @@ public class LandingGear implements Serializable {
     /**
      * @return the ID
      */
-    public long getID() {
-        return ID;
+    public long getId() {
+        return id;
     }
 
     /**
      * @param ID the ID to set
      */
-    public void setID(long ID) {
-        this.ID = ID;
+    public void setId(long id) {
+        this.id = id;
     }
 
     /**

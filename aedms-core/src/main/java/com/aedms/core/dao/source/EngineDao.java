@@ -6,15 +6,17 @@ import org.springframework.stereotype.Repository;
 import com.aedms.core.dao.AbstractDao;
 import com.aedms.core.entities.source.Engine;
 
-
 @Component
 @Repository("engineDAO")
-public class EngineDao extends AbstractDao implements IEngineDao{
+public class EngineDao extends AbstractDao implements IEngineDao {
 
 	@Override
 	public Long saveEngine(Engine engine) {
-		// TODO Auto-generated method stub
-		return null;
+		Long id = 0L;
+		getSession().save(engine);
+		getSession().flush();
+		id = engine.getId();
+		return id;
 	}
 
 	@Override
@@ -24,7 +26,7 @@ public class EngineDao extends AbstractDao implements IEngineDao{
 	}
 
 	@Override
-	public boolean updateAirCraft(Engine user) {
+	public boolean updateEngine(Engine user) {
 		// TODO Auto-generated method stub
 		return false;
 	}

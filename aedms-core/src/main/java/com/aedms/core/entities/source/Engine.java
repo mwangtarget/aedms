@@ -24,10 +24,9 @@ public class Engine implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @SequenceGenerator(name = "BASIC_SEQ", allocationSize = 1, sequenceName = "BASIC_SEQ")
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "BASIC_SEQ")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    private long ID;
+    private long id;
     
     @Column(name = "FLEET")
     private String fleet;
@@ -64,12 +63,12 @@ public class Engine implements Serializable {
     @Column(name = "REMARK")
     private String remark;
 
-    public long getID() {
-        return ID;
+    public long getId() {
+        return id;
     }
 
-    public void setID(long ID) {
-        this.ID = ID;
+    public void setId(long id) {
+        this.id = id;
     }
 
     /**

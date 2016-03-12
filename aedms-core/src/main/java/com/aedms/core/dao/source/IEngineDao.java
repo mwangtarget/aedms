@@ -7,7 +7,7 @@ public interface  IEngineDao {
 
 	public boolean deleteEngine(Long id);
 
-	public boolean updateAirCraft(Engine user);
+	public boolean updateEngine(Engine user);
 
 	public Engine loadEngine(Long id);
 
