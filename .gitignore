@@ -26,4 +26,3 @@ local.properties
 *.launch
 # Test output
 /test-output/
-/aedms-core/src/test/java/com/aedms/core/dao/source/AirCraftTest.java
