@@ -14,7 +14,7 @@
       <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
       <property name="show_sql">true</property>
-      <property name="format_sql">false</property>
+      <property name="format_sql">true</property>
     </properties>
   </persistence-unit>
 </persistence>

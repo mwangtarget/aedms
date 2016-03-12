@@ -17,7 +17,7 @@ import javax.persistence.Temporal;
  * @author jaly
  */
 @Entity
-@Table(name = "LANDING_GEAR_INFO")
+@Table(name = "LANDING_GEAR")
 public class LandingGear implements Serializable {
 
     private static final long serialVersionUID = 1L;

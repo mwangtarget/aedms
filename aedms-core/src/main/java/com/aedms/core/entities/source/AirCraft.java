@@ -20,7 +20,7 @@ import javax.persistence.Temporal;
  *
  */
 @Entity
-@Table(name = "AIRCRAFT_INFO")
+@Table(name = "AIRCRAFT")
 public class AirCraft implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -182,12 +182,11 @@
                 <artifactId>maven-plugin-api</artifactId>
                 <version>3.3.9</version>
             </dependency>
-
         </dependencies>
     </dependencyManagement>
     <build>
         <plugins>
-            <!--            <plugin>
+<!--            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.3</version>

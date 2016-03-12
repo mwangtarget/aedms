@@ -17,7 +17,7 @@ import javax.persistence.Temporal;
  * @author jaly
  */
 @Entity
-@Table(name="ENGINE_INFO")
+@Table(name="ENGINE")
 public class Engine implements Serializable {
 
     private static final long serialVersionUID = 1L;

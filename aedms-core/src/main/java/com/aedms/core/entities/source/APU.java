@@ -17,7 +17,7 @@ import javax.persistence.Temporal;
  * @author jaly
  */
 @Entity
-@Table(name = "APU_INFO")
+@Table(name = "APU")
 public class APU  implements Serializable{
 
     private static final long serialVersionUID = 1L;
