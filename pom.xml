@@ -25,7 +25,6 @@
         <module>aedms-reporting</module>
         <module>aedms-gui</module>
         <module>aedms-deploy</module>
-        <module>aedms-core-rest</module>
     </modules>
 
     <!--TODO: to clean up dependencies and clasify -->

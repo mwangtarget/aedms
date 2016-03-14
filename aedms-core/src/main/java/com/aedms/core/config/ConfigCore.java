@@ -29,7 +29,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ComponentScan(basePackages = { "com" }, excludeFilters = { @ComponentScan.Filter(Configuration.class) })
 @EnableTransactionManagement
 @EnableMBeanExport
-@PropertySource(value = { "classpath:aedms-core.properties" })
+//@PropertySource(value = { "classpath:aedms-core.properties" })
 public class ConfigCore {
 
 	@Autowired
