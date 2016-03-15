@@ -51,7 +51,15 @@ public class LandingGear implements Serializable {
     @Column(name = "ORP")
     private String orp;
 
-    /**
+    
+    @Override
+	public String toString() {
+		return "LandingGear [id=" + id + ", model=" + model + ", SN=" + SN + ", manufactureDate=" + manufactureDate
+				+ ", rentDate=" + rentDate + ", leaseHold=" + leaseHold + ", leaseHolder=" + leaseHolder + ", orp="
+				+ orp + "]";
+	}
+
+	/**
      * @return the ID
      */
     public long getId() {

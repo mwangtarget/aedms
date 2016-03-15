@@ -51,7 +51,16 @@ public class APU  implements Serializable{
     @Column(name = "OPR")
     private String opr;
     
-    public long getId() {
+    
+    
+    @Override
+	public String toString() {
+		return "APU [id=" + id + ", model=" + model + ", SN=" + SN + ", manufactureDate=" + manufactureDate
+				+ ", rentDate=" + rentDate + ", leaseHold=" + leaseHold + ", leaseHolder=" + leaseHolder + ", opr="
+				+ opr + "]";
+	}
+
+	public long getId() {
         return id;
     }
 

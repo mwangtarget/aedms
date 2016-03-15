@@ -64,63 +64,19 @@ public class Engine implements Serializable {
     @Column(name = "REMARK")
     private String remark;
 
-    protected Engine(){}
+   
     
-    public String toString(){
-    	 return String.format(
-                 "Engine[id=%d, fleet='%s', subfleet='%s', model='%s', serialNo='%s', SN='%s']",
-                 id, fleet, subFleet, model, serialNo, SN);
-    }
     
-    private Engine(String fleet, String subFleet, String model, String serialNo, String SN){
-		this.fleet = fleet;
-		this.subFleet = subFleet;
-		this.model = model;
-		this.serialNo = serialNo;
-		this.SN = SN;
-	}
-
-    /**
-     * Engine Builder
-     * **/
-	public static class Builder {
-		private String fleet;
-		private String subFleet;
-		private String model;
-		private String serialNo;
-		private String SN;
-
-		
-		public Builder fleet(String fleet){
-			this.fleet = fleet;
-			return this;
-		}
-		
-		public Builder subFleet(String subFleet){
-			this.subFleet = subFleet;
-			return this;
-		}
-		public Builder model(String model){
-			this.model = model;
-			return this;
-		}
-		public Builder serialNo(String serialNo){
-			this.serialNo = serialNo;
-			return this;
-		}
-		public Builder SN(String SN){
-			this.SN = SN;
-			return this;
-		}
-		
-		
-		public Engine build(){
-			return new Engine(this.fleet, this.subFleet, this.model, this.serialNo, this.SN);
-		}
-		
-	}
 	
-    public long getId() {
+    @Override
+	public String toString() {
+		return "Engine [id=" + id + ", fleet=" + fleet + ", subFleet=" + subFleet + ", serialNo=" + serialNo
+				+ ", model=" + model + ", SN=" + SN + ", manufactureDate=" + manufactureDate + ", rentDate=" + rentDate
+				+ ", leaseHold=" + leaseHold + ", leaseHolder=" + leaseHolder + ", opr=" + opr + ", remark=" + remark
+				+ "]";
+	}
+
+	public long getId() {
         return id;
     }
 

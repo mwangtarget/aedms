@@ -146,7 +146,25 @@ public class AirCraft implements Serializable {
     @JoinColumn(name = "APU_ID")
     private APU apu;
 
-    /**
+    
+    @Override
+	public String toString() {
+		return "AirCraft [id=" + id + ", fleet=" + fleet + ", subFleet=" + subFleet + ", serialNo=" + serialNo
+				+ ", registerNo=" + registerNo + ", model=" + model + ", SN=" + SN + ", LN=" + LN + ", variableNo="
+				+ variableNo + ", virframeNo=" + virframeNo + ", ipcRefNo=" + ipcRefNo + ", manufactureDate="
+				+ manufactureDate + ", leasingDeliveryDate=" + leasingDeliveryDate + ", selCal=" + selCal
+				+ ", tenancyTerm=" + tenancyTerm + ", typeCertificate=" + typeCertificate + ", afmCertificate="
+				+ afmCertificate + ", operatorBase=" + operatorBase + ", owner=" + owner + ", engineType=" + engineType
+				+ ", engineOne=" + engineOne + ", engineTwo=" + engineTwo + ", engineThree=" + engineThree
+				+ ", engineFour=" + engineFour + ", seatCount=" + seatCount + ", firstSeatCount=" + firstSeatCount
+				+ ", busSeatCount=" + busSeatCount + ", economySeatCount=" + economySeatCount + ", manufacturer="
+				+ manufacturer + ", engineMaxThrust=" + engineMaxThrust + ", fuelCapacity=" + fuelCapacity
+				+ ", weigthMaxTakeOff=" + weigthMaxTakeOff + ", weightMaxLanding=" + weightMaxLanding
+				+ ", weightMaxTaxi=" + weightMaxTaxi + ", weightEmpty=" + weightEmpty + ", weightZeroFuel="
+				+ weightZeroFuel + ", apu=" + apu + "]";
+	}
+
+	/**
      * @return the id
      */
     public Long getId() {
