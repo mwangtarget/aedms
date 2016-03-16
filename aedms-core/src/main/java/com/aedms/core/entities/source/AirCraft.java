@@ -463,7 +463,7 @@ public class AirCraft implements Serializable {
     /**
      * @return the busSeatCount
      */
-    public int getBusSeatCount() {
+    public Integer getBusSeatCount() {
         return busSeatCount;
     }
 

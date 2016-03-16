@@ -23,8 +23,8 @@ public class AirCraftBuilder implements com.aedms.core.entities.source.builder.B
         return this;
     }
     
-    public AirCraftBuilder withEngineFour(com.aedms.core.entities.source.builder.Builder<com.aedms.core.entities.source.Engine> engineFour) {
-        getTarget().setEngineFour(engineFour.build());
+    public AirCraftBuilder withEngineFour(com.aedms.core.entities.source.Engine engineFour) {
+        getTarget().setEngineFour(engineFour);
         return this;
     }
     
@@ -43,8 +43,8 @@ public class AirCraftBuilder implements com.aedms.core.entities.source.builder.B
         return this;
     }
     
-    public AirCraftBuilder withEngineOne(com.aedms.core.entities.source.builder.Builder<com.aedms.core.entities.source.Engine> engineOne) {
-        getTarget().setEngineOne(engineOne.build());
+    public AirCraftBuilder withEngineOne(com.aedms.core.entities.source.Engine engineOne) {
+        getTarget().setEngineOne(engineOne);
         return this;
     }
     
@@ -128,13 +128,13 @@ public class AirCraftBuilder implements com.aedms.core.entities.source.builder.B
         return this;
     }
     
-    public AirCraftBuilder withApu(com.aedms.core.entities.source.builder.Builder<com.aedms.core.entities.source.APU> apu) {
-        getTarget().setApu(apu.build());
+    public AirCraftBuilder withApu(com.aedms.core.entities.source.APU apu) {
+        getTarget().setApu(apu);
         return this;
     }
     
-    public AirCraftBuilder withEngineTwo(com.aedms.core.entities.source.builder.Builder<com.aedms.core.entities.source.Engine> engineTwo) {
-        getTarget().setEngineTwo(engineTwo.build());
+    public AirCraftBuilder withEngineTwo(com.aedms.core.entities.source.Engine engineTwo) {
+        getTarget().setEngineTwo(engineTwo);
         return this;
     }
     
@@ -178,8 +178,8 @@ public class AirCraftBuilder implements com.aedms.core.entities.source.builder.B
         return this;
     }
     
-    public AirCraftBuilder withEngineThree(com.aedms.core.entities.source.builder.Builder<com.aedms.core.entities.source.Engine> engineThree) {
-        getTarget().setEngineThree(engineThree.build());
+    public AirCraftBuilder withEngineThree(com.aedms.core.entities.source.Engine engineThree) {
+        getTarget().setEngineThree(engineThree);
         return this;
     }
     
