@@ -1,11 +1,8 @@
-<!--<div class="hero-unit">-->
-  <!--<h1>'Allo, 'Allo!</h1>-->
-  <!--<p>You now have</p>-->
-  <!--<ul>-->
-      <!--<li ng-repeat="thing in awesomeThings">{{thing}}</li>-->
-  <!--</ul>-->
-  <!--<p>installed.</p>-->
-  <!--<h3>Enjoy coding! - Yeoman</h3>-->
-<!--</div>-->
 
-        this is a test
+        <div class="row user-row" ng-repeat="engine in engines">
+            <div class="col-xs-8 col-sm-9 col-md-10 col-lg-10" 
+                <strong>{{engine.id}}</strong><br>
+                <span class="text-muted">{{engine.fleet}}</span>
+            </div>
+        </div>
+

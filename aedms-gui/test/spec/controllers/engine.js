@@ -1,23 +1,23 @@
 'use strict';
 
-describe('Controller: MainCtrl', function () {
+describe('Controller: EngineCtrl', function () {
 
   // load the controller's module
   beforeEach(module('aedmsGuiApp'));
 
-  var MainCtrl,
+  var EngineCtrl,
     scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    MainCtrl = $controller('MainCtrl', {
+    EngineCtrl = $controller('EngineCtrl', {
       $scope: scope
       // place here mocked dependencies
     });
   }));
 
   it('should attach a list of awesomeThings to the scope', function () {
-    expect(MainCtrl.awesomeThings.length).toBe(3);
+    expect(EngineCtrl.awesomeThings.length).toBe(3);
   });
 });
