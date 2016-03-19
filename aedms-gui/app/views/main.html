@@ -1,8 +1,15 @@
 
-        <div class="row user-row" ng-repeat="engine in engines">
+        <div class="row user-row" ng-repeat="engine in enginesList">
             <div class="col-xs-8 col-sm-9 col-md-10 col-lg-10" 
-                <strong>{{engine.id}}</strong><br>
-                <span class="text-muted">{{engine.fleet}}</span>
+                <strong>{{engine.fleet}}</strong><br>
+                <span class="text-muted">{{engine.subFleet}}</span>
             </div>
         </div>
+         <div class="row user-row" ng-repeat="engine in engines">
+            <div class="col-xs-8 col-sm-9 col-md-10 col-lg-10" 
+                <strong>{{engine.fleet}}</strong><br>
+                <span class="text-muted">{{engine.subFleet}}</span>
+            </div>
+        </div>
+
 

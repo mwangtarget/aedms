@@ -2,13 +2,12 @@
 
 /**
  * @ngdoc function
- * @name aedmsGuiApp.controller:EngineCtrl
+ * @name aedmsGuiApp.service:EngineServie
  * @description
- * # EngineCtrl
+ * # EngineService
  * Controller of the aedmsGuiApp
  */
 angular.module('aedmsGuiApp')
 .factory('EngineService', function ($resource) {
-    var data = $resource('http://localhost:8080/engines/');
-    return data;
+    return $resource('http://localhost/aedms-core/engines/:engine', {engine: "@engine"});
 });
