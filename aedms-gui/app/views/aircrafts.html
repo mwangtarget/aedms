@@ -33,7 +33,7 @@
                         <label class="control-label" for="inputStatus">Engine</label>
                         <div class="controls">
                             <select id="inputStatus" class="form-control" ng-model="main.currentStatus"
-                                    ng-options="l.name for l in main.engines"
+                                    ng-options="l.fleet for l in main.engines"
                                     ng-change="main.setCurrentStatus(main.currentStatus)"></select>
                         </div>
                     </div>

@@ -21,19 +21,25 @@ angular.module('aedmsGuiApp')
                 buildIndex: buildIndex
             };
         })
-        .service('AirCraftService', function () {
+        .service('AirCraftService', ['EngineService', function (EngineServie) {
             // var data = $resource('http://localhost:8080/aircrafts/');
             // return data.get();
+            var engines = {};
+            
+            EngineService.get(function(response) {
+               engines = response._embedded.engines;
+            });
+        
             var service = this,
-                    engines = [
-                        {name: 'Back Log'},
-                        {name: 'To Do'},
-                        {name: 'In Progress'},
-                        {name: 'Code Review'},
-                        {name: 'QA Review'},
-                        {name: 'Verified'},
-                        {name: 'Done'}
-                    ],
+                    // engines = [
+                    //     {name: 'Back Log'},
+                    //     {name: 'To Do'},
+                    //     {name: 'In Progress'},
+                    //     {name: 'Code Review'},
+                    //     {name: 'QA Review'},
+                    //     {name: 'Verified'},
+                    //     {name: 'Done'}
+                    // ],
                     apus = [
                         {name: 'Feature'},
                         {name: 'Enhancement'},
@@ -81,4 +87,4 @@ angular.module('aedmsGuiApp')
             service.getAirCrafts = function () {
                 return aircrafts;
             };
-        });
+        }]);
