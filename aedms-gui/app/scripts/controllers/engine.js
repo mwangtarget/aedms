@@ -8,12 +8,23 @@
  * Controller of the aedmsGuiApp
  */
 angular.module('aedmsGuiApp')
-  .config(['$httpProvider', function($httpProvider) {
-        $httpProvider.defaults.useXDomain = true;
-        delete $httpProvider.defaults.headers.common['X-Requested-With'];
-    }
-  ])
-  .controller('EngineCtrl', function ($scope, $resource) {
-  	var data = $resource('http://localhost:8080/engines/');
-    $scope.engines = data.get();
-  });
+  .controller('EngineCtrl', ['$scope','EngineService', function ($scope, EngineService) {
+  	  $scope.enginesList = {};
+  	  $scope.engines = {};
+
+      EngineService.get(function(response) {
+      
+         $scope.enginesList = response._embedded.engines;
+      });
+
+      EngineService.get({engine:1},function(response) {
+      
+         $scope.engines = response;
+      });
+     // HTTP module
+     // $http.get('http://localhost/aedms-core/engines/').success(function(data) {
+     //          $scope.engines = data._embedded.engines;
+     //          console.log("Got "+ $scope.engines.length+ " Engines");
+     //    });
+
+  }])
