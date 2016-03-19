@@ -8,7 +8,7 @@
  * Controller of the aedmsGuiApp
  */
 angular.module('aedmsGuiApp')
-  .controller('EngineCtrl', ['$scope','EngineService', function ($scope, EngineService) {
+   .controller('EngineCtrl', ['$scope','EngineService', function ($scope, EngineService) {
   	  $scope.enginesList = {};
   	  $scope.engines = {};
 
@@ -21,10 +21,13 @@ angular.module('aedmsGuiApp')
       
          $scope.engines = response;
       });
-     // HTTP module
-     // $http.get('http://localhost/aedms-core/engines/').success(function(data) {
-     //          $scope.engines = data._embedded.engines;
-     //          console.log("Got "+ $scope.engines.length+ " Engines");
-     //    });
 
-  }])
+   }]);
+  // .controller('EngineCtrl', ['$scope', '$http', function ($scope, $http) {
+  // 	  $scope.enginesList = {};
+  //     $http.get('http://localhost:8080/aedms-core/engines/').success(function(data) {
+  //             $scope.enginesList = data._embedded.engines;
+  //             console.log("Got "+ $scope.engines.length+ " Engines");
+  //       });
+
+  //  }])
