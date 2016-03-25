@@ -102,8 +102,7 @@ public class ConfigCore {
         CorsConfiguration config = new CorsConfiguration();
         config.addAllowedOrigin(environment.getRequiredProperty("cors.allowed.origins"));
         config.addAllowedHeader("*");
-        config.addAllowedMethod("GET");
-        config.addAllowedMethod("PUT");
+        config.addAllowedMethod("*");
         source.registerCorsConfiguration(environment.getRequiredProperty("cors.allowed.map"), config);
         return new CorsFilter(source);
     }

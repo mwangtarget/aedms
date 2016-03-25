@@ -41,6 +41,8 @@
             <ul class="nav navbar-nav">
               <li class="active"><a href="#/">Home</a></li>
               <li><a ng-href="#/aircrafts">AirCraft</a></li>
+              <li><a ng-href="#/engines">engine</a></li>
+              <li><a ng-href="#/apus">apu</a></li>
               <li><a ng-href="#/about">About</a></li>
               <li><a ng-href="#/">Contact</a></li>
             </ul>
@@ -82,6 +84,7 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -90,7 +93,9 @@
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/about.js"></script>
         <script src="scripts/controllers/engine.js"></script>
-        <script src="scripts/factory/engine_rest.js"></script>
+        <script src="scripts/controllers/apu.js"></script>
+        <script src="scripts/services/engine_service.js"></script>
+        <script src="scripts/services/apu_service.js"></script>
         <script src="scripts/controllers/aircraft.js"></script>
         <script src="scripts/services/aircraftService.js"></script>
         <!-- endbuild -->

@@ -15,14 +15,25 @@ angular
             'ngResource',
             'ngRoute',
             'ngSanitize',
-            'ngTouch'
+            'ngTouch',
+            'ui.bootstrap'
         ])
         .config(function ($routeProvider) {
             $routeProvider
                     .when('/', {
                         templateUrl: 'views/main.html',
+                        controller: 'MainCtrl',
+                        controllerAs: 'mainCtrl'
+                    })
+                    .when('/engines', {
+                        templateUrl: 'views/engines.html',
                         controller: 'EngineCtrl',
                         controllerAs: 'engineCtrl'
+                    })
+                    .when('/apus', {
+                        templateUrl: 'views/apus.html',
+                        controller: 'APUCtrl',
+                        controllerAs: 'apuCtrl'
                     })
                     .when('/aircrafts', {
                         templateUrl: 'views/aircrafts.html',
