@@ -1,6 +1,5 @@
 package com.aedms.core.entities.source.builder;
 
-import com.aedms.core.entities.source.Engine;
 
 public class EngineBuilder implements com.aedms.core.entities.source.builder.Builder<com.aedms.core.entities.source.Engine> {
     public static EngineBuilder anEngine() {
@@ -40,6 +39,14 @@ public class EngineBuilder implements com.aedms.core.entities.source.builder.Bui
         return this;
     }
     
+    public EngineBuilder withEngineOprRec(com.aedms.core.entities.source.builder.Builder<com.aedms.core.entities.source.EngineOprRec> engineOprRec) {
+        if (getTarget().getEngineOprRecs() == null) {
+            getTarget().setEngineOprRecs(new java.util.HashSet<com.aedms.core.entities.source.EngineOprRec>());
+        }        
+        getTarget().getEngineOprRecs().add(engineOprRec.build());
+        return this;
+    }
+    
     public EngineBuilder withRentDate(java.util.Date rentDate) {
         getTarget().setRentDate(rentDate);
         return this;
@@ -67,6 +74,14 @@ public class EngineBuilder implements com.aedms.core.entities.source.builder.Bui
     
     public EngineBuilder withId(long id) {
         getTarget().setId(id);
+        return this;
+    }
+    
+    public EngineBuilder withEngineStatRec(com.aedms.core.entities.source.builder.Builder<com.aedms.core.entities.source.EngineStatRec> engineStatRec) {
+        if (getTarget().getEngineStatRecs() == null) {
+            getTarget().setEngineStatRecs(new java.util.HashSet<com.aedms.core.entities.source.EngineStatRec>());
+        }        
+        getTarget().getEngineStatRecs().add(engineStatRec.build());
         return this;
     }
     

@@ -11,6 +11,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
+import org.hibernate.envers.Audited;
+
 /**
  * The Entity to representing APP information.
  * The physical table is "APU_INFO"
@@ -19,6 +21,7 @@ import javax.persistence.Temporal;
  */
 @Entity
 @Table(name = "APU")
+@Audited
 public class APU  implements Serializable{
 
     private static final long serialVersionUID = 1L;

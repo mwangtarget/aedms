@@ -13,6 +13,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
+import org.hibernate.envers.Audited;
+
 /**
  * The Entity to representing AirCraft. The physical table is "AIRCRAFT_INFO"
  *
@@ -22,6 +24,7 @@ import javax.persistence.Temporal;
  */
 @Entity
 @Table(name = "AIRCRAFT")
+@Audited
 public class AirCraft implements Serializable {
 
     private static final long serialVersionUID = 1L;
