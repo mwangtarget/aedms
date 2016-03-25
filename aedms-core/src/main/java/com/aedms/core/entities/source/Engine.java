@@ -27,7 +27,7 @@ import org.hibernate.envers.Audited;
  */
 @Entity
 @Table(name="ENGINE")
-@Audited
+//@Audited // Cause error: An audited relation to a not audited entity
 public class Engine implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -24,7 +24,7 @@ import org.hibernate.envers.Audited;
  */
 @Entity
 @Table(name = "AIRCRAFT")
-@Audited
+//@Audited // Cause error: An audited relation to a not audited entity
 public class AirCraft implements Serializable {
 
     private static final long serialVersionUID = 1L;
