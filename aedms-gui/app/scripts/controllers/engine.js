@@ -101,4 +101,68 @@ angular.module('aedmsGuiApp')
 
     $scope.query = "";
 
+      /**
+     * Groups edit dialog
+     */
+    var ModalEngineOprInstanceCtrl = function ($scope, $uibModalInstance, engine, EngineOprService, EngineOprListService) {
+        $scope.engine = engine;
+        $scope.ok = function () {
+            $uibModalInstance.close(engine);
+        };
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss('cancel');
+        };
+
+        function reloadEngineOprs() {
+             EngineOprListService.get({"engine": engine._links.self.href.split('/').pop()}, function(response){
+             	$scope.engineOprList = response._embedded.engineOprRecs;
+             });
+        }
+
+        $scope.removeEngineOpr = function (engine_opr) {
+            EngineOprService.delete({"engineOprRec":engine_opr._links.self.href.split('/').pop()}, function () {
+                reloadEngineOprs();
+            });
+        }
+
+        reloadEngineOprs();
+
+        EngineOprService.get(function(response){
+        	$scope.engineOprs = response._embedded.engineOprRecs;
+        });
+
+        function clearSelection() {
+            $scope.selected = undefined;
+        }
+
+        $scope.onSelect = function ($item, $model, $label) {
+            $scope.addEngineOprError = false;
+            var engineOprListService = new EngineOprListService();
+            engineOprListService.engineId = $item.id;
+            engineOprListService.$save({"engine": engine._links.self.href.split('/').pop()}, function () {
+                clearSelection();
+                reloadEngineOprs();
+            }, function () {
+                $scope.addEngineOprError = true;
+            });
+        };
+
+        clearSelection();
+
+    }
+
+    $scope.showEngineOprList = function (engine) {
+        var uibModalInstance = $uibModal.open({
+            templateUrl: 'views/modals/engine_oprs.html',
+            controller: ModalEngineOprInstanceCtrl,
+            resolve: {
+                engine: function () {
+                    return engine;
+                }
+            }
+        });
+        uibModalInstance.result.then(function (newEngine) {}, function () {});
+    };
+
+
 }]);
