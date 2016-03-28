@@ -2,14 +2,21 @@ package com.aedms.core.entities.source;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+
+import org.hibernate.envers.Audited;
 
 
 /**
@@ -20,6 +27,7 @@ import javax.persistence.Temporal;
  */
 @Entity
 @Table(name="ENGINE")
+//@Audited // Cause error: An audited relation to a not audited entity
 public class Engine implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -65,9 +73,12 @@ public class Engine implements Serializable {
     private String remark;
 
    
-    
-    
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="engine")
+    private Set<EngineOprRec>   engineOprRecs; 
 	
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="engine")
+    private Set<EngineStatRec>   engineStatRecs; 
+    
     @Override
 	public String toString() {
 		return "Engine [id=" + id + ", fleet=" + fleet + ", subFleet=" + subFleet + ", serialNo=" + serialNo
@@ -75,6 +86,27 @@ public class Engine implements Serializable {
 				+ ", leaseHold=" + leaseHold + ", leaseHolder=" + leaseHolder + ", opr=" + opr + ", remark=" + remark
 				+ "]";
 	}
+
+    
+	public Set<EngineStatRec> getEngineStatRecs() {
+		return engineStatRecs;
+	}
+
+
+	public void setEngineStatRecs(Set<EngineStatRec> engineStatRecs) {
+		this.engineStatRecs = engineStatRecs;
+	}
+
+
+	public Set<EngineOprRec> getEngineOprRecs() {
+		return engineOprRecs;
+	}
+
+
+	public void setEngineOprRecs(Set<EngineOprRec> engineOprRecs) {
+		this.engineOprRecs = engineOprRecs;
+	}
+
 
 	public long getId() {
         return id;
