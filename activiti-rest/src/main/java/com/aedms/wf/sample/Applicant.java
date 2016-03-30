@@ -1,4 +1,4 @@
-package org.activiti;
+package com.aedms.wf.sample;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

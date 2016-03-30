@@ -1,4 +1,4 @@
-package org.activiti;
+package com.aedms.wf.sample;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

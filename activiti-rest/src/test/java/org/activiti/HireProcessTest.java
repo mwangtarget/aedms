@@ -17,12 +17,16 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.subethamail.wiser.Wiser;
 
+import com.aedms.wf.App;
+import com.aedms.wf.sample.Applicant;
+import com.aedms.wf.sample.ApplicantRepository;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = {MyApp.class})
+@SpringApplicationConfiguration(classes = {App.class})
 @WebAppConfiguration
 @IntegrationTest
 public class HireProcessTest {

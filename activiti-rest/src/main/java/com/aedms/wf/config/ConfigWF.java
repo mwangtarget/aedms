@@ -1,4 +1,6 @@
-package com.aedms.core.config;
+package com.aedms.wf.config;
+
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -12,11 +14,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
-public class ConfigCore {
+public class ConfigWF {
 
 	@Autowired
 	private Environment environment;
 
+	
 	// Web customized configuration, doesn't work, keep it here for future reference
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
@@ -41,3 +44,4 @@ public class ConfigCore {
     }
 
 }
+

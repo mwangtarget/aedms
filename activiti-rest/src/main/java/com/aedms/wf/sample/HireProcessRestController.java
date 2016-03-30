@@ -1,4 +1,4 @@
-package org.activiti;
+package com.aedms.wf.sample;
 
 import org.activiti.engine.RuntimeService;
 import org.springframework.beans.factory.annotation.Autowired;
