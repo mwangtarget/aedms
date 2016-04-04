@@ -10,16 +10,22 @@
 	<parent>
 		<groupId>com.aedms</groupId>
 		<artifactId>aedms-root</artifactId>
-		<version>0.1</version>
+		<version>1.0-SNAPSHOT</version>
 		<relativePath>../</relativePath>
 	</parent>
 
 	<properties>
 		<activiti.version>5.19.0.2</activiti.version>
 		<spring.boot.version>1.3.3.RELEASE</spring.boot.version>
+		<aedms.version>1.0-SNAPSHOT</aedms.version>
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.aedms</groupId>
+			<artifactId>aedms-core</artifactId>
+			<version>${aedms.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-dependencies</artifactId>
@@ -91,6 +97,7 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
+			<version>1.3.176</version>
 		</dependency>
 		<dependency>
 			<groupId>org.activiti</groupId>
