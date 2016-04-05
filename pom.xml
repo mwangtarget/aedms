@@ -21,7 +21,8 @@
     <!--Sub-Modules -->
     <modules>
         <module>aedms-core</module>
-        <module>activiti-rest</module>
+        <module>aedms-wf</module>
+	<module>aedms-wf-gui</module>
         <module>aedms-monitor</module>
         <module>aedms-reporting</module>
         <module>aedms-gui</module>

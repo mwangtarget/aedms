@@ -7,10 +7,10 @@
         <artifactId>aedms-root</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <groupId>com.aedms</groupId>
-    <artifactId>aedms-deploy</artifactId>
+    <groupId>org.aedms</groupId>
+    <artifactId>aedms-wf-gui</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>aedms-deploy</name>
+    <name>aedms-wf-gui</name>
     <url>http://maven.apache.org</url>
     <dependencies>
         <dependency>
