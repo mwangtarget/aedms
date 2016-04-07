@@ -48,7 +48,13 @@ module.exports = function (grunt) {
       livereload: {
         options: {
           middleware: function (connect) {
+        
             return [
+               function(req, res, next) {
+                res.setHeader('Access-Control-Allow-Origin', '*');
+                res.setHeader('Access-Control-Allow-Methods', '*');
+                next();
+              },
               lrSnippet,
               mountFolder(connect, '.tmp'),
               mountFolder(connect, yeomanConfig.app)

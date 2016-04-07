@@ -1,4 +1,4 @@
 angular.module('activitiApp').factory('GroupService', function ($resource) {
-    var data = $resource('service/identity/groups/:group', {group: "@group"});
+    var data = $resource('aedms-wf/identity/groups/:group', {group: "@group"});
     return data;
 });
