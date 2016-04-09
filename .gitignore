@@ -27,3 +27,4 @@ local.properties
 # Test output
 /test-output/
 /.xml/
+/.idea/

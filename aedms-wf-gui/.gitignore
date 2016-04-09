@@ -32,4 +32,6 @@ local.properties
 /.sass-cache
 /bower_components
 /target/
+/app/components/
+
 
