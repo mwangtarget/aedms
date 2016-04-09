@@ -4,8 +4,8 @@
     <startEvent id="StartEvent" name="Start" activiti:async="true"></startEvent>
     <userTask id="EngineCreation" name="Engine Creation" activiti:candidateGroups="recorder">
       <extensionElements>
-        <activiti:formProperty id="fleet" name="Engine Fleet" required="true"></activiti:formProperty>
-        <activiti:formProperty id="subFleet" name="Eninge SubFleet" required="true"></activiti:formProperty>
+        <activiti:formProperty id="fleet" type="string" name="Engine Fleet" required="true"></activiti:formProperty>
+        <activiti:formProperty id="subFleet" type="string" name="Eninge SubFleet" required="true"></activiti:formProperty>
       </extensionElements>
     </userTask>
     <userTask id="EngineApproval" name="Engine Approval" activiti:candidateGroups="approver"></userTask>
@@ -13,7 +13,6 @@
     <sequenceFlow id="flow1" sourceRef="StartEvent" targetRef="EngineCreation"></sequenceFlow>
     <sequenceFlow id="flow2" sourceRef="EngineCreation" targetRef="EngineApproval"></sequenceFlow>
     <serviceTask id="saveToAEDMS" name="Save To AEDMS" activiti:expression="#{engineRSClient.saveEngine(execution)}">
-    
     </serviceTask>
     <sequenceFlow id="flow3" sourceRef="EngineApproval" targetRef="saveToAEDMS"></sequenceFlow>
     <sequenceFlow id="flow4" sourceRef="saveToAEDMS" targetRef="EndEvent"></sequenceFlow>

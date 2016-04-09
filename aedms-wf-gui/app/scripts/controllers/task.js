@@ -11,7 +11,7 @@ angular.module('activitiApp').controller("TasksCtrl", function ($scope, $rootSco
      *
      * @type {string}
      */
-    $scope.tasksType = "assignee";
+    $scope.tasksType = "candidateUser";
 
     function getTasksQuery() {
         if ($scope.tasksType == "involved") {
