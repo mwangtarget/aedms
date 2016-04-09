@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="EngineCreationApproval" name="Engine Creation Approval" isExecutable="true">
+    <startEvent id="StartEvent" name="Start" activiti:async="true"></startEvent>
+    <userTask id="EngineCreation" name="Engine Creation" activiti:candidateGroups="recorder">
+      <extensionElements>
+        <activiti:formProperty id="fleet" type="string" name="Engine Fleet" required="true"></activiti:formProperty>
+        <activiti:formProperty id="subFleet" type="string" name="Eninge SubFleet" required="true"></activiti:formProperty>
+      </extensionElements>
+    </userTask>
+    <userTask id="EngineApproval" name="Engine Approval" activiti:candidateGroups="approver"></userTask>
+    <endEvent id="EndEvent" name="End"></endEvent>
+    <sequenceFlow id="flow1" sourceRef="StartEvent" targetRef="EngineCreation"></sequenceFlow>
+    <sequenceFlow id="flow2" sourceRef="EngineCreation" targetRef="EngineApproval"></sequenceFlow>
+    <serviceTask id="saveToAEDMS" name="Save To AEDMS" activiti:expression="#{engineRSClient.saveEngine(execution)}">
+    </serviceTask>
+    <sequenceFlow id="flow3" sourceRef="EngineApproval" targetRef="saveToAEDMS"></sequenceFlow>
+    <sequenceFlow id="flow4" sourceRef="saveToAEDMS" targetRef="EndEvent"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_EngineCreationApproval">
+    <bpmndi:BPMNPlane bpmnElement="EngineCreationApproval" id="BPMNPlane_EngineCreationApproval">
+      <bpmndi:BPMNShape bpmnElement="StartEvent" id="BPMNShape_StartEvent">
+        <omgdc:Bounds height="35.0" width="35.0" x="118.0" y="160.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="EngineCreation" id="BPMNShape_EngineCreation">
+        <omgdc:Bounds height="55.0" width="105.0" x="240.0" y="150.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="EngineApproval" id="BPMNShape_EngineApproval">
+        <omgdc:Bounds height="55.0" width="105.0" x="440.0" y="150.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="EndEvent" id="BPMNShape_EndEvent">
+        <omgdc:Bounds height="35.0" width="35.0" x="780.0" y="160.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="saveToAEDMS" id="BPMNShape_saveToAEDMS">
+        <omgdc:Bounds height="55.0" width="105.0" x="630.0" y="150.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="153.0" y="177.0"></omgdi:waypoint>
+        <omgdi:waypoint x="240.0" y="177.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="345.0" y="177.0"></omgdi:waypoint>
+        <omgdi:waypoint x="440.0" y="177.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
+        <omgdi:waypoint x="545.0" y="177.0"></omgdi:waypoint>
+        <omgdi:waypoint x="630.0" y="177.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4">
+        <omgdi:waypoint x="735.0" y="177.0"></omgdi:waypoint>
+        <omgdi:waypoint x="780.0" y="177.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

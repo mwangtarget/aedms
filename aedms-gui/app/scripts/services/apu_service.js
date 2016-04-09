@@ -9,5 +9,5 @@
  */
 angular.module('aedmsGuiApp')
 .factory('APUService', function ($resource) {
-    return $resource('http://localhost:8080/aedms-core/aPUs/:apu', {apu: "@apu"});
+    return $resource('http://localhost:8081/aedms-core/aPUs/:apu', {apu: "@apu"});
 });

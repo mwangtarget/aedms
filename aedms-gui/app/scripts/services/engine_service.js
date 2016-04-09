@@ -9,5 +9,5 @@
  */
 angular.module('aedmsGuiApp')
 .factory('EngineService', function ($resource) {
-    return $resource('http://localhost:8080/aedms-core/engines/:engine', {engine: "@engine"});
+    return $resource('http://localhost:8081/aedms-core/engines/:engine', {engine: "@engine"});
 });
