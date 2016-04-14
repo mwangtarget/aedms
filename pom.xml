@@ -22,10 +22,10 @@
     <modules>
         <module>aedms-core</module>
         <module>aedms-wf</module>
-	<module>aedms-wf-gui</module>
+
         <module>aedms-monitor</module>
         <module>aedms-reporting</module>
-        <module>aedms-gui</module>
+
         <module>aedms-deploy</module>
     </modules>
 

@@ -2,6 +2,9 @@ package com.aedms.wf.config;
 
 
 
+import org.activiti.engine.ProcessEngineConfiguration;
+import org.activiti.engine.RuntimeService;
+import org.activiti.spring.ProcessEngineFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -19,6 +22,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import com.aedms.wf.evt.EventEmitter;
+
 @Configuration
 @EnableScheduling
 @EnableAsync
@@ -30,6 +35,9 @@ public class ConfigWF {
 
 	@Autowired
 	private Environment environment;
+	
+	@Autowired
+	private ProcessEngineFactoryBean  processEngineFactoryBean;
 
 	
 	// Web customized configuration, doesn't work, keep it here for future reference
@@ -54,6 +62,14 @@ public class ConfigWF {
         source.registerCorsConfiguration(environment.getRequiredProperty("cors.allowed.map"), config);
         return new CorsFilter(source);
     }
+	
+	// TOENHANCE: Add Event Listener through Process Engine Configuration.
+	@Bean
+	public RuntimeService runtimeService(){
+		RuntimeService runtimeService = processEngineFactoryBean.getProcessEngineConfiguration().getRuntimeService();
+		runtimeService.addEventListener(new EventEmitter());
+		return runtimeService;
+	}
 
 }
 

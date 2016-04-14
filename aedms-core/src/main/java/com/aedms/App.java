@@ -2,6 +2,7 @@ package com.aedms;
 
 import java.util.Date;
 
+import org.apache.chemistry.opencmis.client.api.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -79,6 +80,15 @@ public class App {
 					new AirCraftBuilder().withApu(apu).withEngineOne(engineOne).withFleet("A").withSubFleet("A-1").withSN("123456").build());
 			
 			log.info("Save some AirCraft done");
+		};
+	}
+
+	@Bean
+	public CommandLineRunner cmisDemo(Session cmisSession) {
+
+		return (args) -> {
+			cmisSession.getBinding();
+			log.info("Save some APU done");
 		};
 	}
 	

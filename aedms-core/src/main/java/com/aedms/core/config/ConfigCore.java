@@ -1,5 +1,11 @@
 package com.aedms.core.config;
 
+import org.apache.chemistry.opencmis.client.api.Repository;
+import org.apache.chemistry.opencmis.client.api.Session;
+import org.apache.chemistry.opencmis.client.api.SessionFactory;
+import org.apache.chemistry.opencmis.client.runtime.SessionFactoryImpl;
+import org.apache.chemistry.opencmis.commons.SessionParameter;
+import org.apache.chemistry.opencmis.commons.enums.BindingType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -17,6 +23,9 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 @EnableJpaRepositories("com.aedms.core.repo")
@@ -53,5 +62,17 @@ public class ConfigCore {
         source.registerCorsConfiguration(environment.getRequiredProperty("cors.allowed.map"), config);
         return new CorsFilter(source);
     }
+
+	@Bean
+	public Session cmisSession(){
+		SessionFactory sessionFactory = SessionFactoryImpl.newInstance();
+		Map<String, String> parameter = new HashMap<String, String>();
+		parameter.put(SessionParameter.USER, environment.getRequiredProperty("cmis.user"));
+		parameter.put(SessionParameter.PASSWORD, environment.getRequiredProperty("cmis.password"));
+		parameter.put(SessionParameter.ATOMPUB_URL, environment.getRequiredProperty("cmis.url"));
+		parameter.put(SessionParameter.BINDING_TYPE, BindingType.ATOMPUB.value());
+		Repository repository = sessionFactory.getRepositories(parameter).get(0);
+		return repository.createSession();
+	}
 
 }
