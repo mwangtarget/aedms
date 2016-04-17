@@ -1,5 +1,6 @@
 package com.aedms;
 
+import java.io.InputStream;
 import java.util.Date;
 
 import org.apache.chemistry.opencmis.client.api.Session;
@@ -28,6 +29,8 @@ import com.aedms.core.repo.source.AirCraftRepo;
 import com.aedms.core.repo.source.EngineOprRepo;
 import com.aedms.core.repo.source.EngineRepo;
 import com.aedms.core.repo.source.EngineStatRepo;
+import com.aedms.ext.cmis.CMISSessionUtil;
+import com.google.common.io.ByteStreams;
 
 @SpringBootApplication
 public class App {
@@ -39,17 +42,22 @@ public class App {
 	}
 
 	@Bean
-	public CommandLineRunner demoEngine(EngineRepo repository, EngineStatRepo engineStatRepo, EngineOprRepo engineOprRepo) {
+	public CommandLineRunner demoEngine(EngineRepo repository, EngineStatRepo engineStatRepo,
+			EngineOprRepo engineOprRepo, CMISSessionUtil cMISSessionUtil) {
 		return (args) -> {
+			InputStream inputStream = ClassLoader.getSystemResourceAsStream("application-h2.properties");
+			byte[] inputBytes = ByteStreams.toByteArray(inputStream);
+			cMISSessionUtil.createDocument("application-h2.properties",  inputBytes);
 			Engine engine = repository.save(new EngineBuilder().withFleet("A").withLeaseHold("B").withLeaseHolder("C")
 					.withManufactureDate(new Date()).withManufactureDate(new Date()).withModel("D").withOpr("E")
 					.withRemark("C").withRentDate(new Date()).withSerialNo("123").withSN("E").withSubFleet("F")
 					.build());
-			
-			EngineOprRec engineOpr = engineOprRepo.save(new EngineOprRecBuilder().withCSN(1).withCSO(2).withTSN(new Double(3)).withTSO(new Double(4)).withEngine(engine).build());
-			EngineStatRec engineStat = engineStatRepo.save(new EngineStatRecBuilder().withCSN(1).withCSO(2).withTSN(new Double(3)).withTSO(new Double(4)).withEngine(engine).build());
-			
-			
+
+			EngineOprRec engineOpr = engineOprRepo.save(new EngineOprRecBuilder().withCSN(1).withCSO(2)
+					.withTSN(new Double(3)).withTSO(new Double(4)).withEngine(engine).build());
+			EngineStatRec engineStat = engineStatRepo.save(new EngineStatRecBuilder().withCSN(1).withCSO(2)
+					.withTSN(new Double(3)).withTSO(new Double(4)).withEngine(engine).build());
+
 			log.info("Save some engine done");
 		};
 	}
@@ -72,26 +80,16 @@ public class App {
 					.withLeaseHolder("C").withManufactureDate(new Date()).withManufactureDate(new Date()).withModel("D")
 					.withOpr("E").withRemark("C").withRentDate(new Date()).withSerialNo("123").withSN("E")
 					.withSubFleet("F").build());
-			
-			APU apu = apuRepo.save(new APUBuilder().withLeaseHold("a").withLeaseHolder("b").withManufactureDate(new Date())
+
+			APU apu = apuRepo
+					.save(new APUBuilder().withLeaseHold("a").withLeaseHolder("b").withManufactureDate(new Date())
 							.withModel("HP").withOpr("C").withRentDate(new Date()).withSN("U").build());
 
-			airCraftRepo.save(
-					new AirCraftBuilder().withApu(apu).withEngineOne(engineOne).withFleet("A").withSubFleet("A-1").withSN("123456").build());
-			
+			airCraftRepo.save(new AirCraftBuilder().withApu(apu).withEngineOne(engineOne).withFleet("A")
+					.withSubFleet("A-1").withSN("123456").build());
+
 			log.info("Save some AirCraft done");
 		};
 	}
-
-	@Bean
-	public CommandLineRunner cmisDemo(Session cmisSession) {
-
-		return (args) -> {
-			cmisSession.getBinding();
-			log.info("Save some APU done");
-		};
-	}
-	
-	
 
 }

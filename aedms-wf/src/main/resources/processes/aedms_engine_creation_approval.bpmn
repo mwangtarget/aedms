@@ -6,6 +6,7 @@
       <extensionElements>
         <activiti:formProperty id="fleet" type="string" name="Engine Fleet" required="true"></activiti:formProperty>
         <activiti:formProperty id="subFleet" type="string" name="Eninge SubFleet" required="true"></activiti:formProperty>
+        <activiti:formProperty id="model" type="uploadfile" name="Eninge Model specs" required="true"></activiti:formProperty>
       </extensionElements>
     </userTask>
     <userTask id="EngineApproval" name="Engine Approval" activiti:candidateGroups="approver"></userTask>
