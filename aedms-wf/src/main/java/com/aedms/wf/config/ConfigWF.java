@@ -13,6 +13,7 @@ import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngineConfiguration;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.form.AbstractFormType;
+import org.activiti.rest.security.BasicAuthenticationProvider;
 import org.activiti.spring.ProcessEngineFactoryBean;
 import org.activiti.spring.SpringAsyncExecutor;
 import org.activiti.spring.SpringProcessEngineConfiguration;
@@ -35,15 +36,24 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableMBeanExport;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpMethod;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
+import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -69,6 +79,8 @@ public class ConfigWF {
 
 	@Autowired
 	private UploadFormType uploadFormType;
+	
+	
 
 	// Web customized configuration, doesn't work, keep it here for future
 	// reference
@@ -83,19 +95,34 @@ public class ConfigWF {
 		};
 	}
 
-	@Bean
-	public CorsFilter corsFilter() {
+//	@Bean
+//	public CorsFilter corsFilter() {
+//
+//		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//		CorsConfiguration config = new CorsConfiguration();
+////		config.addAllowedOrigin(environment.getRequiredProperty("cors.allowed.origins"));
+//		config.addAllowedOrigin("*");
+//		config.addAllowedHeader("*");
+//		config.addAllowedMethod("*");
+//		config.addExposedHeader("Vary: Accept-Encoding, Origin");
+//		source.registerCorsConfiguration(environment.getRequiredProperty("cors.allowed.map"), config);
+//		return new CorsFilter(source);
+//	}
+//	
+	
+	public static CorsFilter corsFilterStatic() {
 
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		CorsConfiguration config = new CorsConfiguration();
-		config.addAllowedOrigin(environment.getRequiredProperty("cors.allowed.origins"));
+		config.addAllowedOrigin("*");
 		config.addAllowedHeader("*");
 		config.addAllowedMethod("*");
-		source.registerCorsConfiguration(environment.getRequiredProperty("cors.allowed.map"), config);
+		source.registerCorsConfiguration("/**", config);
 		return new CorsFilter(source);
 	}
 
-	//TODO: this is not working
+	
+	// TODO: this is not working
 	@Bean
 	public BeanPostProcessor activitiConfigurer() {
 		return new BeanPostProcessor() {
@@ -123,7 +150,8 @@ public class ConfigWF {
 
 	}
 
-	//TODO, this is really a dirty solution, need to change to an better approach.
+	// TODO, this is really a dirty solution, need to change to an better
+	// approach.
 	@Configuration
 	@ConditionalOnClass(name = "javax.persistence.EntityManagerFactory")
 	@EnableConfigurationProperties(ActivitiProperties.class)
@@ -144,6 +172,25 @@ public class ConfigWF {
 			customTypeList.add(new com.aedms.wf.ext.form.UploadFormType());
 			config.setCustomFormTypes(customTypeList);
 			return config;
+		}
+	}
+
+	@Configuration
+	@ConditionalOnClass(name = { "org.activiti.rest.service.api.RestUrls",
+			"org.springframework.web.servlet.DispatcherServlet" })
+	@EnableWebMvcSecurity
+	@Order(99) // This is totally doesn't make sense but works
+	public static class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+		@Bean
+		public AuthenticationProvider authenticationProvider() {
+			return new BasicAuthenticationProvider();
+		}
+
+		@Override
+		protected void configure(HttpSecurity http) throws Exception {
+			http.addFilterBefore(corsFilterStatic(), ChannelProcessingFilter.class).antMatcher("/**").authenticationProvider(authenticationProvider()).csrf().disable().authorizeRequests().anyRequest()
+					.authenticated().and().httpBasic();
 		}
 	}
 
