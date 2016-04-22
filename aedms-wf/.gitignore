@@ -26,3 +26,4 @@ local.properties
 *.launch
 /.xml/
 /.bpmn/
+aedms-wf.log
