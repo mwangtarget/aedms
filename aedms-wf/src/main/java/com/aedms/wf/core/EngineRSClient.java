@@ -21,8 +21,9 @@ public class EngineRSClient {
 		
 		 String fleet = (String) execution.getVariable("fleet");
 		 String subFleet = (String) execution.getVariable("subFleet");
+		 String modelSpecs = (String) execution.getVariable("model");
 		 
-		 Engine engine = new EngineBuilder().withFleet(fleet).withSubFleet(subFleet).build(); 
+		 Engine engine = new EngineBuilder().withFleet(fleet).withSubFleet(subFleet).withModel(modelSpecs).build(); 
 		 RestTemplate restTemplate = new RestTemplate();
 		 restTemplate.postForObject(environment.getRequiredProperty("aedms.rs.engines"), engine, Engine.class);
 

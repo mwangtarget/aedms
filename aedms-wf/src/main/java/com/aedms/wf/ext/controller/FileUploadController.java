@@ -1,61 +1,54 @@
 package com.aedms.wf.ext.controller;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
-
+import org.apache.chemistry.opencmis.client.api.Document;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.aedms.wf.App;
+import com.aedms.ext.cmis.CMISSessionUtil;
+import com.aedms.wf.ext.cmis.CMISResp;
+import com.google.common.io.ByteStreams;
 
-@Controller
+
+@RestController
 public class FileUploadController {
 
+	private static final Logger log = LoggerFactory.getLogger(FileUploadController.class);
+
+	@Autowired
+	CMISSessionUtil cmisSessionUtil;
 
 	@RequestMapping(method = RequestMethod.POST, value = "/upload")
-	public String handleFileUpload(@RequestParam("filename") String name,
-								   @RequestParam("file") MultipartFile file,
-								   RedirectAttributes redirectAttributes) {
+	public CMISResp handleFileUpload(@RequestParam("filename") String name,
+								   @RequestParam("file") MultipartFile file) {
+		
+		// If fileNmae had "/", reject.
+		//TODO: move this to client side.
 		if (name.contains("/")) {
-			redirectAttributes.addFlashAttribute("message", "Folder separators not allowed");
-			return "redirect:upload";
+			return new CMISResp(name, "", false);
 		}
-		if (name.contains("/")) {
-			redirectAttributes.addFlashAttribute("message", "Relative pathnames not allowed");
-			return "redirect:upload";
-		}
-
+		
 		if (!file.isEmpty()) {
 			try {
-				BufferedOutputStream stream = new BufferedOutputStream(
-						new FileOutputStream(new File("./" + name)));
-                FileCopyUtils.copy(file.getInputStream(), stream);
-				stream.close();
-				redirectAttributes.addFlashAttribute("message",
-						"You successfully uploaded " + name + "!");
+				Document cmisDocument = cmisSessionUtil.createDocument(name, ByteStreams.toByteArray(file.getInputStream()));
+				log.info("Upload File to CMIS server succeed: "+ cmisDocument.getContentUrl());
+				return new CMISResp(name, cmisDocument.getContentUrl(), true);
 			}
 			catch (Exception e) {
-				redirectAttributes.addFlashAttribute("message",
-						"You failed to upload " + name + " => " + e.getMessage());
+				log.error("Fail to upload to document server");
+				return new CMISResp(name, "", false);
 			}
 		}
 		else {
-			redirectAttributes.addFlashAttribute("message",
-					"You failed to upload " + name + " because the file was empty");
+			log.error("File is empty, fail to upload to document server");
+			return new CMISResp(name, "", false);
 		}
-
-		return "redirect:upload";
 	}
 
 }

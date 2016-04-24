@@ -17,12 +17,8 @@ public class UploadFormType extends AbstractFormType {
 	}
 
 	@Override
-	public Object convertFormValueToModelValue(String uploadFilePath) {
-		File uploadFile = new File(uploadFilePath);
-		if (uploadFile.exists()) {
-			return uploadFilePath;
-		}
-		return null;
+	public String convertFormValueToModelValue(String uploadFilePath) {
+      return uploadFilePath;
 	}
 
 	@Override
