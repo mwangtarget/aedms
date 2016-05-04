@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
   <process id="EngineCreationApproval" name="Engine Creation Approval" isExecutable="true">
+    <extensionElements>
+      <activiti:executionListener expression="${engineCreationListener.notify(execution)}" event="end" />
+    </extensionElements>
     <startEvent id="StartEvent" name="Start" activiti:async="true"></startEvent>
     <userTask id="EngineCreation" name="Engine Creation" activiti:candidateGroups="recorder">
       <extensionElements>
@@ -11,9 +14,10 @@
     </userTask>
     <userTask id="EngineApproval" name="Engine Approval" activiti:candidateGroups="approver">
       <extensionElements>
-        <activiti:formProperty id="fleet" name="Engine Fleet" type="string" required="true"></activiti:formProperty>
-        <activiti:formProperty id="subFleet" name="Eninge SubFleet" type="string" required="true"></activiti:formProperty>
-        <activiti:formProperty id="model" name="Eninge Model specs" type="uploadfile" required="true"></activiti:formProperty>
+        <activiti:formProperty id="fleet" name="Engine Fleet" type="string"  writable="false"></activiti:formProperty>
+        <activiti:formProperty id="subFleet" name="Eninge SubFleet" type="string"  writable="false"></activiti:formProperty>
+        <!-- TODO: Make this one more intelligent to display the link for the approvers -->
+        <activiti:formProperty id="model" name="Eninge Model specs" type="uploadfile"  writable="false"></activiti:formProperty>
       </extensionElements>
     </userTask>
     <endEvent id="EndEvent" name="End"></endEvent>
