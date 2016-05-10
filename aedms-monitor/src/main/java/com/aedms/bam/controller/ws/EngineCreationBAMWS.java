@@ -16,7 +16,6 @@ import com.aedms.bam.kpi.KPIEntry;
 import com.espertech.esper.client.EPServiceProvider;
 
 @Controller
-
 public class EngineCreationBAMWS {
 
 	@Autowired
@@ -28,28 +27,31 @@ public class EngineCreationBAMWS {
 	@Autowired
 	KPIContainer engineBAMKPI;
 
+	//TODO: to check whether without following websocket can still working
 	@MessageMapping("/engine-bam-ed")
 	@SendTo("/topic/engine-bam-ws")
-	public List<KPIEntry> engineBAM(){
-
-			List<KPIEntry> kpiList = new ArrayList<>();
-
-			for (Entry<String, Long> entry : engineBAMKPI.getKpiDetails().entrySet()) {
-				kpiList.add(new KPIEntry(entry.getKey(), entry.getValue()));
-			}
-			return kpiList;
-	}
-    //TODO: instead of fix delay, send to all subscribers after item been added.
-	@Scheduled(fixedDelay = 1500)
-	public void sendTradeNotifications() {
+	public List<KPIEntry> engineBAM() {
 
 		List<KPIEntry> kpiList = new ArrayList<>();
 
 		for (Entry<String, Long> entry : engineBAMKPI.getKpiDetails().entrySet()) {
 			kpiList.add(new KPIEntry(entry.getKey(), entry.getValue()));
 		}
-		messagingTemplate.convertAndSend("/topic/engine-bam-ws", kpiList);
-
+		return kpiList;
 	}
+    
+	// Comment out following Fixed delay push
+	// @Scheduled(fixedDelay = 1500)
+	// public void sendTradeNotifications() {
+	//
+	// List<KPIEntry> kpiList = new ArrayList<>();
+	//
+	// for (Entry<String, Long> entry : engineBAMKPI.getKpiDetails().entrySet())
+	// {
+	// kpiList.add(new KPIEntry(entry.getKey(), entry.getValue()));
+	// }
+	// messagingTemplate.convertAndSend("/topic/engine-bam-ws", kpiList);
+	//
+	// }
 
 }
