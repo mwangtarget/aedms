@@ -1,0 +1,161 @@
+package com.aedms.core.entities.source;
+
+import java.io.Serializable;
+import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+
+/**
+ *
+ * The Entity to representing User record. The physical table is "USER"
+ * 
+ * @author jaly
+ */
+@Entity
+@Table(name = "USER")
+public class User implements Serializable{
+    
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
+    private Long id;
+
+    @Column(name = "NAME")
+    private String name;
+    
+    @Column(name = "LOGIN_NAME")
+    private String loginName;
+    
+    @Column(name = "PASSWORD")
+    private String passsword;
+    
+    @Column(name = "ORGANIZATION_ID")
+    @OneToOne
+    private Organization organization;
+    
+    @Column(name = "FIRST_LOGIN")
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date firstLogin;
+    
+    @Column(name = "LAST_LOGIN")
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date lastLogin;
+    
+    @Column(name = "EMAIL")
+    private String email;
+    
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * @return the loginName
+     */
+    public String getLoginName() {
+        return loginName;
+    }
+
+    /**
+     * @param loginName the loginName to set
+     */
+    public void setLoginName(String loginName) {
+        this.loginName = loginName;
+    }
+
+    /**
+     * @return the passsword
+     */
+    public String getPasssword() {
+        return passsword;
+    }
+
+    /**
+     * @param passsword the passsword to set
+     */
+    public void setPasssword(String passsword) {
+        this.passsword = passsword;
+    }
+
+    /**
+     * @return the organization
+     */
+    public Organization getOrganization() {
+        return organization;
+    }
+
+    /**
+     * @param organization the organization to set
+     */
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
+    }
+
+    /**
+     * @return the firstLogin
+     */
+    public Date getFirstLogin() {
+        return firstLogin;
+    }
+
+    /**
+     * @param firstLogin the firstLogin to set
+     */
+    public void setFirstLogin(Date firstLogin) {
+        this.firstLogin = firstLogin;
+    }
+
+    /**
+     * @return the lastLogin
+     */
+    public Date getLastLogin() {
+        return lastLogin;
+    }
+
+    /**
+     * @param lastLogin the lastLogin to set
+     */
+    public void setLastLogin(Date lastLogin) {
+        this.lastLogin = lastLogin;
+    }
+
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+}

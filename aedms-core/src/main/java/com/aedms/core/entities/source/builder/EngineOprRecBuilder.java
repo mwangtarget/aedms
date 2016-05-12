@@ -1,15 +1,20 @@
 package com.aedms.core.entities.source.builder;
 
+import com.aedms.core.entities.source.Engine;
+import com.aedms.core.entities.source.EngineOprRec;
+import java.util.Date;
 
-public class EngineOprRecBuilder implements com.aedms.core.entities.source.builder.Builder<com.aedms.core.entities.source.EngineOprRec> {
-    public static EngineOprRecBuilder anEngineOprRec() {
+
+public class EngineOprRecBuilder implements Builder<EngineOprRec> {
+    
+    public static EngineOprRecBuilder createEngineOprRecBuilder() {
         return new EngineOprRecBuilder();
     }    
-    private com.aedms.core.entities.source.EngineOprRec target = new com.aedms.core.entities.source.EngineOprRec();
+    private final EngineOprRec target = new EngineOprRec();
     
-    public EngineOprRecBuilder() {}
+    private EngineOprRecBuilder() {}
     
-    public EngineOprRecBuilder withHrsPostInst(java.lang.Double hrsPostInst) {
+    public EngineOprRecBuilder withHrsPostInst(double hrsPostInst) {
         getTarget().setHrsPostInst(hrsPostInst);
         return this;
     }
@@ -19,27 +24,27 @@ public class EngineOprRecBuilder implements com.aedms.core.entities.source.build
         return this;
     }
     
-    public EngineOprRecBuilder withEngine(com.aedms.core.entities.source.Engine engine) {
+    public EngineOprRecBuilder withEngine(Engine engine) {
         getTarget().setEngine(engine);
         return this;
     }
     
-    public EngineOprRecBuilder withRemainHrs(java.lang.Double remainHrs) {
+    public EngineOprRecBuilder withRemainHrs(double remainHrs) {
         getTarget().setRemainHrs(remainHrs);
         return this;
     }
     
-    public EngineOprRecBuilder withRemainCirs(java.lang.Integer remainCirs) {
+    public EngineOprRecBuilder withRemainCirs(int remainCirs) {
         getTarget().setRemainCirs(remainCirs);
         return this;
     }
     
-    public EngineOprRecBuilder withRecordDate(java.util.Date recordDate) {
+    public EngineOprRecBuilder withRecordDate(Date recordDate) {
         getTarget().setRecordDate(recordDate);
         return this;
     }
     
-    public EngineOprRecBuilder withCirsPostInst(java.lang.Integer cirsPostInst) {
+    public EngineOprRecBuilder withCirsPostInst(int cirsPostInst) {
         getTarget().setCirsPostInst(cirsPostInst);
         return this;
     }
@@ -64,11 +69,12 @@ public class EngineOprRecBuilder implements com.aedms.core.entities.source.build
         return this;
     }
     
-    protected com.aedms.core.entities.source.EngineOprRec getTarget() {
+    protected EngineOprRec getTarget() {
         return target;
     }
     
-    public com.aedms.core.entities.source.EngineOprRec build() {
+    @Override
+    public EngineOprRec build() {
         return getTarget();
     }
 }

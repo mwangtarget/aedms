@@ -2,12 +2,14 @@ package com.aedms.core.entities.source;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
@@ -15,7 +17,7 @@ import org.hibernate.envers.Audited;
 
 /**
  * The Entity to representing Landing Gear information.
- * The physical table is "LANDING_GEAR_INFO"
+ * The physical table is "LANDING_GEAR"
  * 
  * @author jaly
  */
@@ -53,6 +55,14 @@ public class LandingGear implements Serializable {
     
     @Column(name = "ORP")
     private String orp;
+    
+    @OneToMany(targetEntity=LandingGearStatusRec.class, mappedBy="landingGear")
+    @JoinColumn(name = "LANDING_GEAR_ID")
+    private Set<LandingGearStatusRec> landingGearStatusRecs;
+    
+    @OneToMany(targetEntity=LandingGearOperationRec.class, mappedBy="landingGear")
+    @JoinColumn(name = "LANDING_GEAR_ID")
+    private Set<LandingGearOperationRec> landingGearOperationRecs;
 
     
     @Override
@@ -70,7 +80,7 @@ public class LandingGear implements Serializable {
     }
 
     /**
-     * @param ID the ID to set
+     * @param id
      */
     public void setId(long id) {
         this.id = id;
@@ -172,5 +182,33 @@ public class LandingGear implements Serializable {
      */
     public void setOrp(String orp) {
         this.orp = orp;
+    }
+
+    /**
+     * @return the landingGearStatusRecs
+     */
+    public Set<LandingGearStatusRec> getLandingGearStatusRecs() {
+        return landingGearStatusRecs;
+    }
+
+    /**
+     * @param landingGearStatusRecs the landingGearStatusRecs to set
+     */
+    public void setLandingGearStatusRecs(Set<LandingGearStatusRec> landingGearStatusRecs) {
+        this.landingGearStatusRecs = landingGearStatusRecs;
+    }
+
+    /**
+     * @return the landingGearOperationRecs
+     */
+    public Set<LandingGearOperationRec> getLandingGearOperationRecs() {
+        return landingGearOperationRecs;
+    }
+
+    /**
+     * @param landingGearOperationRecs the landingGearOperationRecs to set
+     */
+    public void setLandingGearOperationRecs(Set<LandingGearOperationRec> landingGearOperationRecs) {
+        this.landingGearOperationRecs = landingGearOperationRecs;
     }
 }

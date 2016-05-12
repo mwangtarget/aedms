@@ -2,24 +2,27 @@ package com.aedms.core.entities.source;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
-import org.hibernate.envers.Audited;
-
 /**
- * The Entity to representing AirCraft. The physical table is "AIRCRAFT_INFO"
+ * The Entity to representing AirCraft. The physical table is "AIRCRAFT"
  *
  * @author mwang
  * @since 0.1
+ *
+ * -------------------------------------------------------------------------------- 
+ * Changed Date    Changed By 　　　Description
+ * 2016-05-08      Jaly        　　Change Engine from one2one to One2Many
  *
  */
 @Entity
@@ -93,29 +96,13 @@ public class AirCraft implements Serializable {
     @Column(name = "ENGINE_TYPE", length = 20)
     private String engineType;
 
-    @OneToOne
-    @JoinColumn(name = "ENGINE_ONE_ID")
-    private Engine engineOne;
-
-    @OneToOne
-    @JoinColumn(name = "ENGINE_TWO_ID")
-    private Engine engineTwo;
-
-    @OneToOne
-    @JoinColumn(name = "ENGINE_THREE_ID")
-    private Engine engineThree;
-
-    @OneToOne
-    @JoinColumn(name = "ENGINE_FOUR_ID")
-    private Engine engineFour;
-
     @Column(name = "SEAT_COUNT")
     private Integer seatCount;
 
     @Column(name = "FIRST_SEAT_COUNT")
     private Integer firstSeatCount;
 
-    @Column(name = "BUS_SEAT_COUNT", nullable=true)
+    @Column(name = "BUS_SEAT_COUNT", nullable = true)
     private Integer busSeatCount;
 
     @Column(name = "ECONOMY_SEAT_COUNT")
@@ -145,29 +132,74 @@ public class AirCraft implements Serializable {
     @Column(name = "WEIGHT_ZERO_FUEL")
     private Integer weightZeroFuel;
 
-    @OneToOne
-    @JoinColumn(name = "APU_ID")
-    private APU apu;
+    @OneToMany(targetEntity = Engine.class, mappedBy = "aircraft")
+    @JoinColumn(name = "AIRCRAFT_ID")
+    private Set<Engine> engines;
 
-    
+    @OneToMany(targetEntity = APU.class, mappedBy = "aircraft")
+    @JoinColumn(name = "AIRCRAFT_ID")
+    private Set<APU> apus;
+
+    @OneToMany(targetEntity = LandingGear.class, mappedBy = "aircraft")
+    @JoinColumn(name = "AIRCRAFT_ID")
+    private Set<LandingGear> landingGears;
+
+    @OneToMany(targetEntity = AirCraftStatusRec.class, mappedBy = "aircraft", fetch = FetchType.LAZY)
+    @JoinColumn(name = "AIRCRAFT_ID")
+    private Set<AirCraftStatusRec> airCraftStatusRecs;
+
+    /**
+     * to format the output string of engines
+     *
+     * @return
+     */
+    private String enginesToString() {
+        StringBuilder egxToStrSB = new StringBuilder();
+        int index = 1;
+        egxToStrSB.append("Engines");
+        if (getEngines() != null && !getEngines().isEmpty()) {
+            index = getEngines().stream().map((engine) -> {
+                egxToStrSB.append(engine.getId()).append(", model=").append(engine.getModel()).append("]");
+                return engine;
+            }).map((_item) -> 1).reduce(index, Integer::sum);
+            //engines.iterator()
+        } else {
+            egxToStrSB.append("[]");
+        }
+        return egxToStrSB.toString();
+    }
+
+    private String apusToString() {
+        StringBuilder apusToStrSB = new StringBuilder();
+        apusToStrSB.append("apus=");
+        if (getApus() != null && !getApus().isEmpty()) {
+            getApus().stream().map((apu) -> {
+                apusToStrSB.append(apu.toString());
+                return apu;
+            });
+        } else {
+            apusToStrSB.append("[]");
+        }
+        return apusToStrSB.toString();
+    }
+
     @Override
-	public String toString() {
-		return "AirCraft [id=" + id + ", fleet=" + fleet + ", subFleet=" + subFleet + ", serialNo=" + serialNo
-				+ ", registerNo=" + registerNo + ", model=" + model + ", SN=" + SN + ", LN=" + LN + ", variableNo="
-				+ variableNo + ", virframeNo=" + virframeNo + ", ipcRefNo=" + ipcRefNo + ", manufactureDate="
-				+ manufactureDate + ", leasingDeliveryDate=" + leasingDeliveryDate + ", selCal=" + selCal
-				+ ", tenancyTerm=" + tenancyTerm + ", typeCertificate=" + typeCertificate + ", afmCertificate="
-				+ afmCertificate + ", operatorBase=" + operatorBase + ", owner=" + owner + ", engineType=" + engineType
-				+ ", engineOne=" + engineOne + ", engineTwo=" + engineTwo + ", engineThree=" + engineThree
-				+ ", engineFour=" + engineFour + ", seatCount=" + seatCount + ", firstSeatCount=" + firstSeatCount
-				+ ", busSeatCount=" + busSeatCount + ", economySeatCount=" + economySeatCount + ", manufacturer="
-				+ manufacturer + ", engineMaxThrust=" + engineMaxThrust + ", fuelCapacity=" + fuelCapacity
-				+ ", weigthMaxTakeOff=" + weigthMaxTakeOff + ", weightMaxLanding=" + weightMaxLanding
-				+ ", weightMaxTaxi=" + weightMaxTaxi + ", weightEmpty=" + weightEmpty + ", weightZeroFuel="
-				+ weightZeroFuel + ", apu=" + apu + "]";
-	}
+    public String toString() {
+        return "AirCraft [id=" + id + ", fleet=" + fleet + ", subFleet=" + subFleet + ", serialNo=" + serialNo
+                + ", registerNo=" + registerNo + ", model=" + model + ", SN=" + SN + ", LN=" + LN + ", variableNo="
+                + variableNo + ", virframeNo=" + virframeNo + ", ipcRefNo=" + ipcRefNo + ", manufactureDate="
+                + manufactureDate + ", leasingDeliveryDate=" + leasingDeliveryDate + ", selCal=" + selCal
+                + ", tenancyTerm=" + tenancyTerm + ", typeCertificate=" + typeCertificate + ", afmCertificate="
+                + afmCertificate + ", operatorBase=" + operatorBase + ", owner=" + owner + ", engineType=" + engineType
+                + this.enginesToString() + ", seatCount=" + seatCount + ", firstSeatCount=" + firstSeatCount
+                + ", busSeatCount=" + busSeatCount + ", economySeatCount=" + economySeatCount + ", manufacturer="
+                + manufacturer + ", engineMaxThrust=" + engineMaxThrust + ", fuelCapacity=" + fuelCapacity
+                + ", weigthMaxTakeOff=" + weigthMaxTakeOff + ", weightMaxLanding=" + weightMaxLanding
+                + ", weightMaxTaxi=" + weightMaxTaxi + ", weightEmpty=" + weightEmpty + ", weightZeroFuel="
+                + weightZeroFuel + ", " + this.apusToString() + " ]";
+    }
 
-	/**
+    /**
      * @return the id
      */
     public Long getId() {
@@ -433,8 +465,6 @@ public class AirCraft implements Serializable {
         this.engineType = engineType;
     }
 
-    /*
-
     /**
      * @return the seatCount
      */
@@ -604,76 +634,6 @@ public class AirCraft implements Serializable {
     }
 
     /**
-     * @return the engineOneId
-     */
-    public Engine getEngineOne() {
-        return engineOne;
-    }
-
-    /**
-     * @param engineOneId the engineOneId to set
-     */
-    public void setEngineOne(Engine engineOne) {
-        this.engineOne = engineOne;
-    }
-
-    /**
-     * @return the engineTwoId
-     */
-    public Engine getEngineTwo() {
-        return engineTwo;
-    }
-
-    /**
-     * @param engineTwoId the engineTwoId to set
-     */
-    public void setEngineTwo(Engine engineTwo) {
-        this.engineTwo = engineTwo;
-    }
-
-    /**
-     * @return the engineThreeId
-     */
-    public Engine getEngineThree() {
-        return engineThree;
-    }
-
-    /**
-     * @param engineThreeId the engineThreeId to set
-     */
-    public void setEngineThree(Engine engineThree) {
-        this.engineThree = engineThree;
-    }
-
-    /**
-     * @return the engineFourId
-     */
-    public Engine getEngineFour() {
-        return engineFour;
-    }
-
-    /**
-     * @param engineFourId the engineFourId to set
-     */
-    public void setEngineFour(Engine engineFour) {
-        this.engineFour = engineFour;
-    }
-
-    /**
-     * @return the apu
-     */
-    public APU getApu() {
-        return apu;
-    }
-
-    /**
-     * @param apu the apu to set
-     */
-    public void setApu(APU apu) {
-        this.apu = apu;
-    }
-
-    /**
      * @return the tenancyTerm
      */
     public Integer getTenancyTerm() {
@@ -685,5 +645,61 @@ public class AirCraft implements Serializable {
      */
     public void setTenancyTerm(Integer tenancyTerm) {
         this.tenancyTerm = tenancyTerm;
+    }
+
+    /**
+     * @return the engines
+     */
+    public Set<Engine> getEngines() {
+        return engines;
+    }
+
+    /**
+     * @param engines the engines to set
+     */
+    public void setEngines(Set<Engine> engines) {
+        this.engines = engines;
+    }
+
+    /**
+     * @return the apus
+     */
+    public Set<APU> getApus() {
+        return apus;
+    }
+
+    /**
+     * @param apus the apus to set
+     */
+    public void setApus(Set<APU> apus) {
+        this.apus = apus;
+    }
+
+    /**
+     * @return the landingGears
+     */
+    public Set<LandingGear> getLandingGears() {
+        return landingGears;
+    }
+
+    /**
+     * @param landingGears the landingGears to set
+     */
+    public void setLandingGears(Set<LandingGear> landingGears) {
+        this.landingGears = landingGears;
+    }
+
+    /**
+     * @return the airCraftStatusRecs
+     */
+    public Set<AirCraftStatusRec> getAirCraftStatusRecs() {
+        return airCraftStatusRecs;
+    }
+
+    /**
+     * @param airCraftStatusRecs the airCraftStatusRecs to set
+     */
+    public void setAirCraftStatusRecs(Set<AirCraftStatusRec> airCraftStatusRecs) {
+        this.airCraftStatusRecs = airCraftStatusRecs;
     }
 }

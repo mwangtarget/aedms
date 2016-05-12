@@ -1,41 +1,43 @@
 package com.aedms.core.entities.source.builder;
 
 import com.aedms.core.entities.source.APU;
+import java.util.Date;
 
-public class APUBuilder implements com.aedms.core.entities.source.builder.Builder<com.aedms.core.entities.source.APU> {
-    public static APUBuilder anAPU() {
+public class APUBuilder implements Builder<APU> {
+    
+    public static APUBuilder createAPUBuilder() {
         return new APUBuilder();
     }    
-    private com.aedms.core.entities.source.APU target = new com.aedms.core.entities.source.APU();
+    private final APU target = new APU();
     
-    public APUBuilder() {}
+    private APUBuilder() {}
     
-    public APUBuilder withOpr(java.lang.String opr) {
+    public APUBuilder withOpr(String opr) {
         getTarget().setOpr(opr);
         return this;
     }
     
-    public APUBuilder withRentDate(java.util.Date rentDate) {
+    public APUBuilder withRentDate(Date rentDate) {
         getTarget().setRentDate(rentDate);
         return this;
     }
     
-    public APUBuilder withLeaseHold(java.lang.String leaseHold) {
+    public APUBuilder withLeaseHold(String leaseHold) {
         getTarget().setLeaseHold(leaseHold);
         return this;
     }
     
-    public APUBuilder withManufactureDate(java.util.Date manufactureDate) {
+    public APUBuilder withManufactureDate(Date manufactureDate) {
         getTarget().setManufactureDate(manufactureDate);
         return this;
     }
     
-    public APUBuilder withModel(java.lang.String model) {
+    public APUBuilder withModel(String model) {
         getTarget().setModel(model);
         return this;
     }
     
-    public APUBuilder withSN(java.lang.String SN) {
+    public APUBuilder withSN(String SN) {
         getTarget().setSN(SN);
         return this;
     }
@@ -45,16 +47,17 @@ public class APUBuilder implements com.aedms.core.entities.source.builder.Builde
         return this;
     }
     
-    public APUBuilder withLeaseHolder(java.lang.String leaseHolder) {
+    public APUBuilder withLeaseHolder(String leaseHolder) {
         getTarget().setLeaseHolder(leaseHolder);
         return this;
     }
     
-    protected com.aedms.core.entities.source.APU getTarget() {
+    protected APU getTarget() {
         return target;
     }
     
-    public com.aedms.core.entities.source.APU build() {
+    @Override
+    public APU build() {
         return getTarget();
     }
 }

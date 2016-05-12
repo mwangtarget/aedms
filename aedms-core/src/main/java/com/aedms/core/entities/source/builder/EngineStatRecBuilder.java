@@ -1,129 +1,135 @@
 package com.aedms.core.entities.source.builder;
 
+import com.aedms.core.entities.source.Engine;
+import com.aedms.core.entities.source.EngineStatRec;
+import java.util.Date;
 
-public class EngineStatRecBuilder implements com.aedms.core.entities.source.builder.Builder<com.aedms.core.entities.source.EngineStatRec> {
-    public static EngineStatRecBuilder anEngineStatRec() {
+public class EngineStatRecBuilder implements Builder<EngineStatRec> {
+
+    public static EngineStatRecBuilder createEngineStatRecBuilder() {
         return new EngineStatRecBuilder();
-    }    
-    private com.aedms.core.entities.source.EngineStatRec target = new com.aedms.core.entities.source.EngineStatRec();
-    
-    public EngineStatRecBuilder() {}
-    
-    public EngineStatRecBuilder withHrsPostInst(java.lang.Double hrsPostInst) {
+    }
+    private final EngineStatRec target = new EngineStatRec();
+
+    private EngineStatRecBuilder() {
+    }
+
+    public EngineStatRecBuilder withHrsPostInst(double hrsPostInst) {
         getTarget().setHrsPostInst(hrsPostInst);
         return this;
     }
-    
-    public EngineStatRecBuilder withRepDate(java.util.Date repDate) {
+
+    public EngineStatRecBuilder withRepDate(Date repDate) {
         getTarget().setRepDate(repDate);
         return this;
     }
-    
-    public EngineStatRecBuilder withEngineStat(java.lang.String engineStat) {
+
+    public EngineStatRecBuilder withEngineStat(String engineStat) {
         getTarget().setEngineStat(engineStat);
         return this;
     }
-    
-    public EngineStatRecBuilder withTdANO(java.lang.String tdANO) {
+
+    public EngineStatRecBuilder withTdANO(String tdANO) {
         getTarget().setTdANO(tdANO);
         return this;
     }
-    
-    public EngineStatRecBuilder withCirsPostInst(java.lang.Integer cirsPostInst) {
+
+    public EngineStatRecBuilder withCirsPostInst(int cirsPostInst) {
         getTarget().setCirsPostInst(cirsPostInst);
         return this;
     }
-    
-    public EngineStatRecBuilder withRemark(java.lang.String remark) {
+
+    public EngineStatRecBuilder withRemark(String remark) {
         getTarget().setRemark(remark);
         return this;
     }
-    
-    public EngineStatRecBuilder withInstallANO(java.lang.String installANO) {
+
+    public EngineStatRecBuilder withInstallANO(String installANO) {
         getTarget().setInstallANO(installANO);
         return this;
     }
-    
-    public EngineStatRecBuilder withTdCause(java.lang.String tdCause) {
+
+    public EngineStatRecBuilder withTdCause(String tdCause) {
         getTarget().setTdCause(tdCause);
         return this;
     }
-    
+
     public EngineStatRecBuilder withRecDate(java.util.Date recDate) {
         getTarget().setRecDate(recDate);
         return this;
     }
-    
+
     public EngineStatRecBuilder withTdDate(java.util.Date tdDate) {
         getTarget().setTdDate(tdDate);
         return this;
     }
-    
+
     public EngineStatRecBuilder withTSN(java.lang.Double TSN) {
         getTarget().setTSN(TSN);
         return this;
     }
-    
+
     public EngineStatRecBuilder withTSO(java.lang.Double TSO) {
         getTarget().setTSO(TSO);
         return this;
     }
-    
-    public EngineStatRecBuilder withInstallPos(java.lang.String installPos) {
+
+    public EngineStatRecBuilder withInstallPos(String installPos) {
         getTarget().setInstallPos(installPos);
         return this;
     }
-    
-    public EngineStatRecBuilder withRepUnit(java.lang.String repUnit) {
+
+    public EngineStatRecBuilder withRepUnit(String repUnit) {
         getTarget().setRepUnit(repUnit);
         return this;
     }
-    
-    public EngineStatRecBuilder withEngine(com.aedms.core.entities.source.Engine engine) {
+
+    public EngineStatRecBuilder withEngine(Engine engine) {
         getTarget().setEngine(engine);
         return this;
     }
-    
-    public EngineStatRecBuilder withInstallDate(java.util.Date installDate) {
+
+    public EngineStatRecBuilder withInstallDate(Date installDate) {
         getTarget().setInstallDate(installDate);
         return this;
     }
-    
-    public EngineStatRecBuilder withLastRpDate(java.util.Date lastRpDate) {
+
+    public EngineStatRecBuilder withLastRpDate(Date lastRpDate) {
         getTarget().setLastRpDate(lastRpDate);
         return this;
     }
-    
+
     public EngineStatRecBuilder withId(long id) {
         getTarget().setId(id);
         return this;
     }
-    
-    public EngineStatRecBuilder withLastRpUnit(java.lang.String lastRpUnit) {
+
+    public EngineStatRecBuilder withLastRpUnit(String lastRpUnit) {
         getTarget().setLastRpUnit(lastRpUnit);
         return this;
     }
-    
-    public EngineStatRecBuilder withTdPIS(java.lang.String tdPIS) {
+
+    public EngineStatRecBuilder withTdPIS(String tdPIS) {
         getTarget().setTdPIS(tdPIS);
         return this;
     }
-    
-    public EngineStatRecBuilder withCSO(java.lang.Integer CSO) {
+
+    public EngineStatRecBuilder withCSO(int CSO) {
         getTarget().setCSO(CSO);
         return this;
     }
-    
-    public EngineStatRecBuilder withCSN(java.lang.Integer CSN) {
+
+    public EngineStatRecBuilder withCSN(int CSN) {
         getTarget().setCSN(CSN);
         return this;
     }
-    
-    protected com.aedms.core.entities.source.EngineStatRec getTarget() {
+
+    protected EngineStatRec getTarget() {
         return target;
     }
-    
-    public com.aedms.core.entities.source.EngineStatRec build() {
+
+    @Override
+    public EngineStatRec build() {
         return getTarget();
     }
 }

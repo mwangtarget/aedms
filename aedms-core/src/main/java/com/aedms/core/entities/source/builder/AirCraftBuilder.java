@@ -1,198 +1,187 @@
 package com.aedms.core.entities.source.builder;
 
-public class AirCraftBuilder implements com.aedms.core.entities.source.builder.Builder<com.aedms.core.entities.source.AirCraft> {
-    public static AirCraftBuilder anAirCraft() {
+import com.aedms.core.entities.source.APU;
+import com.aedms.core.entities.source.AirCraft;
+import com.aedms.core.entities.source.Engine;
+import java.util.Date;
+import java.util.Set;
+
+public class AirCraftBuilder implements Builder<AirCraft> {
+
+    public static AirCraftBuilder createAirCraftBuilder() {
         return new AirCraftBuilder();
-    }    
-    private com.aedms.core.entities.source.AirCraft target = new com.aedms.core.entities.source.AirCraft();
-    
-    public AirCraftBuilder() {}
-    
-    public AirCraftBuilder withIpcRefNo(java.lang.String ipcRefNo) {
+    }
+    private final AirCraft target = new AirCraft();
+
+    private AirCraftBuilder() {
+    }
+
+    public AirCraftBuilder withIpcRefNo(String ipcRefNo) {
         getTarget().setIpcRefNo(ipcRefNo);
         return this;
     }
-    
-    public AirCraftBuilder withFleet(java.lang.String fleet) {
+
+    public AirCraftBuilder withFleet(String fleet) {
         getTarget().setFleet(fleet);
         return this;
     }
-    
-    public AirCraftBuilder withLN(java.lang.String LN) {
+
+    public AirCraftBuilder withLN(String LN) {
         getTarget().setLN(LN);
         return this;
     }
-    
-    public AirCraftBuilder withEngineFour(com.aedms.core.entities.source.Engine engineFour) {
-        getTarget().setEngineFour(engineFour);
-        return this;
-    }
-    
-    public AirCraftBuilder withLeasingDeliveryDate(java.util.Date leasingDeliveryDate) {
+
+    public AirCraftBuilder withLeasingDeliveryDate(Date leasingDeliveryDate) {
         getTarget().setLeasingDeliveryDate(leasingDeliveryDate);
         return this;
     }
-    
-    public AirCraftBuilder withSubFleet(java.lang.String subFleet) {
+
+    public AirCraftBuilder withSubFleet(String subFleet) {
         getTarget().setSubFleet(subFleet);
         return this;
     }
-    
-    public AirCraftBuilder withVariableNo(java.lang.String variableNo) {
+
+    public AirCraftBuilder withVariableNo(String variableNo) {
         getTarget().setVariableNo(variableNo);
         return this;
     }
-    
-    public AirCraftBuilder withEngineOne(com.aedms.core.entities.source.Engine engineOne) {
-        getTarget().setEngineOne(engineOne);
+
+    public AirCraftBuilder withEngines(Set<Engine> engines) {
+        getTarget().setEngines(engines);
         return this;
     }
-    
-    public AirCraftBuilder withWeigthMaxTakeOff(java.lang.Integer weigthMaxTakeOff) {
+
+    public AirCraftBuilder withWeigthMaxTakeOff(int weigthMaxTakeOff) {
         getTarget().setWeigthMaxTakeOff(weigthMaxTakeOff);
         return this;
     }
-    
-    public AirCraftBuilder withEngineType(java.lang.String engineType) {
+
+    public AirCraftBuilder withEngineType(String engineType) {
         getTarget().setEngineType(engineType);
         return this;
     }
-    
-    public AirCraftBuilder withTenancyTerm(java.lang.Integer tenancyTerm) {
+
+    public AirCraftBuilder withTenancyTerm(int tenancyTerm) {
         getTarget().setTenancyTerm(tenancyTerm);
         return this;
     }
-    
-    public AirCraftBuilder withManufacturer(java.lang.String manufacturer) {
+
+    public AirCraftBuilder withManufacturer(String manufacturer) {
         getTarget().setManufacturer(manufacturer);
         return this;
     }
-    
-    public AirCraftBuilder withRegisterNo(java.lang.String registerNo) {
+
+    public AirCraftBuilder withRegisterNo(String registerNo) {
         getTarget().setRegisterNo(registerNo);
         return this;
     }
-    
-    public AirCraftBuilder withTypeCertificate(java.lang.String typeCertificate) {
+
+    public AirCraftBuilder withTypeCertificate(String typeCertificate) {
         getTarget().setTypeCertificate(typeCertificate);
         return this;
     }
-    
-    public AirCraftBuilder withWeightEmpty(java.lang.Integer weightEmpty) {
+
+    public AirCraftBuilder withWeightEmpty(int weightEmpty) {
         getTarget().setWeightEmpty(weightEmpty);
         return this;
     }
-    
-    public AirCraftBuilder withManufactureDate(java.util.Date manufactureDate) {
+
+    public AirCraftBuilder withManufactureDate(Date manufactureDate) {
         getTarget().setManufactureDate(manufactureDate);
         return this;
     }
-    
-    public AirCraftBuilder withModel(java.lang.String model) {
+
+    public AirCraftBuilder withModel(String model) {
         getTarget().setModel(model);
         return this;
     }
-    
-    public AirCraftBuilder withSN(java.lang.String SN) {
+
+    public AirCraftBuilder withSN(String SN) {
         getTarget().setSN(SN);
         return this;
     }
-    
-    public AirCraftBuilder withId(java.lang.Long id) {
-        getTarget().setId(id);
-        return this;
-    }
-    
-    public AirCraftBuilder withWeightZeroFuel(java.lang.Integer weightZeroFuel) {
+
+    public AirCraftBuilder withWeightZeroFuel(int weightZeroFuel) {
         getTarget().setWeightZeroFuel(weightZeroFuel);
         return this;
     }
-    
-    public AirCraftBuilder withOwner(java.lang.String owner) {
+
+    public AirCraftBuilder withOwner(String owner) {
         getTarget().setOwner(owner);
         return this;
     }
-    
-    public AirCraftBuilder withWeightMaxLanding(java.lang.Integer weightMaxLanding) {
+
+    public AirCraftBuilder withWeightMaxLanding(int weightMaxLanding) {
         getTarget().setWeightMaxLanding(weightMaxLanding);
         return this;
     }
-    
-    public AirCraftBuilder withAfmCertificate(java.lang.String afmCertificate) {
+
+    public AirCraftBuilder withAfmCertificate(String afmCertificate) {
         getTarget().setAfmCertificate(afmCertificate);
         return this;
     }
-    
-    public AirCraftBuilder withFuelCapacity(java.lang.Integer fuelCapacity) {
+
+    public AirCraftBuilder withFuelCapacity(int fuelCapacity) {
         getTarget().setFuelCapacity(fuelCapacity);
         return this;
     }
-    
-    public AirCraftBuilder withApu(com.aedms.core.entities.source.APU apu) {
-        getTarget().setApu(apu);
+
+    public AirCraftBuilder withApus(Set<APU> apus) {
+        getTarget().setApus(apus);
         return this;
     }
-    
-    public AirCraftBuilder withEngineTwo(com.aedms.core.entities.source.Engine engineTwo) {
-        getTarget().setEngineTwo(engineTwo);
-        return this;
-    }
-    
-    public AirCraftBuilder withOperatorBase(java.lang.String operatorBase) {
+
+    public AirCraftBuilder withOperatorBase(String operatorBase) {
         getTarget().setOperatorBase(operatorBase);
         return this;
     }
-    
-    public AirCraftBuilder withSelCal(java.lang.String selCal) {
+
+    public AirCraftBuilder withSelCal(String selCal) {
         getTarget().setSelCal(selCal);
         return this;
     }
-    
-    public AirCraftBuilder withSeatCount(java.lang.Integer seatCount) {
+
+    public AirCraftBuilder withSeatCount(int seatCount) {
         getTarget().setSeatCount(seatCount);
         return this;
     }
-    
-    public AirCraftBuilder withFirstSeatCount(java.lang.Integer firstSeatCount) {
+
+    public AirCraftBuilder withFirstSeatCount(int firstSeatCount) {
         getTarget().setFirstSeatCount(firstSeatCount);
         return this;
     }
-    
-    public AirCraftBuilder withSerialNo(java.lang.String serialNo) {
+
+    public AirCraftBuilder withSerialNo(String serialNo) {
         getTarget().setSerialNo(serialNo);
         return this;
     }
-    
-    public AirCraftBuilder withVirframeNo(java.lang.String virframeNo) {
+
+    public AirCraftBuilder withVirframeNo(String virframeNo) {
         getTarget().setVirframeNo(virframeNo);
         return this;
     }
-    
-    public AirCraftBuilder withEngineMaxThrust(java.lang.Integer engineMaxThrust) {
+
+    public AirCraftBuilder withEngineMaxThrust(int engineMaxThrust) {
         getTarget().setEngineMaxThrust(engineMaxThrust);
         return this;
     }
-    
-    public AirCraftBuilder withEconomySeatCount(java.lang.Integer economySeatCount) {
+
+    public AirCraftBuilder withEconomySeatCount(int economySeatCount) {
         getTarget().setEconomySeatCount(economySeatCount);
         return this;
     }
-    
-    public AirCraftBuilder withEngineThree(com.aedms.core.entities.source.Engine engineThree) {
-        getTarget().setEngineThree(engineThree);
-        return this;
-    }
-    
-    public AirCraftBuilder withWeightMaxTaxi(java.lang.Integer weightMaxTaxi) {
+
+    public AirCraftBuilder withWeightMaxTaxi(int weightMaxTaxi) {
         getTarget().setWeightMaxTaxi(weightMaxTaxi);
         return this;
     }
-    
-    protected com.aedms.core.entities.source.AirCraft getTarget() {
+
+    protected AirCraft getTarget() {
         return target;
     }
-    
-    public com.aedms.core.entities.source.AirCraft build() {
+
+    @Override
+    public AirCraft build() {
         return getTarget();
     }
 }

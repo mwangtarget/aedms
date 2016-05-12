@@ -2,12 +2,14 @@ package com.aedms.core.entities.source;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
@@ -15,7 +17,7 @@ import org.hibernate.envers.Audited;
 
 /**
  * The Entity to representing APP information.
- * The physical table is "APU_INFO"
+ * The physical table is "APU"
  * 
  * @author jaly
  */
@@ -53,6 +55,14 @@ public class APU  implements Serializable{
     
     @Column(name = "OPR")
     private String opr;
+    
+    @OneToMany(targetEntity = Engine.class, mappedBy = "aircraft")
+    @JoinColumn(name = "APU_ID")
+    private Set<APUStatusRec> apuStatusRecs;
+    
+    @OneToMany(targetEntity = Engine.class, mappedBy = "aircraft")
+    @JoinColumn(name = "APU_ID")
+    private Set<APUOperationRec> apuOperationRecs;
     
     
     
@@ -167,5 +177,33 @@ public class APU  implements Serializable{
      */
     public void setOpr(String opr) {
         this.opr = opr;
+    }
+
+    /**
+     * @return the apuStatusRecs
+     */
+    public Set<APUStatusRec> getApuStatusRecs() {
+        return apuStatusRecs;
+    }
+
+    /**
+     * @param apuStatusRecs the apuStatusRecs to set
+     */
+    public void setApuStatusRecs(Set<APUStatusRec> apuStatusRecs) {
+        this.apuStatusRecs = apuStatusRecs;
+    }
+
+    /**
+     * @return the apuOperationRecs
+     */
+    public Set<APUOperationRec> getApuOperationRecs() {
+        return apuOperationRecs;
+    }
+
+    /**
+     * @param apuOperationRecs the apuOperationRecs to set
+     */
+    public void setApuOperationRecs(Set<APUOperationRec> apuOperationRecs) {
+        this.apuOperationRecs = apuOperationRecs;
     }
 }
