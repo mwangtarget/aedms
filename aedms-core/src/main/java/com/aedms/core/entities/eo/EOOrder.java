@@ -2,6 +2,7 @@ package com.aedms.core.entities.eo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -11,6 +12,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -193,5 +196,9 @@ public class EOOrder implements Serializable {
 	@Column(name = "VERSION", length = 2)
 	private String version;
 
-	
+
+	// Link to AD	
+	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@JoinTable(name = "EOORDER_AD")
+	public Set<AirworthDirective> airworthDirectives;
 }
