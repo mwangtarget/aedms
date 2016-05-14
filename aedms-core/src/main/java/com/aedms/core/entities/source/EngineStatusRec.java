@@ -12,9 +12,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
+import fr.lteconsulting.Mandatory;
+import fr.lteconsulting.UseBuilderGenerator;
+
 @Entity
 @Table(name = "ENGINE_STAT_REC")
-public class EngineStatRec {
+public class EngineStatusRec {
 
 	private static final long serialVersionUID = 1L;
 
@@ -91,6 +94,40 @@ public class EngineStatRec {
 	@ManyToOne
     @JoinColumn(name="ENGINE_ID", nullable=false)
 	private Engine engine;
+
+	/** Constructor List block*/
+	public EngineStatusRec(){
+		
+	}
+	
+	@UseBuilderGenerator
+	public EngineStatusRec(@Mandatory Double tSN, @Mandatory Integer cSN, @Mandatory Double tSO, Integer cSO, Double hrsPostInst, Integer cirsPostInst,
+			Date lastRpDate, String lastRpUnit, Date installDate, String installANO, String installPos, Date tdDate,
+			String tdANO, String tdPIS, String tdCause, String engineStat, Date repDate, String repUnit, Date recDate,
+			String remark, @Mandatory Engine engine) {
+		super();
+		TSN = tSN;
+		CSN = cSN;
+		TSO = tSO;
+		CSO = cSO;
+		this.hrsPostInst = hrsPostInst;
+		this.cirsPostInst = cirsPostInst;
+		this.lastRpDate = lastRpDate;
+		this.lastRpUnit = lastRpUnit;
+		this.installDate = installDate;
+		this.installANO = installANO;
+		this.installPos = installPos;
+		this.tdDate = tdDate;
+		this.tdANO = tdANO;
+		this.tdPIS = tdPIS;
+		this.tdCause = tdCause;
+		this.engineStat = engineStat;
+		this.repDate = repDate;
+		this.repUnit = repUnit;
+		this.recDate = recDate;
+		this.remark = remark;
+		this.engine = engine;
+	}
 
 	@Override
 	public String toString() {

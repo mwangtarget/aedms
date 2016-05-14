@@ -7,8 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+
+import fr.lteconsulting.Mandatory;
+import fr.lteconsulting.UseBuilderGenerator;
 
 /**
  *
@@ -86,8 +91,47 @@ public class APUStatusRec implements Serializable {
     @Column(name = "OPT_TYPE")
     private String optType;
     
+    @ManyToOne
+    @JoinColumn(name = "APU_ID")
+	private APU apu;
+    
+    /** Constructor list block */
+    public APUStatusRec(){
+    	
+    }
+    
+    
+    @UseBuilderGenerator
+    public APUStatusRec(@Mandatory float tSN, @Mandatory Integer cSN, @Mandatory float tSO, @Mandatory Integer cSO, Date lastRpDate, String lastRpUnit,
+			Date installDate, String installANO, int installFH, int installFC, Date tearDownDate, String tearDownAno,
+			String tearDownCause, String apuStatus, String remark, Date recordDate, Date repairDate, String repairUnit,
+			String optType, @Mandatory APU apu) {
+		super();
+		TSN = tSN;
+		CSN = cSN;
+		TSO = tSO;
+		CSO = cSO;
+		this.lastRpDate = lastRpDate;
+		this.lastRpUnit = lastRpUnit;
+		this.installDate = installDate;
+		this.installANO = installANO;
+		this.installFH = installFH;
+		this.installFC = installFC;
+		this.tearDownDate = tearDownDate;
+		this.tearDownAno = tearDownAno;
+		this.tearDownCause = tearDownCause;
+		this.apuStatus = apuStatus;
+		this.remark = remark;
+		this.recordDate = recordDate;
+		this.repairDate = repairDate;
+		this.repairUnit = repairUnit;
+		this.optType = optType;
+		this.apu = apu;
+	}
 
-    public Long getId() {
+
+
+	public Long getId() {
         return id;
     }
 

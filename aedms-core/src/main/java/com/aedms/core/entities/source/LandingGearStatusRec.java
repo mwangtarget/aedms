@@ -7,8 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+
+import fr.lteconsulting.Mandatory;
+import fr.lteconsulting.UseBuilderGenerator;
 
 /**
  * The Entity to representing LandingGearStatus record. The physical table is "LANDING_GEAR_STATUS_RECORD"
@@ -102,7 +107,48 @@ public class LandingGearStatusRec implements Serializable{
     @Column(name = "OPT_TYPE")
     private String optType;
     
-    @Override
+    @ManyToOne
+    @JoinColumn(name = "LANDING_GEAR_ID")
+	private LandingGear landingGear;
+    /** Constructor block list */
+    public LandingGearStatusRec(){
+    	
+    }
+    @UseBuilderGenerator
+    public LandingGearStatusRec(@Mandatory String tsn, @Mandatory  String csn, String tso, String cso, Date lastRpDate, String lastRpUnit,
+			Date installDate, String installAno, String installPosition, int installFH, int installFC, String timeLimit,
+			String remainTime, String docType, Date tearDownDate, String tearDownAno, String tearDownPis,
+			String tearDownCause, String landingGearStatus, String remark, Date recordDate, Date repairDate,
+			String repairUnit, String optType, @Mandatory  LandingGear landingGear) {
+		super();
+		this.tsn = tsn;
+		this.csn = csn;
+		this.tso = tso;
+		this.cso = cso;
+		this.lastRpDate = lastRpDate;
+		this.lastRpUnit = lastRpUnit;
+		this.installDate = installDate;
+		this.installAno = installAno;
+		this.installPosition = installPosition;
+		this.installFH = installFH;
+		this.installFC = installFC;
+		this.timeLimit = timeLimit;
+		this.remainTime = remainTime;
+		this.docType = docType;
+		this.tearDownDate = tearDownDate;
+		this.tearDownAno = tearDownAno;
+		this.tearDownPis = tearDownPis;
+		this.tearDownCause = tearDownCause;
+		this.landingGearStatus = landingGearStatus;
+		this.remark = remark;
+		this.recordDate = recordDate;
+		this.repairDate = repairDate;
+		this.repairUnit = repairUnit;
+		this.optType = optType;
+		this.landingGear = landingGear;
+	}
+
+	@Override
     public String toString() {
         StringBuilder sb = new StringBuilder("LandingGearStatusRec[ ID=");
         sb.append(this.getId())

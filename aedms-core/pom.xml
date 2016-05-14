@@ -103,9 +103,10 @@
 
 		<!-- Tools -->
 		<dependency>
-			<groupId>uk.co.buildergenerator</groupId>
-			<artifactId>buildergenerator</artifactId>
-			<version>LATEST</version>
+			<groupId>fr.lteconsulting</groupId>
+			<artifactId>builder-generator</artifactId>
+			<version>0.9</version>
+			<scope>provided</scope> <!-- this is source generation, nothing at runtime -->
 		</dependency>
 	</dependencies>
 	<build>

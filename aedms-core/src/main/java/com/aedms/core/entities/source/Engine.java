@@ -11,9 +11,16 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+
+import com.aedms.core.entities.eo.EOOrder;
+
+import fr.lteconsulting.Mandatory;
+import fr.lteconsulting.UseBuilderGenerator;
 
 
 
@@ -72,12 +79,53 @@ public class Engine implements Serializable {
 
    
     @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="engine")
-    private Set<EngineOprRec>   engineOprRecs; 
+    private Set<EngineOperationRec>   engineOprRecs; 
 	
     @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="engine")
-    private Set<EngineStatRec>   engineStatRecs; 
+    private Set<EngineStatusRec>   engineStatRecs; 
     
-    @Override
+	@ManyToOne
+    @JoinColumn(name = "AIRCRAFT_ID")
+	private AirCraft aircraft;
+    
+	/** Constructor block */
+	public Engine(){}
+	
+	
+	@UseBuilderGenerator
+    public Engine(@Mandatory String fleet, @Mandatory String subFleet, @Mandatory  String serialNo, @Mandatory  String model, @Mandatory  String sN, @Mandatory  Date manufactureDate,
+			Date rentDate, String leaseHold, String leaseHolder, String opr, String remark,
+			Set<EngineOperationRec> engineOprRecs, Set<EngineStatusRec> engineStatRecs, AirCraft aircraft) {
+		super();
+		this.fleet = fleet;
+		this.subFleet = subFleet;
+		this.serialNo = serialNo;
+		this.model = model;
+		SN = sN;
+		this.manufactureDate = manufactureDate;
+		this.rentDate = rentDate;
+		this.leaseHold = leaseHold;
+		this.leaseHolder = leaseHolder;
+		this.opr = opr;
+		this.remark = remark;
+		this.engineOprRecs = engineOprRecs;
+		this.engineStatRecs = engineStatRecs;
+		this.aircraft = aircraft;
+	}
+
+
+
+	public AirCraft getAircraft() {
+		return aircraft;
+	}
+
+
+	public void setAircraft(AirCraft aircraft) {
+		this.aircraft = aircraft;
+	}
+
+
+	@Override
 	public String toString() {
 		return "Engine [id=" + id + ", fleet=" + fleet + ", subFleet=" + subFleet + ", serialNo=" + serialNo
 				+ ", model=" + model + ", SN=" + SN + ", manufactureDate=" + manufactureDate + ", rentDate=" + rentDate
@@ -86,22 +134,22 @@ public class Engine implements Serializable {
 	}
 
     
-	public Set<EngineStatRec> getEngineStatRecs() {
+	public Set<EngineStatusRec> getEngineStatRecs() {
 		return engineStatRecs;
 	}
 
 
-	public void setEngineStatRecs(Set<EngineStatRec> engineStatRecs) {
+	public void setEngineStatRecs(Set<EngineStatusRec> engineStatRecs) {
 		this.engineStatRecs = engineStatRecs;
 	}
 
 
-	public Set<EngineOprRec> getEngineOprRecs() {
+	public Set<EngineOperationRec> getEngineOprRecs() {
 		return engineOprRecs;
 	}
 
 
-	public void setEngineOprRecs(Set<EngineOprRec> engineOprRecs) {
+	public void setEngineOprRecs(Set<EngineOperationRec> engineOprRecs) {
 		this.engineOprRecs = engineOprRecs;
 	}
 

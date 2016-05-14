@@ -7,7 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import fr.lteconsulting.Mandatory;
+import fr.lteconsulting.UseBuilderGenerator;
 
 /**
  *
@@ -51,7 +56,31 @@ public class APUOperationRec implements Serializable{
     @Column(name = "RECORD_DATE")
     private Date recordDate;
     
-    public Long getId() {
+    @ManyToOne
+    @JoinColumn(name = "APU_ID")
+	private APU apu;
+    
+    /** Constructor List block */
+    public APUOperationRec(){}
+    
+    @UseBuilderGenerator
+    public APUOperationRec(@Mandatory float tsn, @Mandatory int csn, @Mandatory float tso, int cso, float installFH, int installFC, float remainFH,
+    		@Mandatory int remainFC, @Mandatory Date recordDate, @Mandatory APU apu) {
+		super();
+		this.tsn = tsn;
+		this.csn = csn;
+		this.tso = tso;
+		this.cso = cso;
+		this.installFH = installFH;
+		this.installFC = installFC;
+		this.remainFH = remainFH;
+		this.remainFC = remainFC;
+		this.recordDate = recordDate;
+		this.apu = apu;
+	}
+
+
+	public Long getId() {
         return id;
     }
 
