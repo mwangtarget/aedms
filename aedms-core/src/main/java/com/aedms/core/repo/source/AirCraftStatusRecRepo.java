@@ -1,12 +1,18 @@
 package com.aedms.core.repo.source;
 
-import com.aedms.core.entities.source.AircraftStatusRec;
+
 import org.springframework.data.repository.CrudRepository;
+
+import com.aedms.core.entities.source.AirCraftStatusRec;
+
+
+
+
 
 /**
  *
  * @author jaly
  */
-public interface AircraftStatusRecRepo extends CrudRepository<AircraftStatusRec, Long>{
+public interface AirCraftStatusRecRepo extends CrudRepository<AirCraftStatusRec, Long>{
     
 }

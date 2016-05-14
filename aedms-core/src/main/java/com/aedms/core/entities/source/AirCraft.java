@@ -147,10 +147,10 @@ public class AirCraft implements Serializable {
     private Set<LandingGear> landingGears;
 
     @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy = "aircraft")
-    private Set<AircraftStatusRec> airCraftStatusRecs;
+    private Set<AirCraftStatusRec> airCraftStatusRecs;
     
     @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy = "aircraft")
-    private Set<AircraftFlightRec> airCraftFlightRecs;
+    private Set<AirCraftFlightRec> airCraftFlightRecs;
     
     
     public AirCraft(){
@@ -165,8 +165,8 @@ public class AirCraft implements Serializable {
 			Integer busSeatCount, Integer economySeatCount, String manufacturer, Integer engineMaxThrust,
 			Integer fuelCapacity, Integer weigthMaxTakeOff, Integer weightMaxLanding, Integer weightMaxTaxi,
 			Integer weightEmpty, Integer weightZeroFuel, Set<Engine> engines, Set<APU> apus,
-			Set<LandingGear> landingGears, Set<AircraftStatusRec> airCraftStatusRecs,
-			Set<AircraftFlightRec> airCraftFlightRecs) {
+			Set<LandingGear> landingGears, Set<AirCraftStatusRec> airCraftStatusRecs,
+			Set<AirCraftFlightRec> airCraftFlightRecs) {
 		super();
 		this.fleet = fleet;
 		this.subFleet = subFleet;
@@ -750,14 +750,14 @@ public class AirCraft implements Serializable {
     /**
      * @return the airCraftStatusRecs
      */
-    public Set<AircraftStatusRec> getAirCraftStatusRecs() {
+    public Set<AirCraftStatusRec> getAirCraftStatusRecs() {
         return airCraftStatusRecs;
     }
 
     /**
      * @param airCraftStatusRecs the airCraftStatusRecs to set
      */
-    public void setAirCraftStatusRecs(Set<AircraftStatusRec> airCraftStatusRecs) {
+    public void setAirCraftStatusRecs(Set<AirCraftStatusRec> airCraftStatusRecs) {
         this.airCraftStatusRecs = airCraftStatusRecs;
     }
 }

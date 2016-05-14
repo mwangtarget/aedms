@@ -22,7 +22,7 @@ import fr.lteconsulting.UseBuilderGenerator;
  */
 @Entity
 @Table(name = "AIRCRAFT_FLIGHT_RECORD")
-public class AircraftFlightRec implements Serializable{
+public class AirCraftFlightRec implements Serializable{
 
     private static final long serialVersionUID = 1L;
     
@@ -71,12 +71,12 @@ public class AircraftFlightRec implements Serializable{
 	private AirCraft aircraft;
 
     /**Constructor block*/
-    public AircraftFlightRec(){
+    public AirCraftFlightRec(){
     	
     }
     
     @UseBuilderGenerator
-    public AircraftFlightRec(@Mandatory int tt, @Mandatory int tc, @Mandatory int tbo, @Mandatory int cbo, int tso, int cso, int trem, int crem, int tslsv,
+    public AirCraftFlightRec(@Mandatory int tt, @Mandatory int tc, @Mandatory int tbo, @Mandatory int cbo, int tso, int cso, int trem, int crem, int tslsv,
 			Date cslsv, @Mandatory Date effectDate, @Mandatory AirCraft aircraft) {
 		super();
 		this.tt = tt;

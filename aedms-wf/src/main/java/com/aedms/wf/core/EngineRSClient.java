@@ -1,5 +1,7 @@
 package com.aedms.wf.core;
 
+import java.util.Date;
+
 import org.activiti.engine.delegate.DelegateExecution;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -7,7 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import com.aedms.core.entities.source.Engine;
-import com.aedms.core.entities.source.builder.EngineBuilder;
+
 
 @Component(value = "engineRSClient")
 public class EngineRSClient {
@@ -21,7 +23,9 @@ public class EngineRSClient {
         String subFleet = (String) execution.getVariable("subFleet");
         String modelSpecs = (String) execution.getVariable("model");
 
-        Engine engine = EngineBuilder.createEngineBuilder().withFleet(fleet).withSubFleet(subFleet).withModel(modelSpecs).build();
+        Engine engine = com.aedms.core.entities.source.EngineBuilder.withFleet(fleet).withSubFleet(subFleet)
+        		.withSerialNo("123455").withModel(modelSpecs).withSN("12345").withManufactureDate(new Date()).build();
+        
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.postForObject(environment.getRequiredProperty("aedms.rs.engines"), engine, Engine.class);
 
