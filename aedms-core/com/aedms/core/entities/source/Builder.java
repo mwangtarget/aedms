@@ -1,4 +1,4 @@
-package com.aedms.core.entities.source.builder;
+package com.aedms.core.entities.source;
 
 public interface Builder<T> {
 

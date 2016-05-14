@@ -7,8 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+
+import fr.lteconsulting.Mandatory;
+import fr.lteconsulting.UseBuilderGenerator;
 
 /**
  *　The Entity to representing AirCraft status record. The physical table is "AIRCRAFT_STATUS_RECORD"
@@ -51,7 +56,29 @@ public class AircraftStatusRec implements Serializable{
     @Column(name = "REMAIN_FC")
     private int remainFC;
     
-    @Override
+    @ManyToOne
+    @JoinColumn(name = "AIRCRAFT_ID")
+	private AirCraft aircraft;
+    
+    /**Constructor block*/
+    public AircraftStatusRec(){}
+    
+    @UseBuilderGenerator
+    public AircraftStatusRec(@Mandatory String status, @Mandatory Date statusChangedDatetimne, @Mandatory float tt, int tc, float tso, int cso,
+    		@Mandatory float remainFH, @Mandatory int remainFC, @Mandatory AirCraft aircraft) {
+		super();
+		this.status = status;
+		this.statusChangedDatetimne = statusChangedDatetimne;
+		this.tt = tt;
+		this.tc = tc;
+		this.tso = tso;
+		this.cso = cso;
+		this.remainFH = remainFH;
+		this.remainFC = remainFC;
+		this.aircraft = aircraft;
+	}
+
+	@Override
     public String toString() {
         StringBuilder sb = new StringBuilder("AirCraftStatusRec[ ID=");
         sb.append(this.getId())

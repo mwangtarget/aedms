@@ -18,7 +18,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
-import com.aedms.core.entities.source.EngineOprRec;
+import com.aedms.core.entities.source.EngineOperationRec;
 
 @Entity
 @Table(name = "EO_ORDER")

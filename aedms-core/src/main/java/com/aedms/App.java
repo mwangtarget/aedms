@@ -10,14 +10,16 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.aedms.core.entities.source.APUBuilder;
+import com.aedms.core.entities.source.AirCraft;
 import com.aedms.core.entities.source.APU;
+import com.aedms.core.entities.source.AirCraftBuilder;
 import com.aedms.core.entities.source.Engine;
-import com.aedms.core.entities.source.EngineOprRec;
-import com.aedms.core.entities.source.EngineStatRec;
-import com.aedms.core.entities.source.builder.APUBuilder;
-import com.aedms.core.entities.source.builder.AirCraftBuilder;
-import com.aedms.core.entities.source.builder.EngineBuilder;
-import com.aedms.core.entities.source.builder.*;
+import com.aedms.core.entities.source.EngineBuilder;
+import com.aedms.core.entities.source.EngineOperationRec;
+import com.aedms.core.entities.source.EngineOperationRecBuilder;
+import com.aedms.core.entities.source.EngineStatusRec;
+import com.aedms.core.entities.source.EngineStatusRecBuilder;
 import com.aedms.core.repo.source.APURepo;
 import com.aedms.core.repo.source.AirCraftRepo;
 import com.aedms.core.repo.source.EngineOprRepo;
@@ -25,71 +27,55 @@ import com.aedms.core.repo.source.EngineRepo;
 import com.aedms.core.repo.source.EngineStatRepo;
 import com.aedms.ext.cmis.CMISSessionUtil;
 import com.google.common.io.ByteStreams;
-import java.util.HashSet;
-import java.util.Set;
 
 @SpringBootApplication
 public class App {
 
-    private static final Logger log = LoggerFactory.getLogger(App.class);
+	private static final Logger log = LoggerFactory.getLogger(App.class);
 
-    public static void main(String[] args) {
-        SpringApplication.run(App.class);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(App.class);
+	}
 
-    @Bean
-    public CommandLineRunner demoEngine(EngineRepo repository, EngineStatRepo engineStatRepo,
-            EngineOprRepo engineOprRepo, CMISSessionUtil cMISSessionUtil) {
-        return (args) -> {
-            InputStream inputStream = ClassLoader.getSystemResourceAsStream("application-h2.properties");
-            byte[] inputBytes = ByteStreams.toByteArray(inputStream);
-            cMISSessionUtil.createDocument("application-h2.properties", inputBytes);
-            Engine engine = repository.save(EngineBuilder.createEngineBuilder().withFleet("A").withLeaseHold("B").withLeaseHolder("C")
-                    .withManufactureDate(new Date()).withManufactureDate(new Date()).withModel("D").withOpr("E")
-                    .withRemark("C").withRentDate(new Date()).withSerialNo("123").withSN("E").withSubFleet("F")
-                    .build());
+	@Bean
+	public CommandLineRunner demoEngine(EngineRepo repository, EngineStatRepo engineStatRepo,
+			EngineOprRepo engineOprRepo, CMISSessionUtil cMISSessionUtil) {
+		return (args) -> {
+			InputStream inputStream = ClassLoader.getSystemResourceAsStream("application-h2.properties");
+			byte[] inputBytes = ByteStreams.toByteArray(inputStream);
+			cMISSessionUtil.createDocument("application-h2.properties", inputBytes);
+			Engine engine = repository
+					.save(EngineBuilder.withFleet("ShaftEngine").withSubFleet("Turbine").withSerialNo("HP-2016-05-15")
+							.withModel("HP").withSN("123456789").withManufactureDate(new Date()).build());
 
-            EngineOprRec engineOpr = engineOprRepo.save(EngineOprRecBuilder.createEngineOprRecBuilder().withCSN(1).withCSO(2)
-                    .withTSN(new Double(3)).withTSO(new Double(4)).withEngine(engine).build());
-            EngineStatRec engineStat = engineStatRepo.save(EngineStatRecBuilder.createEngineStatRecBuilder().withCSN(1).withCSO(2)
-                    .withTSN(new Double(3)).withTSO(new Double(4)).withEngine(engine).build());
+			EngineOperationRec engineOpr = engineOprRepo
+					.save(EngineOperationRecBuilder.withTSN(12345.6).withCSN(12345).withEngine(engine).build());
+			EngineStatusRec engineStat = engineStatRepo.save(
+					EngineStatusRecBuilder.withTSN(12345.6).withCSN(12345).withTSO(12345.6).withEngine(engine).build());
 
-            log.info("Save some engine done");
-        };
-    }
+			log.info("Save some engine done");
+		};
+	}
 
-    @Bean
-    public CommandLineRunner demoAPU(APURepo repository) {
+	@Bean
+	public CommandLineRunner demoAirCraft(AirCraftRepo airCraftRepo, EngineRepo engineRepo, APURepo apuRepo) {
 
-        return (args) -> {
-            repository.save(APUBuilder.createAPUBuilder().withLeaseHold("a").withLeaseHolder("b").withManufactureDate(new Date())
-                    .withModel("HP").withOpr("C").withRentDate(new Date()).withSN("U").build());
-            log.info("Save some APU done");
-        };
-    }
+		return (args) -> {
 
-    @Bean
-    public CommandLineRunner demoAirCraft(AirCraftRepo airCraftRepo, EngineRepo engineRepo, APURepo apuRepo) {
+			AirCraft aircraft = airCraftRepo.save(AirCraftBuilder.withFleet("Boeing")
+					          .withSubFleet("777").withSerialNo("123456789")
+					          .withRegisterNo("CA-796").withModel("Bird").withSN("12345").build());
 
-        return (args) -> {
-            Set<Engine> engines = new HashSet<>();
-            Engine engineOne = engineRepo.save(EngineBuilder.createEngineBuilder().withFleet("A").withLeaseHold("B")
-                    .withLeaseHolder("C").withManufactureDate(new Date()).withManufactureDate(new Date()).withModel("D")
-                    .withOpr("E").withRemark("C").withRentDate(new Date()).withSerialNo("123").withSN("E")
-                    .withSubFleet("F").build());
-            engines.add(engineOne);
+			Engine engine = engineRepo
+					.save(EngineBuilder.withFleet("ShaftEngine").withSubFleet("Turbine").withSerialNo("GE-2016-05-15")
+							.withModel("GE").withSN("123456789").withManufactureDate(new Date()).build());
 
-            APU apu = apuRepo
-                    .save(APUBuilder.createAPUBuilder().withLeaseHold("a").withLeaseHolder("b").withManufactureDate(new Date())
-                            .withModel("HP").withOpr("C").withRentDate(new Date()).withSN("U").build());
-            Set<APU> apus = new HashSet<>();
-            apus.add(apu);
+			APU apu = apuRepo.save(APUBuilder.withModel("Turbo").withSN("123456")
+					  .withManufactureDate(new Date())
+					  .withRentDate(new Date()).withAircraft(aircraft).build());
 
-            airCraftRepo.save(AirCraftBuilder.createAirCraftBuilder().withApus(apus).withEngines(engines).withFleet("A")
-                    .withSubFleet("A-1").withSN("123456").build());
-
-            log.info("Save some AirCraft done");
-        };
-    }
+			log.info("Save some AirCraft done");
+		};
+	}
 
 }

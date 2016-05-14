@@ -7,9 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+
+import fr.lteconsulting.Mandatory;
+import fr.lteconsulting.UseBuilderGenerator;
 
 /**
  *
@@ -37,8 +42,8 @@ public class User implements Serializable{
     @Column(name = "PASSWORD")
     private String passsword;
     
-    @Column(name = "ORGANIZATION_ID")
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "ORGANIZATION_ID")
     private Organization organization;
     
     @Column(name = "FIRST_LOGIN")
@@ -52,7 +57,24 @@ public class User implements Serializable{
     @Column(name = "EMAIL")
     private String email;
     
-    public Long getId() {
+    /** Constructors list block */
+    public User(){}
+    
+    @UseBuilderGenerator
+    public User(@Mandatory String name, @Mandatory String loginName, @Mandatory String passsword, @Mandatory Organization organization,@Mandatory  Date firstLogin,
+    		@Mandatory Date lastLogin, @Mandatory String email) {
+		super();
+		this.name = name;
+		this.loginName = loginName;
+		this.passsword = passsword;
+		this.organization = organization;
+		this.firstLogin = firstLogin;
+		this.lastLogin = lastLogin;
+		this.email = email;
+	}
+
+
+	public Long getId() {
         return id;
     }
 

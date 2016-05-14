@@ -3,6 +3,8 @@ package com.aedms.core.entities.source;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,6 +15,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+
+import fr.lteconsulting.Mandatory;
+import fr.lteconsulting.UseBuilderGenerator;
 
 /**
  * The Entity to representing AirCraft. The physical table is "AIRCRAFT"
@@ -132,23 +137,76 @@ public class AirCraft implements Serializable {
     @Column(name = "WEIGHT_ZERO_FUEL")
     private Integer weightZeroFuel;
 
-    @OneToMany(targetEntity = Engine.class, mappedBy = "aircraft")
-    @JoinColumn(name = "AIRCRAFT_ID")
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy = "aircraft")
     private Set<Engine> engines;
 
-    @OneToMany(targetEntity = APU.class, mappedBy = "aircraft")
-    @JoinColumn(name = "AIRCRAFT_ID")
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy = "aircraft")
     private Set<APU> apus;
 
-    @OneToMany(targetEntity = LandingGear.class, mappedBy = "aircraft")
-    @JoinColumn(name = "AIRCRAFT_ID")
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy = "aircraft")
     private Set<LandingGear> landingGears;
 
-    @OneToMany(targetEntity = AirCraftStatusRec.class, mappedBy = "aircraft", fetch = FetchType.LAZY)
-    @JoinColumn(name = "AIRCRAFT_ID")
-    private Set<AirCraftStatusRec> airCraftStatusRecs;
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy = "aircraft")
+    private Set<AircraftStatusRec> airCraftStatusRecs;
+    
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy = "aircraft")
+    private Set<AircraftFlightRec> airCraftFlightRecs;
+    
+    
+    public AirCraft(){
+    	
+    }
+    
+    @UseBuilderGenerator
+    protected AirCraft(@Mandatory String fleet, @Mandatory String subFleet, @Mandatory String serialNo, @Mandatory String registerNo, @Mandatory String model, @Mandatory String sN,
+			String lN, String variableNo, String virframeNo, String ipcRefNo, Date manufactureDate,
+			Date leasingDeliveryDate, String selCal, Integer tenancyTerm, String typeCertificate, String afmCertificate,
+			String operatorBase, String owner, String engineType, Integer seatCount, Integer firstSeatCount,
+			Integer busSeatCount, Integer economySeatCount, String manufacturer, Integer engineMaxThrust,
+			Integer fuelCapacity, Integer weigthMaxTakeOff, Integer weightMaxLanding, Integer weightMaxTaxi,
+			Integer weightEmpty, Integer weightZeroFuel, Set<Engine> engines, Set<APU> apus,
+			Set<LandingGear> landingGears, Set<AircraftStatusRec> airCraftStatusRecs,
+			Set<AircraftFlightRec> airCraftFlightRecs) {
+		super();
+		this.fleet = fleet;
+		this.subFleet = subFleet;
+		this.serialNo = serialNo;
+		this.registerNo = registerNo;
+		this.model = model;
+		SN = sN;
+		LN = lN;
+		this.variableNo = variableNo;
+		this.virframeNo = virframeNo;
+		this.ipcRefNo = ipcRefNo;
+		this.manufactureDate = manufactureDate;
+		this.leasingDeliveryDate = leasingDeliveryDate;
+		this.selCal = selCal;
+		this.tenancyTerm = tenancyTerm;
+		this.typeCertificate = typeCertificate;
+		this.afmCertificate = afmCertificate;
+		this.operatorBase = operatorBase;
+		this.owner = owner;
+		this.engineType = engineType;
+		this.seatCount = seatCount;
+		this.firstSeatCount = firstSeatCount;
+		this.busSeatCount = busSeatCount;
+		this.economySeatCount = economySeatCount;
+		this.manufacturer = manufacturer;
+		this.engineMaxThrust = engineMaxThrust;
+		this.fuelCapacity = fuelCapacity;
+		this.weigthMaxTakeOff = weigthMaxTakeOff;
+		this.weightMaxLanding = weightMaxLanding;
+		this.weightMaxTaxi = weightMaxTaxi;
+		this.weightEmpty = weightEmpty;
+		this.weightZeroFuel = weightZeroFuel;
+		this.engines = engines;
+		this.apus = apus;
+		this.landingGears = landingGears;
+		this.airCraftStatusRecs = airCraftStatusRecs;
+		this.airCraftFlightRecs = airCraftFlightRecs;
+	}
 
-    /**
+	/**
      * to format the output string of engines
      *
      * @return
@@ -692,14 +750,14 @@ public class AirCraft implements Serializable {
     /**
      * @return the airCraftStatusRecs
      */
-    public Set<AirCraftStatusRec> getAirCraftStatusRecs() {
+    public Set<AircraftStatusRec> getAirCraftStatusRecs() {
         return airCraftStatusRecs;
     }
 
     /**
      * @param airCraftStatusRecs the airCraftStatusRecs to set
      */
-    public void setAirCraftStatusRecs(Set<AirCraftStatusRec> airCraftStatusRecs) {
+    public void setAirCraftStatusRecs(Set<AircraftStatusRec> airCraftStatusRecs) {
         this.airCraftStatusRecs = airCraftStatusRecs;
     }
 }

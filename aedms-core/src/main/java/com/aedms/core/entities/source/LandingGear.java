@@ -3,17 +3,24 @@ package com.aedms.core.entities.source;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
 import org.hibernate.envers.Audited;
+
+import fr.lteconsulting.Mandatory;
+import fr.lteconsulting.UseBuilderGenerator;
 
 /**
  * The Entity to representing Landing Gear information.
@@ -23,7 +30,7 @@ import org.hibernate.envers.Audited;
  */
 @Entity
 @Table(name = "LANDING_GEAR")
-@Audited
+//@Audited
 public class LandingGear implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -56,16 +63,38 @@ public class LandingGear implements Serializable {
     @Column(name = "ORP")
     private String orp;
     
-    @OneToMany(targetEntity=LandingGearStatusRec.class, mappedBy="landingGear")
-    @JoinColumn(name = "LANDING_GEAR_ID")
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="landingGear")
     private Set<LandingGearStatusRec> landingGearStatusRecs;
     
-    @OneToMany(targetEntity=LandingGearOperationRec.class, mappedBy="landingGear")
-    @JoinColumn(name = "LANDING_GEAR_ID")
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="landingGear")
     private Set<LandingGearOperationRec> landingGearOperationRecs;
 
+    @ManyToOne
+    @JoinColumn(name = "AIRCRAFT_ID")
+	private AirCraft aircraft;
     
-    @Override
+    /** Constructor block list */
+    public LandingGear(){}
+    
+    @UseBuilderGenerator
+    public LandingGear(@Mandatory String model, @Mandatory String sN, @Mandatory Date manufactureDate, Date rentDate, String leaseHold,
+			String leaseHolder, String orp, Set<LandingGearStatusRec> landingGearStatusRecs,
+			Set<LandingGearOperationRec> landingGearOperationRecs, @Mandatory AirCraft aircraft) {
+		super();
+		this.model = model;
+		SN = sN;
+		this.manufactureDate = manufactureDate;
+		this.rentDate = rentDate;
+		this.leaseHold = leaseHold;
+		this.leaseHolder = leaseHolder;
+		this.orp = orp;
+		this.landingGearStatusRecs = landingGearStatusRecs;
+		this.landingGearOperationRecs = landingGearOperationRecs;
+		this.aircraft = aircraft;
+	}
+
+
+	@Override
 	public String toString() {
 		return "LandingGear [id=" + id + ", model=" + model + ", SN=" + SN + ", manufactureDate=" + manufactureDate
 				+ ", rentDate=" + rentDate + ", leaseHold=" + leaseHold + ", leaseHolder=" + leaseHolder + ", orp="

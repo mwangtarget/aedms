@@ -7,7 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import fr.lteconsulting.Mandatory;
+import fr.lteconsulting.UseBuilderGenerator;
 
 /**
  * The Entity to representing LandingGear Operation record. The physical table is "LANDING_GEAR_OPERATION_RECORD"
@@ -51,7 +56,31 @@ public class LandingGearOperationRec implements Serializable{
     @Column(name = "RECORD_DATE")
     private Date recordDate;
     
-    public Long getId() {
+    @ManyToOne
+    @JoinColumn(name = "LANDING_GEAR_ID")
+	private LandingGear landingGear;
+    
+    /** Constructor block list*/
+    public LandingGearOperationRec(){}
+    
+    @UseBuilderGenerator
+    public LandingGearOperationRec(@Mandatory float tsn, @Mandatory int csn, float tso, int cso, float installFH, int installFC,
+			float remainFH, int remainFC, Date recordDate, @Mandatory LandingGear landingGear) {
+		super();
+		this.tsn = tsn;
+		this.csn = csn;
+		this.tso = tso;
+		this.cso = cso;
+		this.installFH = installFH;
+		this.installFC = installFC;
+		this.remainFH = remainFH;
+		this.remainFC = remainFC;
+		this.recordDate = recordDate;
+		this.landingGear = landingGear;
+	}
+
+
+	public Long getId() {
         return id;
     }
 

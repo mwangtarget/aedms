@@ -3,17 +3,24 @@ package com.aedms.core.entities.source;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
 import org.hibernate.envers.Audited;
+
+import fr.lteconsulting.Mandatory;
+import fr.lteconsulting.UseBuilderGenerator;
 
 /**
  * The Entity to representing APP information.
@@ -23,7 +30,7 @@ import org.hibernate.envers.Audited;
  */
 @Entity
 @Table(name = "APU")
-@Audited
+//@Audited
 public class APU  implements Serializable{
 
     private static final long serialVersionUID = 1L;
@@ -56,17 +63,45 @@ public class APU  implements Serializable{
     @Column(name = "OPR")
     private String opr;
     
-    @OneToMany(targetEntity = Engine.class, mappedBy = "aircraft")
-    @JoinColumn(name = "APU_ID")
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy = "apu")
     private Set<APUStatusRec> apuStatusRecs;
     
-    @OneToMany(targetEntity = Engine.class, mappedBy = "aircraft")
-    @JoinColumn(name = "APU_ID")
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy = "apu")
     private Set<APUOperationRec> apuOperationRecs;
     
+    @ManyToOne
+    @JoinColumn(name = "AIRCRAFT_ID")
+	private AirCraft aircraft;
     
+    /** Constructors list block */
+    public APU(){}
     
-    @Override
+    @UseBuilderGenerator
+    public APU(@Mandatory String model, @Mandatory String sN, @Mandatory  Date manufactureDate, @Mandatory  Date rentDate, String leaseHold, String leaseHolder,
+			String opr, Set<APUStatusRec> apuStatusRecs, Set<APUOperationRec> apuOperationRecs, @Mandatory  AirCraft aircraft) {
+		super();
+		this.model = model;
+		SN = sN;
+		this.manufactureDate = manufactureDate;
+		this.rentDate = rentDate;
+		this.leaseHold = leaseHold;
+		this.leaseHolder = leaseHolder;
+		this.opr = opr;
+		this.apuStatusRecs = apuStatusRecs;
+		this.apuOperationRecs = apuOperationRecs;
+		this.aircraft = aircraft;
+	}
+
+
+	public AirCraft getAircraft() {
+		return aircraft;
+	}
+
+	public void setAircraft(AirCraft aircraft) {
+		this.aircraft = aircraft;
+	}
+
+	@Override
 	public String toString() {
 		return "APU [id=" + id + ", model=" + model + ", SN=" + SN + ", manufactureDate=" + manufactureDate
 				+ ", rentDate=" + rentDate + ", leaseHold=" + leaseHold + ", leaseHolder=" + leaseHolder + ", opr="

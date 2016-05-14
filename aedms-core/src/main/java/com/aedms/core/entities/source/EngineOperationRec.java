@@ -12,9 +12,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
+import fr.lteconsulting.Mandatory;
+import fr.lteconsulting.UseBuilderGenerator;
+
 @Entity
 @Table(name = "ENGINE_OPR_REC")
-public class EngineOprRec {
+public class EngineOperationRec {
 
 	private static final long serialVersionUID = 1L;
 
@@ -55,7 +58,28 @@ public class EngineOprRec {
     @JoinColumn(name="ENGINE_ID", nullable=false)
 	private Engine engine;
 	
+	/**Construct list block*/
+	public EngineOperationRec(){}
 	
+	
+	@UseBuilderGenerator
+	public EngineOperationRec(@Mandatory Double tSN, @Mandatory  Integer cSN, Double tSO, Integer cSO, Double hrsPostInst,
+			Integer cirsPostInst, Double remainHrs, Integer remainCirs, Date recordDate, @Mandatory  Engine engine) {
+		super();
+		TSN = tSN;
+		CSN = cSN;
+		TSO = tSO;
+		CSO = cSO;
+		this.hrsPostInst = hrsPostInst;
+		this.cirsPostInst = cirsPostInst;
+		this.remainHrs = remainHrs;
+		this.remainCirs = remainCirs;
+		this.recordDate = recordDate;
+		this.engine = engine;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "EngineOprRec [id=" + id + ", TSN=" + TSN + ", CSN=" + CSN + ", TSO=" + TSO + ", CSO=" + CSO

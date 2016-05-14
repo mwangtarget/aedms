@@ -7,18 +7,23 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
+import fr.lteconsulting.Mandatory;
+import fr.lteconsulting.UseBuilderGenerator;
+
 /**
- * The Entity to representing AirCraft status record. The physical table is "AIRCRAFT_STATUS_RECORD"
- *
+ *　The Entity to representing AirCraft status record. The physical table is "AIRCRAFT_STATUS_RECORD"
+ * 
  * @author jaly
  */
 @Entity
 @Table(name = "AIRCRAFT_STATUS_RECORD")
-public class AirCraftStatusRec implements Serializable {
-
+public class AircraftStatusRec implements Serializable{
+    
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -31,7 +36,7 @@ public class AirCraftStatusRec implements Serializable {
     
     @Column(name = "STATUS_CHANGE_DATE")
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date statusChangeDate;
+    private Date statusChangedDatetimne;
     
     @Column(name = "TT")
     private float tt;
@@ -51,22 +56,43 @@ public class AirCraftStatusRec implements Serializable {
     @Column(name = "REMAIN_FC")
     private int remainFC;
     
-    @Override
+    @ManyToOne
+    @JoinColumn(name = "AIRCRAFT_ID")
+	private AirCraft aircraft;
+    
+    /**Constructor block*/
+    public AircraftStatusRec(){}
+    
+    @UseBuilderGenerator
+    public AircraftStatusRec(@Mandatory String status, @Mandatory Date statusChangedDatetimne, @Mandatory float tt, int tc, float tso, int cso,
+    		@Mandatory float remainFH, @Mandatory int remainFC, @Mandatory AirCraft aircraft) {
+		super();
+		this.status = status;
+		this.statusChangedDatetimne = statusChangedDatetimne;
+		this.tt = tt;
+		this.tc = tc;
+		this.tso = tso;
+		this.cso = cso;
+		this.remainFH = remainFH;
+		this.remainFC = remainFC;
+		this.aircraft = aircraft;
+	}
+
+	@Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("AirCraftStatusRec[ ID = ");
+        StringBuilder sb = new StringBuilder("AirCraftStatusRec[ ID=");
         sb.append(this.getId())
                 .append(", STATUS=").append(this.getStatus())
-                .append(", STATUS_CHANGE_DATE=").append(this.getStatusChangeDate())
+                .append(", STATUS_CHANGE_DATE=").append(this.getStatusChangedDatetimne().toString())
                 .append(", TT=").append(this.getTt())
                 .append(", TC=").append(this.getTc())
-                .append(", TSO=").append((this.getTso()))
+                .append(", TSO=").append(this.getTso())
                 .append(", CSO=").append(this.getCso())
-                .append(", REMAIN_FH=").append(this.getRemainFH())
+                .append(", REMAIN_FH＝").append(this.getRemainFH())
                 .append(", REMAIN_FC=").append(this.getRemainFC())
                 .append(" ]");
         return sb.toString();
     }
-    
 
     public Long getId() {
         return id;
@@ -91,17 +117,17 @@ public class AirCraftStatusRec implements Serializable {
     }
 
     /**
-     * @return the statusChangeDate
+     * @return the statusChangedDatetimne
      */
-    public Date getStatusChangeDate() {
-        return statusChangeDate;
+    public Date getStatusChangedDatetimne() {
+        return statusChangedDatetimne;
     }
 
     /**
-     * @param statusChangeDate the statusChangeDate to set
+     * @param statusChangedDatetimne the statusChangedDatetimne to set
      */
-    public void setStatusChangeDate(Date statusChangeDate) {
-        this.statusChangeDate = statusChangeDate;
+    public void setStatusChangedDatetimne(Date statusChangedDatetimne) {
+        this.statusChangedDatetimne = statusChangedDatetimne;
     }
 
     /**
@@ -187,5 +213,5 @@ public class AirCraftStatusRec implements Serializable {
     public void setRemainFC(int remainFC) {
         this.remainFC = remainFC;
     }
-
+    
 }

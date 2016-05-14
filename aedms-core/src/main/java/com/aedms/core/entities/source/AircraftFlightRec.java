@@ -7,8 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+
+import fr.lteconsulting.Mandatory;
+import fr.lteconsulting.UseBuilderGenerator;
 
 /**
  * The Entity to representing AirCraft flight record. The physical table is "AIRCRAFT_FLIGHT_RECORD"
@@ -60,8 +65,35 @@ public class AircraftFlightRec implements Serializable{
     @Column(name = "EFFECT_DATE")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date effectDate;
+    
+    @ManyToOne
+    @JoinColumn(name = "AIRCRAFT_ID")
+	private AirCraft aircraft;
 
-    @Override
+    /**Constructor block*/
+    public AircraftFlightRec(){
+    	
+    }
+    
+    @UseBuilderGenerator
+    public AircraftFlightRec(@Mandatory int tt, @Mandatory int tc, @Mandatory int tbo, @Mandatory int cbo, int tso, int cso, int trem, int crem, int tslsv,
+			Date cslsv, @Mandatory Date effectDate, @Mandatory AirCraft aircraft) {
+		super();
+		this.tt = tt;
+		this.tc = tc;
+		this.tbo = tbo;
+		this.cbo = cbo;
+		this.tso = tso;
+		this.cso = cso;
+		this.trem = trem;
+		this.crem = crem;
+		this.tslsv = tslsv;
+		this.cslsv = cslsv;
+		this.effectDate = effectDate;
+		this.aircraft = aircraft;
+	}
+
+	@Override
     public String toString() {
         StringBuilder sb = new StringBuilder("AirCraftFlightRecord[ ID=");
         sb.append(this.getId())
