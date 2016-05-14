@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,9 +33,20 @@ public class EngineCreationBAM {
 	@Autowired
 	KPIContainer engineBAMKPI;
 	
+	@Autowired
+	SimpMessageSendingOperations messagingTemplate;
+	
 	@RequestMapping(method = RequestMethod.POST, value = "/engine-evt-notify")
 	public EngineCreationEvent engineEventNotify(@RequestBody EngineCreationEvent engineEvt) {
 		epService.getEPRuntime().sendEvent(engineEvt);
+		
+		//Update to all subscribe client
+        List<KPIEntry> kpiList = new ArrayList<>();		
+		for(Entry<String, Long> entry : engineBAMKPI.getKpiDetails().entrySet()){
+			kpiList.add(new KPIEntry(entry.getKey(), entry.getValue()));
+		}
+		messagingTemplate.convertAndSend("/topic/engine-bam-ws", kpiList);
+		log.info("Update the KPI to all subscribed clients.");
 		//TODO: return the meaningful response.
 		return engineEvt;
 	
@@ -50,10 +62,5 @@ public class EngineCreationBAM {
 		return kpiList;
 	}
 
-	//TODO: remove this block of code
-	@RequestMapping(method = RequestMethod.GET, value = "/engine-evt")
-	public EngineCreationEvent engineEvtGet() {
-		return new EngineCreationEvent("a","b",123455) ;	
-	}
 
 }
