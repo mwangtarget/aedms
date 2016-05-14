@@ -24,5 +24,8 @@ local.properties
 
 # Locally stored "Eclipse launch configurations"
 *.launch
+
 # Test output
 /test-output/
+/logs/
+*.log

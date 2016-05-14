@@ -27,3 +27,5 @@ local.properties
 
 # Test output
 /test-output/
+/logs/
+*.log
