@@ -2,7 +2,6 @@ package com.aedms.core.entities.eo;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -18,7 +17,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
-import com.aedms.core.entities.source.EngineOperationRec;
 
 @Entity
 @Table(name = "EO_ORDER")
@@ -41,9 +39,10 @@ public class EOOrder implements Serializable {
 	@Column(name = "EO_CLASS", length = 10)
 	private String eoClass;
 
-	@Column(name = "EO_SUBJECT", length = 100)
-	private String eoSubject;
-	@Column(name = "EO_DESCR", length = 4000)
+	@Column(name = "SUBJECT", length = 100)
+	private String subject;
+    
+	@Column(name = "DESCRIPTION", length = 4000)
 	private String description;
 
 	@Column(name = "ISSUE_DATE")
@@ -70,24 +69,31 @@ public class EOOrder implements Serializable {
 	// @ Block of EO origination end.
 
 	// Block of affected components start
-	@Column(name = "AC_MODEL_AFF", length = 4000)
+    /*
+     * 受影响飞机机型，各个部件类型
+     * （受影响的飞机的各种型号信息，大文本）
+    */
+	@Column(name = "AC_MODEL_AF", length = 4000)
 	private String acModelAffected;
-	@Column(name = "APU_MODEL_AFF", length = 400)
+    
+	@Column(name = "APU_MODEL_AF", length = 400)
 	private String apuModelAffected;
 
-	@Column(name = "LD_MODEL_AFF", length = 400)
+	@Column(name = "LD_MODEL_AF", length = 400)
 	private String ldModelAffected;
 
-	@Column(name = "EG_MODEL_AFF", length = 400)
+	@Column(name = "EG_MODEL_AF", length = 400)
 	private String engineModelAffected;
 	// @Block of affected components end
 
 	// Block of 重检 start.
 	// Whether this EO need re-inspection.
-	@Column(name = "IS_RE_INSPEC")
-	private Boolean isReInspec;
+	@Column(name = "IS_RE_INSPECTION")
+	private Boolean isReInspection;
+    
 	@Column(name = "FNL_LMT_DESCR", length = 4000)
 	private String finalLmtDescr;
+    
 	@Column(name = "FINAL_LMT")
 	private Integer finalLimit;
 
