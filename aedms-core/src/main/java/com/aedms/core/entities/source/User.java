@@ -40,7 +40,7 @@ public class User implements Serializable{
     private String loginName;
     
     @Column(name = "PASSWORD")
-    private String passsword;
+    private String password;
     
     @ManyToOne
     @JoinColumn(name = "ORGANIZATION_ID")
@@ -61,16 +61,16 @@ public class User implements Serializable{
     public User(){}
     
     @UseBuilderGenerator
-    public User(@Mandatory String name, @Mandatory String loginName, @Mandatory String passsword, @Mandatory Organization organization,@Mandatory  Date firstLogin,
-    		@Mandatory Date lastLogin, @Mandatory String email) {
+    public User(@Mandatory String name, @Mandatory String loginName, @Mandatory String passsword, @Mandatory Organization organization,  Date firstLogin,
+    		Date lastLogin, String email) {
 		super();
 		this.name = name;
 		this.loginName = loginName;
-		this.passsword = passsword;
+		this.password = passsword;
 		this.organization = organization;
 		this.firstLogin = firstLogin;
 		this.lastLogin = lastLogin;
-		this.email = email;
+		this.email = email; 
 	}
 
 
@@ -113,15 +113,15 @@ public class User implements Serializable{
     /**
      * @return the passsword
      */
-    public String getPasssword() {
-        return passsword;
+    public String getPassword() {
+        return password;
     }
 
     /**
      * @param passsword the passsword to set
      */
-    public void setPasssword(String passsword) {
-        this.passsword = passsword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     /**
