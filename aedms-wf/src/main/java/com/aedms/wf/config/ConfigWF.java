@@ -65,7 +65,7 @@ import com.aedms.wf.ext.form.UploadFormType;
 @Configuration
 @EnableScheduling
 @EnableAsync
-@ComponentScan(basePackages = { "com" }, excludeFilters = { @ComponentScan.Filter(Configuration.class) })
+@ComponentScan(basePackages = { "com.aedms.wf" }, excludeFilters = { @ComponentScan.Filter(Configuration.class) })
 @EnableTransactionManagement
 @EnableMBeanExport
 @EnableWebMvc

@@ -1,4 +1,4 @@
-package com.aedms.ext.cmis;
+package com.aedms.wf.ext.cmis;
 
 import java.io.ByteArrayInputStream;
 import java.math.BigInteger;
