@@ -61,6 +61,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 import com.aedms.wf.evt.EventEmitter;
 import com.aedms.wf.ext.form.UploadFormType;
+import com.aedms.wf.shiro.ShiroConfigurator;
 
 @Configuration
 @EnableScheduling
@@ -168,9 +169,14 @@ public class ConfigWF {
 			config.setTransactionManager(transactionManager);
 			config.setJpaHandleTransaction(false);
 			config.setJpaCloseEntityManager(false);
+			
+			//Customization Point: add customized type.
 			List<AbstractFormType> customTypeList = new ArrayList<AbstractFormType>();
 			customTypeList.add(new com.aedms.wf.ext.form.UploadFormType());
 			config.setCustomFormTypes(customTypeList);
+			
+			//Customization Point: Add external user/group management configurator
+			config.addConfigurator(new ShiroConfigurator());
 			return config;
 		}
 	}
