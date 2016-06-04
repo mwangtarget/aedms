@@ -176,7 +176,8 @@ public class ConfigWF {
 			config.setCustomFormTypes(customTypeList);
 			
 			//Customization Point: Add external user/group management configurator
-			config.addConfigurator(new ShiroConfigurator());
+			// Disable it for now. TODO: need more time to fill in ShiroUser/GroupManager implmentation
+            //config.addConfigurator(new ShiroConfigurator());
 			return config;
 		}
 	}

@@ -108,6 +108,12 @@
 			<version>0.9</version>
 			<scope>provided</scope> <!-- this is source generation, nothing at runtime -->
 		</dependency>
+
+		<dependency>
+			<groupId>org.joda</groupId>
+			<artifactId>joda-beans</artifactId>
+			<version>1.7</version>
+		</dependency>
 		<!-- Secruity -->
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
@@ -141,6 +147,19 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.joda</groupId>
+				<artifactId>joda-beans-maven-plugin</artifactId>
+				<version>1.0</version>
+				<executions>
+					<execution>
+						<id>joda-beans-generate</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
