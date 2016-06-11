@@ -24,14 +24,14 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import com.aedms.core.entities.source.Engine;
-import com.aedms.core.rest.source.AuthenticationController;
+import com.aedms.core.repo.source.AuthenticationController;
 
-@Component(value = "shiroUserManager")
+
 public class ShiroUserManager extends AbstractManager implements UserIdentityManager {
 
 	private static final Logger log = LoggerFactory.getLogger(ShiroUserManager.class);
 
-	@Autowired
+
 	private Environment environment;
 
 

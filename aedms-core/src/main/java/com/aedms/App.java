@@ -70,6 +70,7 @@ public class App {
 
 		return (args) -> {
 
+
 			AirCraft aircraft = airCraftRepo.save(AirCraftBuilder.withFleet("Boeing")
 					          .withSubFleet("777").withSerialNo("123456789")
 					          .withRegisterNo("CA-796").withModel("Bird").withSN("12345").build());
@@ -93,6 +94,7 @@ public class App {
 	public CommandLineRunner initUsers(UserRepo userRepo, OrganizationRepo organizationRepo) {
 
 		return (args) -> {
+			
             Organization orgRecorder = organizationRepo.save(OrganizationBuilder.withDepCode("recorder").withDepName("recorder").build());
 			User userRecorder = userRepo.save(UserBuilder.withName("AEDMS recorder").withLoginName("abc").withPasssword(passwordService.encryptPassword("abc")).withOrganization(orgRecorder).build());
 

@@ -7,7 +7,7 @@ import org.activiti.ldap.LDAPUserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component(value = "shiroUserManagerFactory")
+
 public class ShiroUserManagerFactory implements SessionFactory {
 
 

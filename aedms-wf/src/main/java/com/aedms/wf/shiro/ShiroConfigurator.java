@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class ShiroConfigurator extends AbstractProcessEngineConfigurator {
 
-	@Autowired
+	
 	protected ShiroUserManagerFactory shiroUserManagerFactory = new ShiroUserManagerFactory();
 
 	// Cache clock
