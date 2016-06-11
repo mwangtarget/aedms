@@ -2,7 +2,9 @@ package com.aedms.core.entities.eo;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import java.util.Map;
+
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -34,6 +36,7 @@ import com.aedms.core.entities.source.Organization;
 
 import fr.lteconsulting.Mandatory;
 import fr.lteconsulting.UseBuilderGenerator;
+
 
 @Entity
 @Table(name = "EO_ORDER")
