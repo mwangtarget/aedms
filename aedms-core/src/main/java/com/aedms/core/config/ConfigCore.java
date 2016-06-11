@@ -28,7 +28,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-@EnableJpaRepositories("com.aedms.core.repo")
+//@EnableJpaRepositories("com.aedms.core.repo")
 @EnableScheduling
 @EnableAsync
 @ComponentScan(basePackages = { "com" }, excludeFilters = { @ComponentScan.Filter(Configuration.class) })

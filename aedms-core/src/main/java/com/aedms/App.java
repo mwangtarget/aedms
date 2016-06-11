@@ -3,8 +3,10 @@ package com.aedms;
 import java.io.InputStream;
 import java.util.Date;
 
+import org.apache.shiro.authc.credential.DefaultPasswordService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,11 +22,17 @@ import com.aedms.core.entities.source.EngineOperationRec;
 import com.aedms.core.entities.source.EngineOperationRecBuilder;
 import com.aedms.core.entities.source.EngineStatusRec;
 import com.aedms.core.entities.source.EngineStatusRecBuilder;
+import com.aedms.core.entities.source.Organization;
+import com.aedms.core.entities.source.OrganizationBuilder;
+import com.aedms.core.entities.source.User;
+import com.aedms.core.entities.source.UserBuilder;
 import com.aedms.core.repo.source.APURepo;
 import com.aedms.core.repo.source.AirCraftRepo;
 import com.aedms.core.repo.source.EngineOprRepo;
 import com.aedms.core.repo.source.EngineRepo;
 import com.aedms.core.repo.source.EngineStatRepo;
+import com.aedms.core.repo.source.OrganizationRepo;
+import com.aedms.core.repo.source.UserRepo;
 import com.aedms.ext.cmis.CMISSessionUtil;
 import com.google.common.io.ByteStreams;
 
@@ -62,6 +70,7 @@ public class App {
 
 		return (args) -> {
 
+
 			AirCraft aircraft = airCraftRepo.save(AirCraftBuilder.withFleet("Boeing")
 					          .withSubFleet("777").withSerialNo("123456789")
 					          .withRegisterNo("CA-796").withModel("Bird").withSN("12345").build());
@@ -75,6 +84,24 @@ public class App {
 					  .withRentDate(new Date()).withAircraft(aircraft).build());
 
 			log.info("Save some AirCraft done");
+		};
+	}
+	
+	@Autowired
+	private DefaultPasswordService passwordService;
+	
+	@Bean
+	public CommandLineRunner initUsers(UserRepo userRepo, OrganizationRepo organizationRepo) {
+
+		return (args) -> {
+			
+            Organization orgRecorder = organizationRepo.save(OrganizationBuilder.withDepCode("recorder").withDepName("recorder").build());
+			User userRecorder = userRepo.save(UserBuilder.withName("AEDMS recorder").withLoginName("abc").withPasssword(passwordService.encryptPassword("abc")).withOrganization(orgRecorder).build());
+
+			Organization orgApprover= organizationRepo.save(OrganizationBuilder.withDepCode("approver").withDepName("approver").build());
+			User userApprover = userRepo.save(UserBuilder.withName("AEDMS Approver").withLoginName("def").withPasssword(passwordService.encryptPassword("def")).withOrganization(orgApprover).build());
+
+			log.info("Save some Users done");
 		};
 	}
 
