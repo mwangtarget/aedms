@@ -1,12 +1,10 @@
 package com.aedms.core.entities.source;
 
+import com.aedms.core.entities.AedmsEntity;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -17,14 +15,9 @@ import fr.lteconsulting.UseBuilderGenerator;
 
 @Entity
 @Table(name = "ENGINE_STAT_REC")
-public class EngineStatusRec {
-
-	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID")
-	private long id;
+public class EngineStatusRec extends AedmsEntity {
+    
+    private static final long serialVersionUID = 1L;
 
 	@Column(name = "TSN")
 	private Double TSN;
@@ -131,7 +124,7 @@ public class EngineStatusRec {
 
 	@Override
 	public String toString() {
-		return "EngineStatRec [id=" + id + ", TSN=" + TSN + ", CSN=" + CSN + ", TSO=" + TSO + ", CSO=" + CSO
+		return "EngineStatRec [id=" + this.getId() + ", TSN=" + TSN + ", CSN=" + CSN + ", TSO=" + TSO + ", CSO=" + CSO
 				+ ", hrsPostInst=" + hrsPostInst + ", cirsPostInst=" + cirsPostInst + ", lastRpDate=" + lastRpDate
 				+ ", lastRpUnit=" + lastRpUnit + ", installDate=" + installDate + ", installANO=" + installANO
 				+ ", installPos=" + installPos + ", tdDate=" + tdDate + ", tdANO=" + tdANO + ", tdPIS=" + tdPIS
@@ -149,14 +142,6 @@ public class EngineStatusRec {
 		this.engine = engine;
 	}
 
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
 
 	public Double getTSN() {
 		return TSN;

@@ -1,12 +1,9 @@
 package com.aedms.core.entities.source;
 
-import java.io.Serializable;
+import com.aedms.core.entities.AedmsEntity;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -21,14 +18,9 @@ import fr.lteconsulting.UseBuilderGenerator;
  */
 @Entity
 @Table(name="APU_STATUS_RECORD")
-public class APUStatusRec implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class APUStatusRec extends AedmsEntity {
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
-    private Long id;
+    private static final long serialVersionUID = 1L;
     
     @Column(name = "TSN")
 	private float TSN;
@@ -130,14 +122,6 @@ public class APUStatusRec implements Serializable {
 	}
 
 
-
-	public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     /**
      * @return the TSN

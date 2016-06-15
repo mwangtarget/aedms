@@ -1,15 +1,12 @@
 package com.aedms.core.entities.source;
 
-import java.io.Serializable;
+import com.aedms.core.entities.AedmsEntity;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -23,14 +20,9 @@ import fr.lteconsulting.UseBuilderGenerator;
  */
 @Entity
 @Table(name = "ORGANIZATION")
-public class Organization implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class Organization extends AedmsEntity {
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
-    private Long id;
+    private static final long serialVersionUID = 1L;
     
     @Column(name = "DEP_CODE")
     private String depCode;
@@ -57,14 +49,6 @@ public class Organization implements Serializable {
 		this.users = users;
 	}
 
-
-	public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     /**
      * @return the depCode

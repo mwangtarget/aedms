@@ -1,6 +1,6 @@
 package com.aedms.core.entities.source;
 
-import java.io.Serializable;
+import com.aedms.core.entities.AedmsEntity;
 import java.util.Date;
 import java.util.Set;
 
@@ -8,16 +8,12 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
-import org.hibernate.envers.Audited;
 
 import fr.lteconsulting.Mandatory;
 import fr.lteconsulting.UseBuilderGenerator;
@@ -31,14 +27,9 @@ import fr.lteconsulting.UseBuilderGenerator;
 @Entity
 @Table(name = "APU")
 //@Audited
-public class APU  implements Serializable{
-
-    private static final long serialVersionUID = 1L;
+public class APU  extends AedmsEntity {
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
-    private long id;
+    private static final long serialVersionUID = 1L;
     
     @Column(name = "MODEL")
     private String model;
@@ -103,18 +94,10 @@ public class APU  implements Serializable{
 
 	@Override
 	public String toString() {
-		return "APU [id=" + id + ", model=" + model + ", SN=" + SN + ", manufactureDate=" + manufactureDate
+		return "APU [id=" + this.getId() + ", model=" + model + ", SN=" + SN + ", manufactureDate=" + manufactureDate
 				+ ", rentDate=" + rentDate + ", leaseHold=" + leaseHold + ", leaseHolder=" + leaseHolder + ", opr="
 				+ opr + "]";
 	}
-
-	public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     /**
      * @return the model

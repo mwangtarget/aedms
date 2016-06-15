@@ -1,12 +1,10 @@
 package com.aedms.core.entities.source;
 
+import com.aedms.core.entities.AedmsEntity;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -17,14 +15,9 @@ import fr.lteconsulting.UseBuilderGenerator;
 
 @Entity
 @Table(name = "ENGINE_OPR_REC")
-public class EngineOperationRec {
-
-	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID")
-	private long id;
+public class EngineOperationRec extends AedmsEntity {
+    
+    private static final long serialVersionUID = 1L;
 
 	@Column(name = "TSN")
 	private Double TSN;
@@ -82,18 +75,11 @@ public class EngineOperationRec {
 
 	@Override
 	public String toString() {
-		return "EngineOprRec [id=" + id + ", TSN=" + TSN + ", CSN=" + CSN + ", TSO=" + TSO + ", CSO=" + CSO
+		return "EngineOprRec [id=" + this.getId() + ", TSN=" + TSN + ", CSN=" + CSN + ", TSO=" + TSO + ", CSO=" + CSO
 				+ ", hrsPostInst=" + hrsPostInst + ", cirsPostInst=" + cirsPostInst + ", remainHrs=" + remainHrs
 				+ ", remainCirs=" + remainCirs + ", recordDate=" + recordDate + "]";
 	}
 
-	/**
-	 * Auto Generate Set/Get
-	 */
-	
-	public long getId() {
-		return id;
-	}
 
 	public Engine getEngine() {
 		return engine;
@@ -109,10 +95,6 @@ public class EngineOperationRec {
 
 	public void setCSO(Integer cSO) {
 		CSO = cSO;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public Double getTSN() {

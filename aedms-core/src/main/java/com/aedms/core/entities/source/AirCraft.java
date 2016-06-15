@@ -1,6 +1,6 @@
 package com.aedms.core.entities.source;
 
-import java.io.Serializable;
+import com.aedms.core.entities.AedmsEntity;
 import java.util.Date;
 import java.util.Set;
 
@@ -8,10 +8,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -33,14 +29,9 @@ import fr.lteconsulting.UseBuilderGenerator;
 @Entity
 @Table(name = "AIRCRAFT")
 //@Audited // Cause error: An audited relation to a not audited entity
-public class AirCraft implements Serializable {
-
+public class AirCraft extends AedmsEntity {
+    
     private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
-    private Long id;
 
     @Column(name = "FLEET", length = 20, nullable = true)
     private String fleet;
@@ -243,7 +234,7 @@ public class AirCraft implements Serializable {
 
     @Override
     public String toString() {
-        return "AirCraft [id=" + id + ", fleet=" + fleet + ", subFleet=" + subFleet + ", serialNo=" + serialNo
+        return "AirCraft [id=" + this.getId() + ", fleet=" + fleet + ", subFleet=" + subFleet + ", serialNo=" + serialNo
                 + ", registerNo=" + registerNo + ", model=" + model + ", SN=" + SN + ", LN=" + LN + ", variableNo="
                 + variableNo + ", virframeNo=" + virframeNo + ", ipcRefNo=" + ipcRefNo + ", manufactureDate="
                 + manufactureDate + ", leasingDeliveryDate=" + leasingDeliveryDate + ", selCal=" + selCal
@@ -255,20 +246,6 @@ public class AirCraft implements Serializable {
                 + ", weigthMaxTakeOff=" + weigthMaxTakeOff + ", weightMaxLanding=" + weightMaxLanding
                 + ", weightMaxTaxi=" + weightMaxTaxi + ", weightEmpty=" + weightEmpty + ", weightZeroFuel="
                 + weightZeroFuel + ", " + this.apusToString() + " ]";
-    }
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
     }
 
     /**
