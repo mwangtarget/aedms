@@ -28,9 +28,9 @@ import com.aedms.core.entities.source.User;
 import com.aedms.core.entities.source.UserBuilder;
 import com.aedms.core.repo.source.APURepo;
 import com.aedms.core.repo.source.AirCraftRepo;
-import com.aedms.core.repo.source.EngineOprRepo;
+import com.aedms.core.repo.source.EngineOperationRecRepo;
 import com.aedms.core.repo.source.EngineRepo;
-import com.aedms.core.repo.source.EngineStatRepo;
+import com.aedms.core.repo.source.EngineStatusRecRepo;
 import com.aedms.core.repo.source.OrganizationRepo;
 import com.aedms.core.repo.source.UserRepo;
 import com.aedms.ext.cmis.CMISSessionUtil;
@@ -46,8 +46,8 @@ public class App {
 	}
 
 	@Bean
-	public CommandLineRunner demoEngine(EngineRepo repository, EngineStatRepo engineStatRepo,
-			EngineOprRepo engineOprRepo, CMISSessionUtil cMISSessionUtil) {
+	public CommandLineRunner demoEngine(EngineRepo repository, EngineStatusRecRepo engineStatRepo,
+			EngineOperationRecRepo engineOprRepo, CMISSessionUtil cMISSessionUtil) {
 		return (args) -> {
 			InputStream inputStream = ClassLoader.getSystemResourceAsStream("application-h2.properties");
 			byte[] inputBytes = ByteStreams.toByteArray(inputStream);
