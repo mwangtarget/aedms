@@ -1,5 +1,6 @@
 package com.aedms.core.entities.source;
 
+import com.aedms.core.entities.AedmsEntity;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -14,309 +15,1355 @@ import javax.persistence.Temporal;
 
 import fr.lteconsulting.Mandatory;
 import fr.lteconsulting.UseBuilderGenerator;
+import org.joda.beans.BeanDefinition;
+import org.joda.beans.PropertyDefinition;
+import java.util.Map;
+import org.joda.beans.Bean;
+import org.joda.beans.BeanBuilder;
+import org.joda.beans.JodaBeanUtils;
+import org.joda.beans.MetaProperty;
+import org.joda.beans.Property;
+import org.joda.beans.impl.direct.DirectBeanBuilder;
+import org.joda.beans.impl.direct.DirectMetaProperty;
+import org.joda.beans.impl.direct.DirectMetaPropertyMap;
 
 @Entity
 @Table(name = "ENGINE_STAT_REC")
-public class EngineStatusRec {
+@BeanDefinition
+public class EngineStatusRec extends AedmsEntity{
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID")
-	private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
+    @PropertyDefinition
+    private long id;
 
-	@Column(name = "TSN")
-	private Double TSN;
+    @Column(name = "TSN")
+    @PropertyDefinition
+    private Double TSN;
 
-	@Column(name = "CSN")
-	private Integer CSN;
+    @Column(name = "CSN")
+    @PropertyDefinition
+    private Integer CSN;
 
-	@Column(name = "TSO")
-	private Double TSO;
+    @Column(name = "TSO")
+    @PropertyDefinition
+    private Double TSO;
 
-	@Column(name = "CSO")
-	private Integer CSO;
-	
-	@Column(name = "INSTALL_FH")
-	private Double hrsPostInst;
-
-	@Column(name = "INSTALL_FC")
-	private Integer cirsPostInst;
-	
-	@Column(name="LAST_RP_DATE")
-	@Temporal(javax.persistence.TemporalType.DATE)
-	private Date lastRpDate;
-	
-	@Column(name="LAST_RP_UNIT")
-	private String lastRpUnit;
-	
-	@Column(name="INSTALL_DATE")
-	@Temporal(javax.persistence.TemporalType.DATE)
-	private Date installDate;
-	
-	@Column(name="INSTALL_ANO")
-	private String installANO;
-	
-	@Column(name="INSTALL_POS")
-	private String installPos;
-	
-	@Column(name="TEARDOWN_DATE")
-	@Temporal(javax.persistence.TemporalType.DATE)
-	private Date tdDate;
+    @Column(name = "CSO")
+    @PropertyDefinition
+    private Integer CSO;
     
-	@Column(name="TEARDOWN_ANO")
-	private String tdANO;
-	
-	@Column(name="TEARDOWN_PIS")
-	private String tdPIS;
-	
-	@Column(name="TEARDDOWN_CAUSE")
-	private String tdCause;
-	
-	@Column(name="ENGINE_STAT")
-	private String engineStat;
-	
-	@Column(name="REP_DATE")
-	@Temporal(javax.persistence.TemporalType.DATE)
-	private Date repDate;
-	
-	@Column(name="REP_UNIT")
-	private String repUnit;
-	
-	@Column(name="REC_DATE")
-	@Temporal(javax.persistence.TemporalType.DATE)
-	private Date recDate;
-	
-	@Column(name="REMARK")
-	private String remark;
-	
-	@ManyToOne
+    @Column(name = "INSTALL_FH")
+    @PropertyDefinition
+    private Double hrsPostInst;
+
+    @Column(name = "INSTALL_FC")
+    @PropertyDefinition
+    private Integer cirsPostInst;
+    
+    @Column(name="LAST_RP_DATE")
+    @Temporal(javax.persistence.TemporalType.DATE)
+    @PropertyDefinition
+    private Date lastRpDate;
+    
+    @Column(name="LAST_RP_UNIT")
+    @PropertyDefinition
+    private String lastRpUnit;
+    
+    @Column(name="INSTALL_DATE")
+    @Temporal(javax.persistence.TemporalType.DATE)
+    @PropertyDefinition
+    private Date installDate;
+    
+    @Column(name="INSTALL_ANO")
+    @PropertyDefinition
+    private String installANO;
+    
+    @Column(name="INSTALL_POS")
+    @PropertyDefinition
+    private String installPos;
+    
+    @Column(name="TEARDOWN_DATE")
+    @Temporal(javax.persistence.TemporalType.DATE)
+    @PropertyDefinition
+    private Date tdDate;
+    
+    @Column(name="TEARDOWN_ANO")
+    @PropertyDefinition
+    private String tdANO;
+    
+    @Column(name="TEARDOWN_PIS")
+    @PropertyDefinition
+    private String tdPIS;
+    
+    @Column(name="TEARDDOWN_CAUSE")
+    @PropertyDefinition
+    private String tdCause;
+    
+    @Column(name="ENGINE_STAT")
+    @PropertyDefinition
+    private String engineStat;
+    
+    @Column(name="REP_DATE")
+    @Temporal(javax.persistence.TemporalType.DATE)
+    @PropertyDefinition
+    private Date repDate;
+    
+    @Column(name="REP_UNIT")
+    @PropertyDefinition
+    private String repUnit;
+    
+    @Column(name="REC_DATE")
+    @Temporal(javax.persistence.TemporalType.DATE)
+    @PropertyDefinition
+    private Date recDate;
+    
+    @Column(name="REMARK")
+    @PropertyDefinition
+    private String remark;
+    
+    @ManyToOne
     @JoinColumn(name="ENGINE_ID", nullable=false)
-	private Engine engine;
+    @PropertyDefinition
+    private Engine engine;
 
-	/** Constructor List block*/
-	public EngineStatusRec(){
-		
-	}
-	
-	@UseBuilderGenerator
-	public EngineStatusRec(@Mandatory Double tSN, @Mandatory Integer cSN, @Mandatory Double tSO, Integer cSO, Double hrsPostInst, Integer cirsPostInst,
-			Date lastRpDate, String lastRpUnit, Date installDate, String installANO, String installPos, Date tdDate,
-			String tdANO, String tdPIS, String tdCause, String engineStat, Date repDate, String repUnit, Date recDate,
-			String remark, @Mandatory Engine engine) {
-		super();
-		TSN = tSN;
-		CSN = cSN;
-		TSO = tSO;
-		CSO = cSO;
-		this.hrsPostInst = hrsPostInst;
-		this.cirsPostInst = cirsPostInst;
-		this.lastRpDate = lastRpDate;
-		this.lastRpUnit = lastRpUnit;
-		this.installDate = installDate;
-		this.installANO = installANO;
-		this.installPos = installPos;
-		this.tdDate = tdDate;
-		this.tdANO = tdANO;
-		this.tdPIS = tdPIS;
-		this.tdCause = tdCause;
-		this.engineStat = engineStat;
-		this.repDate = repDate;
-		this.repUnit = repUnit;
-		this.recDate = recDate;
-		this.remark = remark;
-		this.engine = engine;
-	}
+    /** Constructor List block*/
+    public EngineStatusRec(){
+        
+    }
+    
+    @UseBuilderGenerator
+    public EngineStatusRec(@Mandatory Double tSN, @Mandatory Integer cSN, @Mandatory Double tSO, Integer cSO, Double hrsPostInst, Integer cirsPostInst,
+            Date lastRpDate, String lastRpUnit, Date installDate, String installANO, String installPos, Date tdDate,
+            String tdANO, String tdPIS, String tdCause, String engineStat, Date repDate, String repUnit, Date recDate,
+            String remark, @Mandatory Engine engine) {
+        super();
+        TSN = tSN;
+        CSN = cSN;
+        TSO = tSO;
+        CSO = cSO;
+        this.hrsPostInst = hrsPostInst;
+        this.cirsPostInst = cirsPostInst;
+        this.lastRpDate = lastRpDate;
+        this.lastRpUnit = lastRpUnit;
+        this.installDate = installDate;
+        this.installANO = installANO;
+        this.installPos = installPos;
+        this.tdDate = tdDate;
+        this.tdANO = tdANO;
+        this.tdPIS = tdPIS;
+        this.tdCause = tdCause;
+        this.engineStat = engineStat;
+        this.repDate = repDate;
+        this.repUnit = repUnit;
+        this.recDate = recDate;
+        this.remark = remark;
+        this.engine = engine;
+    }
+    //------------------------- AUTOGENERATED START -------------------------
+    ///CLOVER:OFF
+    /**
+     * The meta-bean for {@code EngineStatusRec}.
+     * @return the meta-bean, not null
+     */
+    public static EngineStatusRec.Meta meta() {
+        return EngineStatusRec.Meta.INSTANCE;
+    }
 
-	@Override
-	public String toString() {
-		return "EngineStatRec [id=" + id + ", TSN=" + TSN + ", CSN=" + CSN + ", TSO=" + TSO + ", CSO=" + CSO
-				+ ", hrsPostInst=" + hrsPostInst + ", cirsPostInst=" + cirsPostInst + ", lastRpDate=" + lastRpDate
-				+ ", lastRpUnit=" + lastRpUnit + ", installDate=" + installDate + ", installANO=" + installANO
-				+ ", installPos=" + installPos + ", tdDate=" + tdDate + ", tdANO=" + tdANO + ", tdPIS=" + tdPIS
-				+ ", tdCause=" + tdCause + ", engineStat=" + engineStat + ", repDate=" + repDate + ", repUnit="
-				+ repUnit + ", recDate=" + recDate + ", remark=" + remark + "]";
-	}
-	
+    static {
+        JodaBeanUtils.registerMetaBean(EngineStatusRec.Meta.INSTANCE);
+    }
 
-	public Engine getEngine() {
-		return engine;
-	}
+    @Override
+    public EngineStatusRec.Meta metaBean() {
+        return EngineStatusRec.Meta.INSTANCE;
+    }
 
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the id.
+     * @return the value of the property
+     */
+    public long getId() {
+        return id;
+    }
 
-	public void setEngine(Engine engine) {
-		this.engine = engine;
-	}
+    /**
+     * Sets the id.
+     * @param id  the new value of the property
+     */
+    public void setId(long id) {
+        this.id = id;
+    }
 
+    /**
+     * Gets the the {@code id} property.
+     * @return the property, not null
+     */
+    public final Property<Long> id() {
+        return metaBean().id().createProperty(this);
+    }
 
-	public long getId() {
-		return id;
-	}
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the TSN.
+     * @return the value of the property
+     */
+    public Double getTSN() {
+        return TSN;
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    /**
+     * Sets the TSN.
+     * @param TSN  the new value of the property
+     */
+    public void setTSN(Double TSN) {
+        this.TSN = TSN;
+    }
 
-	public Double getTSN() {
-		return TSN;
-	}
+    /**
+     * Gets the the {@code TSN} property.
+     * @return the property, not null
+     */
+    public final Property<Double> TSN() {
+        return metaBean().TSN().createProperty(this);
+    }
 
-	public void setTSN(Double tSN) {
-		TSN = tSN;
-	}
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the CSN.
+     * @return the value of the property
+     */
+    public Integer getCSN() {
+        return CSN;
+    }
 
-	public Integer getCSN() {
-		return CSN;
-	}
+    /**
+     * Sets the CSN.
+     * @param CSN  the new value of the property
+     */
+    public void setCSN(Integer CSN) {
+        this.CSN = CSN;
+    }
 
-	public void setCSN(Integer cSN) {
-		CSN = cSN;
-	}
+    /**
+     * Gets the the {@code CSN} property.
+     * @return the property, not null
+     */
+    public final Property<Integer> CSN() {
+        return metaBean().CSN().createProperty(this);
+    }
 
-	public Double getTSO() {
-		return TSO;
-	}
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the TSO.
+     * @return the value of the property
+     */
+    public Double getTSO() {
+        return TSO;
+    }
 
-	public void setTSO(Double tSO) {
-		TSO = tSO;
-	}
+    /**
+     * Sets the TSO.
+     * @param TSO  the new value of the property
+     */
+    public void setTSO(Double TSO) {
+        this.TSO = TSO;
+    }
 
-	public Integer getCSO() {
-		return CSO;
-	}
+    /**
+     * Gets the the {@code TSO} property.
+     * @return the property, not null
+     */
+    public final Property<Double> TSO() {
+        return metaBean().TSO().createProperty(this);
+    }
 
-	public void setCSO(Integer cSO) {
-		CSO = cSO;
-	}
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the CSO.
+     * @return the value of the property
+     */
+    public Integer getCSO() {
+        return CSO;
+    }
 
-	public Double getHrsPostInst() {
-		return hrsPostInst;
-	}
+    /**
+     * Sets the CSO.
+     * @param CSO  the new value of the property
+     */
+    public void setCSO(Integer CSO) {
+        this.CSO = CSO;
+    }
 
-	public void setHrsPostInst(Double hrsPostInst) {
-		this.hrsPostInst = hrsPostInst;
-	}
+    /**
+     * Gets the the {@code CSO} property.
+     * @return the property, not null
+     */
+    public final Property<Integer> CSO() {
+        return metaBean().CSO().createProperty(this);
+    }
 
-	public Integer getCirsPostInst() {
-		return cirsPostInst;
-	}
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the hrsPostInst.
+     * @return the value of the property
+     */
+    public Double getHrsPostInst() {
+        return hrsPostInst;
+    }
 
-	public void setCirsPostInst(Integer cirsPostInst) {
-		this.cirsPostInst = cirsPostInst;
-	}
+    /**
+     * Sets the hrsPostInst.
+     * @param hrsPostInst  the new value of the property
+     */
+    public void setHrsPostInst(Double hrsPostInst) {
+        this.hrsPostInst = hrsPostInst;
+    }
 
-	public Date getLastRpDate() {
-		return lastRpDate;
-	}
+    /**
+     * Gets the the {@code hrsPostInst} property.
+     * @return the property, not null
+     */
+    public final Property<Double> hrsPostInst() {
+        return metaBean().hrsPostInst().createProperty(this);
+    }
 
-	public void setLastRpDate(Date lastRpDate) {
-		this.lastRpDate = lastRpDate;
-	}
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the cirsPostInst.
+     * @return the value of the property
+     */
+    public Integer getCirsPostInst() {
+        return cirsPostInst;
+    }
 
-	public String getLastRpUnit() {
-		return lastRpUnit;
-	}
+    /**
+     * Sets the cirsPostInst.
+     * @param cirsPostInst  the new value of the property
+     */
+    public void setCirsPostInst(Integer cirsPostInst) {
+        this.cirsPostInst = cirsPostInst;
+    }
 
-	public void setLastRpUnit(String lastRpUnit) {
-		this.lastRpUnit = lastRpUnit;
-	}
+    /**
+     * Gets the the {@code cirsPostInst} property.
+     * @return the property, not null
+     */
+    public final Property<Integer> cirsPostInst() {
+        return metaBean().cirsPostInst().createProperty(this);
+    }
 
-	public Date getInstallDate() {
-		return installDate;
-	}
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the lastRpDate.
+     * @return the value of the property
+     */
+    public Date getLastRpDate() {
+        return lastRpDate;
+    }
 
-	public void setInstallDate(Date installDate) {
-		this.installDate = installDate;
-	}
+    /**
+     * Sets the lastRpDate.
+     * @param lastRpDate  the new value of the property
+     */
+    public void setLastRpDate(Date lastRpDate) {
+        this.lastRpDate = lastRpDate;
+    }
 
-	public String getInstallANO() {
-		return installANO;
-	}
+    /**
+     * Gets the the {@code lastRpDate} property.
+     * @return the property, not null
+     */
+    public final Property<Date> lastRpDate() {
+        return metaBean().lastRpDate().createProperty(this);
+    }
 
-	public void setInstallANO(String installANO) {
-		this.installANO = installANO;
-	}
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the lastRpUnit.
+     * @return the value of the property
+     */
+    public String getLastRpUnit() {
+        return lastRpUnit;
+    }
 
-	public String getInstallPos() {
-		return installPos;
-	}
+    /**
+     * Sets the lastRpUnit.
+     * @param lastRpUnit  the new value of the property
+     */
+    public void setLastRpUnit(String lastRpUnit) {
+        this.lastRpUnit = lastRpUnit;
+    }
 
-	public void setInstallPos(String installPos) {
-		this.installPos = installPos;
-	}
+    /**
+     * Gets the the {@code lastRpUnit} property.
+     * @return the property, not null
+     */
+    public final Property<String> lastRpUnit() {
+        return metaBean().lastRpUnit().createProperty(this);
+    }
 
-	public Date getTdDate() {
-		return tdDate;
-	}
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the installDate.
+     * @return the value of the property
+     */
+    public Date getInstallDate() {
+        return installDate;
+    }
 
-	public void setTdDate(Date tdDate) {
-		this.tdDate = tdDate;
-	}
+    /**
+     * Sets the installDate.
+     * @param installDate  the new value of the property
+     */
+    public void setInstallDate(Date installDate) {
+        this.installDate = installDate;
+    }
 
-	public String getTdANO() {
-		return tdANO;
-	}
+    /**
+     * Gets the the {@code installDate} property.
+     * @return the property, not null
+     */
+    public final Property<Date> installDate() {
+        return metaBean().installDate().createProperty(this);
+    }
 
-	public void setTdANO(String tdANO) {
-		this.tdANO = tdANO;
-	}
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the installANO.
+     * @return the value of the property
+     */
+    public String getInstallANO() {
+        return installANO;
+    }
 
-	public String getTdPIS() {
-		return tdPIS;
-	}
+    /**
+     * Sets the installANO.
+     * @param installANO  the new value of the property
+     */
+    public void setInstallANO(String installANO) {
+        this.installANO = installANO;
+    }
 
-	public void setTdPIS(String tdPIS) {
-		this.tdPIS = tdPIS;
-	}
+    /**
+     * Gets the the {@code installANO} property.
+     * @return the property, not null
+     */
+    public final Property<String> installANO() {
+        return metaBean().installANO().createProperty(this);
+    }
 
-	public String getTdCause() {
-		return tdCause;
-	}
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the installPos.
+     * @return the value of the property
+     */
+    public String getInstallPos() {
+        return installPos;
+    }
 
-	public void setTdCause(String tdCause) {
-		this.tdCause = tdCause;
-	}
+    /**
+     * Sets the installPos.
+     * @param installPos  the new value of the property
+     */
+    public void setInstallPos(String installPos) {
+        this.installPos = installPos;
+    }
 
-	public String getEngineStat() {
-		return engineStat;
-	}
+    /**
+     * Gets the the {@code installPos} property.
+     * @return the property, not null
+     */
+    public final Property<String> installPos() {
+        return metaBean().installPos().createProperty(this);
+    }
 
-	public void setEngineStat(String engineStat) {
-		this.engineStat = engineStat;
-	}
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the tdDate.
+     * @return the value of the property
+     */
+    public Date getTdDate() {
+        return tdDate;
+    }
 
-	public Date getRepDate() {
-		return repDate;
-	}
+    /**
+     * Sets the tdDate.
+     * @param tdDate  the new value of the property
+     */
+    public void setTdDate(Date tdDate) {
+        this.tdDate = tdDate;
+    }
 
-	public void setRepDate(Date repDate) {
-		this.repDate = repDate;
-	}
+    /**
+     * Gets the the {@code tdDate} property.
+     * @return the property, not null
+     */
+    public final Property<Date> tdDate() {
+        return metaBean().tdDate().createProperty(this);
+    }
 
-	public String getRepUnit() {
-		return repUnit;
-	}
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the tdANO.
+     * @return the value of the property
+     */
+    public String getTdANO() {
+        return tdANO;
+    }
 
-	public void setRepUnit(String repUnit) {
-		this.repUnit = repUnit;
-	}
+    /**
+     * Sets the tdANO.
+     * @param tdANO  the new value of the property
+     */
+    public void setTdANO(String tdANO) {
+        this.tdANO = tdANO;
+    }
 
-	public Date getRecDate() {
-		return recDate;
-	}
+    /**
+     * Gets the the {@code tdANO} property.
+     * @return the property, not null
+     */
+    public final Property<String> tdANO() {
+        return metaBean().tdANO().createProperty(this);
+    }
 
-	public void setRecDate(Date recDate) {
-		this.recDate = recDate;
-	}
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the tdPIS.
+     * @return the value of the property
+     */
+    public String getTdPIS() {
+        return tdPIS;
+    }
 
-	public String getRemark() {
-		return remark;
-	}
+    /**
+     * Sets the tdPIS.
+     * @param tdPIS  the new value of the property
+     */
+    public void setTdPIS(String tdPIS) {
+        this.tdPIS = tdPIS;
+    }
 
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
-	
-	
+    /**
+     * Gets the the {@code tdPIS} property.
+     * @return the property, not null
+     */
+    public final Property<String> tdPIS() {
+        return metaBean().tdPIS().createProperty(this);
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the tdCause.
+     * @return the value of the property
+     */
+    public String getTdCause() {
+        return tdCause;
+    }
+
+    /**
+     * Sets the tdCause.
+     * @param tdCause  the new value of the property
+     */
+    public void setTdCause(String tdCause) {
+        this.tdCause = tdCause;
+    }
+
+    /**
+     * Gets the the {@code tdCause} property.
+     * @return the property, not null
+     */
+    public final Property<String> tdCause() {
+        return metaBean().tdCause().createProperty(this);
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the engineStat.
+     * @return the value of the property
+     */
+    public String getEngineStat() {
+        return engineStat;
+    }
+
+    /**
+     * Sets the engineStat.
+     * @param engineStat  the new value of the property
+     */
+    public void setEngineStat(String engineStat) {
+        this.engineStat = engineStat;
+    }
+
+    /**
+     * Gets the the {@code engineStat} property.
+     * @return the property, not null
+     */
+    public final Property<String> engineStat() {
+        return metaBean().engineStat().createProperty(this);
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the repDate.
+     * @return the value of the property
+     */
+    public Date getRepDate() {
+        return repDate;
+    }
+
+    /**
+     * Sets the repDate.
+     * @param repDate  the new value of the property
+     */
+    public void setRepDate(Date repDate) {
+        this.repDate = repDate;
+    }
+
+    /**
+     * Gets the the {@code repDate} property.
+     * @return the property, not null
+     */
+    public final Property<Date> repDate() {
+        return metaBean().repDate().createProperty(this);
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the repUnit.
+     * @return the value of the property
+     */
+    public String getRepUnit() {
+        return repUnit;
+    }
+
+    /**
+     * Sets the repUnit.
+     * @param repUnit  the new value of the property
+     */
+    public void setRepUnit(String repUnit) {
+        this.repUnit = repUnit;
+    }
+
+    /**
+     * Gets the the {@code repUnit} property.
+     * @return the property, not null
+     */
+    public final Property<String> repUnit() {
+        return metaBean().repUnit().createProperty(this);
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the recDate.
+     * @return the value of the property
+     */
+    public Date getRecDate() {
+        return recDate;
+    }
+
+    /**
+     * Sets the recDate.
+     * @param recDate  the new value of the property
+     */
+    public void setRecDate(Date recDate) {
+        this.recDate = recDate;
+    }
+
+    /**
+     * Gets the the {@code recDate} property.
+     * @return the property, not null
+     */
+    public final Property<Date> recDate() {
+        return metaBean().recDate().createProperty(this);
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the remark.
+     * @return the value of the property
+     */
+    public String getRemark() {
+        return remark;
+    }
+
+    /**
+     * Sets the remark.
+     * @param remark  the new value of the property
+     */
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    /**
+     * Gets the the {@code remark} property.
+     * @return the property, not null
+     */
+    public final Property<String> remark() {
+        return metaBean().remark().createProperty(this);
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the engine.
+     * @return the value of the property
+     */
+    public Engine getEngine() {
+        return engine;
+    }
+
+    /**
+     * Sets the engine.
+     * @param engine  the new value of the property
+     */
+    public void setEngine(Engine engine) {
+        this.engine = engine;
+    }
+
+    /**
+     * Gets the the {@code engine} property.
+     * @return the property, not null
+     */
+    public final Property<Engine> engine() {
+        return metaBean().engine().createProperty(this);
+    }
+
+    //-----------------------------------------------------------------------
+    @Override
+    public EngineStatusRec clone() {
+        return JodaBeanUtils.cloneAlways(this);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj != null && obj.getClass() == this.getClass()) {
+            EngineStatusRec other = (EngineStatusRec) obj;
+            return (getId() == other.getId()) &&
+                    JodaBeanUtils.equal(getTSN(), other.getTSN()) &&
+                    JodaBeanUtils.equal(getCSN(), other.getCSN()) &&
+                    JodaBeanUtils.equal(getTSO(), other.getTSO()) &&
+                    JodaBeanUtils.equal(getCSO(), other.getCSO()) &&
+                    JodaBeanUtils.equal(getHrsPostInst(), other.getHrsPostInst()) &&
+                    JodaBeanUtils.equal(getCirsPostInst(), other.getCirsPostInst()) &&
+                    JodaBeanUtils.equal(getLastRpDate(), other.getLastRpDate()) &&
+                    JodaBeanUtils.equal(getLastRpUnit(), other.getLastRpUnit()) &&
+                    JodaBeanUtils.equal(getInstallDate(), other.getInstallDate()) &&
+                    JodaBeanUtils.equal(getInstallANO(), other.getInstallANO()) &&
+                    JodaBeanUtils.equal(getInstallPos(), other.getInstallPos()) &&
+                    JodaBeanUtils.equal(getTdDate(), other.getTdDate()) &&
+                    JodaBeanUtils.equal(getTdANO(), other.getTdANO()) &&
+                    JodaBeanUtils.equal(getTdPIS(), other.getTdPIS()) &&
+                    JodaBeanUtils.equal(getTdCause(), other.getTdCause()) &&
+                    JodaBeanUtils.equal(getEngineStat(), other.getEngineStat()) &&
+                    JodaBeanUtils.equal(getRepDate(), other.getRepDate()) &&
+                    JodaBeanUtils.equal(getRepUnit(), other.getRepUnit()) &&
+                    JodaBeanUtils.equal(getRecDate(), other.getRecDate()) &&
+                    JodaBeanUtils.equal(getRemark(), other.getRemark()) &&
+                    JodaBeanUtils.equal(getEngine(), other.getEngine()) &&
+                    super.equals(obj);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = hash * 31 + JodaBeanUtils.hashCode(getId());
+        hash = hash * 31 + JodaBeanUtils.hashCode(getTSN());
+        hash = hash * 31 + JodaBeanUtils.hashCode(getCSN());
+        hash = hash * 31 + JodaBeanUtils.hashCode(getTSO());
+        hash = hash * 31 + JodaBeanUtils.hashCode(getCSO());
+        hash = hash * 31 + JodaBeanUtils.hashCode(getHrsPostInst());
+        hash = hash * 31 + JodaBeanUtils.hashCode(getCirsPostInst());
+        hash = hash * 31 + JodaBeanUtils.hashCode(getLastRpDate());
+        hash = hash * 31 + JodaBeanUtils.hashCode(getLastRpUnit());
+        hash = hash * 31 + JodaBeanUtils.hashCode(getInstallDate());
+        hash = hash * 31 + JodaBeanUtils.hashCode(getInstallANO());
+        hash = hash * 31 + JodaBeanUtils.hashCode(getInstallPos());
+        hash = hash * 31 + JodaBeanUtils.hashCode(getTdDate());
+        hash = hash * 31 + JodaBeanUtils.hashCode(getTdANO());
+        hash = hash * 31 + JodaBeanUtils.hashCode(getTdPIS());
+        hash = hash * 31 + JodaBeanUtils.hashCode(getTdCause());
+        hash = hash * 31 + JodaBeanUtils.hashCode(getEngineStat());
+        hash = hash * 31 + JodaBeanUtils.hashCode(getRepDate());
+        hash = hash * 31 + JodaBeanUtils.hashCode(getRepUnit());
+        hash = hash * 31 + JodaBeanUtils.hashCode(getRecDate());
+        hash = hash * 31 + JodaBeanUtils.hashCode(getRemark());
+        hash = hash * 31 + JodaBeanUtils.hashCode(getEngine());
+        return hash ^ super.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder buf = new StringBuilder(736);
+        buf.append("EngineStatusRec{");
+        int len = buf.length();
+        toString(buf);
+        if (buf.length() > len) {
+            buf.setLength(buf.length() - 2);
+        }
+        buf.append('}');
+        return buf.toString();
+    }
+
+    @Override
+    protected void toString(StringBuilder buf) {
+        super.toString(buf);
+        buf.append("id").append('=').append(JodaBeanUtils.toString(getId())).append(',').append(' ');
+        buf.append("TSN").append('=').append(JodaBeanUtils.toString(getTSN())).append(',').append(' ');
+        buf.append("CSN").append('=').append(JodaBeanUtils.toString(getCSN())).append(',').append(' ');
+        buf.append("TSO").append('=').append(JodaBeanUtils.toString(getTSO())).append(',').append(' ');
+        buf.append("CSO").append('=').append(JodaBeanUtils.toString(getCSO())).append(',').append(' ');
+        buf.append("hrsPostInst").append('=').append(JodaBeanUtils.toString(getHrsPostInst())).append(',').append(' ');
+        buf.append("cirsPostInst").append('=').append(JodaBeanUtils.toString(getCirsPostInst())).append(',').append(' ');
+        buf.append("lastRpDate").append('=').append(JodaBeanUtils.toString(getLastRpDate())).append(',').append(' ');
+        buf.append("lastRpUnit").append('=').append(JodaBeanUtils.toString(getLastRpUnit())).append(',').append(' ');
+        buf.append("installDate").append('=').append(JodaBeanUtils.toString(getInstallDate())).append(',').append(' ');
+        buf.append("installANO").append('=').append(JodaBeanUtils.toString(getInstallANO())).append(',').append(' ');
+        buf.append("installPos").append('=').append(JodaBeanUtils.toString(getInstallPos())).append(',').append(' ');
+        buf.append("tdDate").append('=').append(JodaBeanUtils.toString(getTdDate())).append(',').append(' ');
+        buf.append("tdANO").append('=').append(JodaBeanUtils.toString(getTdANO())).append(',').append(' ');
+        buf.append("tdPIS").append('=').append(JodaBeanUtils.toString(getTdPIS())).append(',').append(' ');
+        buf.append("tdCause").append('=').append(JodaBeanUtils.toString(getTdCause())).append(',').append(' ');
+        buf.append("engineStat").append('=').append(JodaBeanUtils.toString(getEngineStat())).append(',').append(' ');
+        buf.append("repDate").append('=').append(JodaBeanUtils.toString(getRepDate())).append(',').append(' ');
+        buf.append("repUnit").append('=').append(JodaBeanUtils.toString(getRepUnit())).append(',').append(' ');
+        buf.append("recDate").append('=').append(JodaBeanUtils.toString(getRecDate())).append(',').append(' ');
+        buf.append("remark").append('=').append(JodaBeanUtils.toString(getRemark())).append(',').append(' ');
+        buf.append("engine").append('=').append(JodaBeanUtils.toString(getEngine())).append(',').append(' ');
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * The meta-bean for {@code EngineStatusRec}.
+     */
+    public static class Meta extends AedmsEntity.Meta {
+        /**
+         * The singleton instance of the meta-bean.
+         */
+        static final Meta INSTANCE = new Meta();
+
+        /**
+         * The meta-property for the {@code id} property.
+         */
+        private final MetaProperty<Long> id = DirectMetaProperty.ofReadWrite(
+                this, "id", EngineStatusRec.class, Long.TYPE);
+        /**
+         * The meta-property for the {@code TSN} property.
+         */
+        private final MetaProperty<Double> TSN = DirectMetaProperty.ofReadWrite(
+                this, "TSN", EngineStatusRec.class, Double.class);
+        /**
+         * The meta-property for the {@code CSN} property.
+         */
+        private final MetaProperty<Integer> CSN = DirectMetaProperty.ofReadWrite(
+                this, "CSN", EngineStatusRec.class, Integer.class);
+        /**
+         * The meta-property for the {@code TSO} property.
+         */
+        private final MetaProperty<Double> TSO = DirectMetaProperty.ofReadWrite(
+                this, "TSO", EngineStatusRec.class, Double.class);
+        /**
+         * The meta-property for the {@code CSO} property.
+         */
+        private final MetaProperty<Integer> CSO = DirectMetaProperty.ofReadWrite(
+                this, "CSO", EngineStatusRec.class, Integer.class);
+        /**
+         * The meta-property for the {@code hrsPostInst} property.
+         */
+        private final MetaProperty<Double> hrsPostInst = DirectMetaProperty.ofReadWrite(
+                this, "hrsPostInst", EngineStatusRec.class, Double.class);
+        /**
+         * The meta-property for the {@code cirsPostInst} property.
+         */
+        private final MetaProperty<Integer> cirsPostInst = DirectMetaProperty.ofReadWrite(
+                this, "cirsPostInst", EngineStatusRec.class, Integer.class);
+        /**
+         * The meta-property for the {@code lastRpDate} property.
+         */
+        private final MetaProperty<Date> lastRpDate = DirectMetaProperty.ofReadWrite(
+                this, "lastRpDate", EngineStatusRec.class, Date.class);
+        /**
+         * The meta-property for the {@code lastRpUnit} property.
+         */
+        private final MetaProperty<String> lastRpUnit = DirectMetaProperty.ofReadWrite(
+                this, "lastRpUnit", EngineStatusRec.class, String.class);
+        /**
+         * The meta-property for the {@code installDate} property.
+         */
+        private final MetaProperty<Date> installDate = DirectMetaProperty.ofReadWrite(
+                this, "installDate", EngineStatusRec.class, Date.class);
+        /**
+         * The meta-property for the {@code installANO} property.
+         */
+        private final MetaProperty<String> installANO = DirectMetaProperty.ofReadWrite(
+                this, "installANO", EngineStatusRec.class, String.class);
+        /**
+         * The meta-property for the {@code installPos} property.
+         */
+        private final MetaProperty<String> installPos = DirectMetaProperty.ofReadWrite(
+                this, "installPos", EngineStatusRec.class, String.class);
+        /**
+         * The meta-property for the {@code tdDate} property.
+         */
+        private final MetaProperty<Date> tdDate = DirectMetaProperty.ofReadWrite(
+                this, "tdDate", EngineStatusRec.class, Date.class);
+        /**
+         * The meta-property for the {@code tdANO} property.
+         */
+        private final MetaProperty<String> tdANO = DirectMetaProperty.ofReadWrite(
+                this, "tdANO", EngineStatusRec.class, String.class);
+        /**
+         * The meta-property for the {@code tdPIS} property.
+         */
+        private final MetaProperty<String> tdPIS = DirectMetaProperty.ofReadWrite(
+                this, "tdPIS", EngineStatusRec.class, String.class);
+        /**
+         * The meta-property for the {@code tdCause} property.
+         */
+        private final MetaProperty<String> tdCause = DirectMetaProperty.ofReadWrite(
+                this, "tdCause", EngineStatusRec.class, String.class);
+        /**
+         * The meta-property for the {@code engineStat} property.
+         */
+        private final MetaProperty<String> engineStat = DirectMetaProperty.ofReadWrite(
+                this, "engineStat", EngineStatusRec.class, String.class);
+        /**
+         * The meta-property for the {@code repDate} property.
+         */
+        private final MetaProperty<Date> repDate = DirectMetaProperty.ofReadWrite(
+                this, "repDate", EngineStatusRec.class, Date.class);
+        /**
+         * The meta-property for the {@code repUnit} property.
+         */
+        private final MetaProperty<String> repUnit = DirectMetaProperty.ofReadWrite(
+                this, "repUnit", EngineStatusRec.class, String.class);
+        /**
+         * The meta-property for the {@code recDate} property.
+         */
+        private final MetaProperty<Date> recDate = DirectMetaProperty.ofReadWrite(
+                this, "recDate", EngineStatusRec.class, Date.class);
+        /**
+         * The meta-property for the {@code remark} property.
+         */
+        private final MetaProperty<String> remark = DirectMetaProperty.ofReadWrite(
+                this, "remark", EngineStatusRec.class, String.class);
+        /**
+         * The meta-property for the {@code engine} property.
+         */
+        private final MetaProperty<Engine> engine = DirectMetaProperty.ofReadWrite(
+                this, "engine", EngineStatusRec.class, Engine.class);
+        /**
+         * The meta-properties.
+         */
+        private final Map<String, MetaProperty<?>> metaPropertyMap$ = new DirectMetaPropertyMap(
+                this, (DirectMetaPropertyMap) super.metaPropertyMap(),
+                "id",
+                "TSN",
+                "CSN",
+                "TSO",
+                "CSO",
+                "hrsPostInst",
+                "cirsPostInst",
+                "lastRpDate",
+                "lastRpUnit",
+                "installDate",
+                "installANO",
+                "installPos",
+                "tdDate",
+                "tdANO",
+                "tdPIS",
+                "tdCause",
+                "engineStat",
+                "repDate",
+                "repUnit",
+                "recDate",
+                "remark",
+                "engine");
+
+        /**
+         * Restricted constructor.
+         */
+        protected Meta() {
+        }
+
+        @Override
+        protected MetaProperty<?> metaPropertyGet(String propertyName) {
+            switch (propertyName.hashCode()) {
+                case 3355:  // id
+                    return id;
+                case 83375:  // TSN
+                    return TSN;
+                case 67038:  // CSN
+                    return CSN;
+                case 83376:  // TSO
+                    return TSO;
+                case 67039:  // CSO
+                    return CSO;
+                case 290415311:  // hrsPostInst
+                    return hrsPostInst;
+                case -1612248755:  // cirsPostInst
+                    return cirsPostInst;
+                case 1906039106:  // lastRpDate
+                    return lastRpDate;
+                case 1906557720:  // lastRpUnit
+                    return lastRpUnit;
+                case 2143044585:  // installDate
+                    return installDate;
+                case 900410951:  // installANO
+                    return installANO;
+                case 900426425:  // installPos
+                    return installPos;
+                case -879510978:  // tdDate
+                    return tdDate;
+                case 110172498:  // tdANO
+                    return tdANO;
+                case 110186762:  // tdPIS
+                    return tdPIS;
+                case -1495958567:  // tdCause
+                    return tdCause;
+                case 1439990710:  // engineStat
+                    return engineStat;
+                case 1093305835:  // repDate
+                    return repDate;
+                case 1093824449:  // repUnit
+                    return repUnit;
+                case 1081300062:  // recDate
+                    return recDate;
+                case -934624384:  // remark
+                    return remark;
+                case -1298662846:  // engine
+                    return engine;
+            }
+            return super.metaPropertyGet(propertyName);
+        }
+
+        @Override
+        public BeanBuilder<? extends EngineStatusRec> builder() {
+            return new DirectBeanBuilder<EngineStatusRec>(new EngineStatusRec());
+        }
+
+        @Override
+        public Class<? extends EngineStatusRec> beanType() {
+            return EngineStatusRec.class;
+        }
+
+        @Override
+        public Map<String, MetaProperty<?>> metaPropertyMap() {
+            return metaPropertyMap$;
+        }
+
+        //-----------------------------------------------------------------------
+        /**
+         * The meta-property for the {@code id} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<Long> id() {
+            return id;
+        }
+
+        /**
+         * The meta-property for the {@code TSN} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<Double> TSN() {
+            return TSN;
+        }
+
+        /**
+         * The meta-property for the {@code CSN} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<Integer> CSN() {
+            return CSN;
+        }
+
+        /**
+         * The meta-property for the {@code TSO} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<Double> TSO() {
+            return TSO;
+        }
+
+        /**
+         * The meta-property for the {@code CSO} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<Integer> CSO() {
+            return CSO;
+        }
+
+        /**
+         * The meta-property for the {@code hrsPostInst} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<Double> hrsPostInst() {
+            return hrsPostInst;
+        }
+
+        /**
+         * The meta-property for the {@code cirsPostInst} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<Integer> cirsPostInst() {
+            return cirsPostInst;
+        }
+
+        /**
+         * The meta-property for the {@code lastRpDate} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<Date> lastRpDate() {
+            return lastRpDate;
+        }
+
+        /**
+         * The meta-property for the {@code lastRpUnit} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<String> lastRpUnit() {
+            return lastRpUnit;
+        }
+
+        /**
+         * The meta-property for the {@code installDate} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<Date> installDate() {
+            return installDate;
+        }
+
+        /**
+         * The meta-property for the {@code installANO} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<String> installANO() {
+            return installANO;
+        }
+
+        /**
+         * The meta-property for the {@code installPos} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<String> installPos() {
+            return installPos;
+        }
+
+        /**
+         * The meta-property for the {@code tdDate} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<Date> tdDate() {
+            return tdDate;
+        }
+
+        /**
+         * The meta-property for the {@code tdANO} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<String> tdANO() {
+            return tdANO;
+        }
+
+        /**
+         * The meta-property for the {@code tdPIS} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<String> tdPIS() {
+            return tdPIS;
+        }
+
+        /**
+         * The meta-property for the {@code tdCause} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<String> tdCause() {
+            return tdCause;
+        }
+
+        /**
+         * The meta-property for the {@code engineStat} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<String> engineStat() {
+            return engineStat;
+        }
+
+        /**
+         * The meta-property for the {@code repDate} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<Date> repDate() {
+            return repDate;
+        }
+
+        /**
+         * The meta-property for the {@code repUnit} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<String> repUnit() {
+            return repUnit;
+        }
+
+        /**
+         * The meta-property for the {@code recDate} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<Date> recDate() {
+            return recDate;
+        }
+
+        /**
+         * The meta-property for the {@code remark} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<String> remark() {
+            return remark;
+        }
+
+        /**
+         * The meta-property for the {@code engine} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<Engine> engine() {
+            return engine;
+        }
+
+        //-----------------------------------------------------------------------
+        @Override
+        protected Object propertyGet(Bean bean, String propertyName, boolean quiet) {
+            switch (propertyName.hashCode()) {
+                case 3355:  // id
+                    return ((EngineStatusRec) bean).getId();
+                case 83375:  // TSN
+                    return ((EngineStatusRec) bean).getTSN();
+                case 67038:  // CSN
+                    return ((EngineStatusRec) bean).getCSN();
+                case 83376:  // TSO
+                    return ((EngineStatusRec) bean).getTSO();
+                case 67039:  // CSO
+                    return ((EngineStatusRec) bean).getCSO();
+                case 290415311:  // hrsPostInst
+                    return ((EngineStatusRec) bean).getHrsPostInst();
+                case -1612248755:  // cirsPostInst
+                    return ((EngineStatusRec) bean).getCirsPostInst();
+                case 1906039106:  // lastRpDate
+                    return ((EngineStatusRec) bean).getLastRpDate();
+                case 1906557720:  // lastRpUnit
+                    return ((EngineStatusRec) bean).getLastRpUnit();
+                case 2143044585:  // installDate
+                    return ((EngineStatusRec) bean).getInstallDate();
+                case 900410951:  // installANO
+                    return ((EngineStatusRec) bean).getInstallANO();
+                case 900426425:  // installPos
+                    return ((EngineStatusRec) bean).getInstallPos();
+                case -879510978:  // tdDate
+                    return ((EngineStatusRec) bean).getTdDate();
+                case 110172498:  // tdANO
+                    return ((EngineStatusRec) bean).getTdANO();
+                case 110186762:  // tdPIS
+                    return ((EngineStatusRec) bean).getTdPIS();
+                case -1495958567:  // tdCause
+                    return ((EngineStatusRec) bean).getTdCause();
+                case 1439990710:  // engineStat
+                    return ((EngineStatusRec) bean).getEngineStat();
+                case 1093305835:  // repDate
+                    return ((EngineStatusRec) bean).getRepDate();
+                case 1093824449:  // repUnit
+                    return ((EngineStatusRec) bean).getRepUnit();
+                case 1081300062:  // recDate
+                    return ((EngineStatusRec) bean).getRecDate();
+                case -934624384:  // remark
+                    return ((EngineStatusRec) bean).getRemark();
+                case -1298662846:  // engine
+                    return ((EngineStatusRec) bean).getEngine();
+            }
+            return super.propertyGet(bean, propertyName, quiet);
+        }
+
+        @Override
+        protected void propertySet(Bean bean, String propertyName, Object newValue, boolean quiet) {
+            switch (propertyName.hashCode()) {
+                case 3355:  // id
+                    ((EngineStatusRec) bean).setId((Long) newValue);
+                    return;
+                case 83375:  // TSN
+                    ((EngineStatusRec) bean).setTSN((Double) newValue);
+                    return;
+                case 67038:  // CSN
+                    ((EngineStatusRec) bean).setCSN((Integer) newValue);
+                    return;
+                case 83376:  // TSO
+                    ((EngineStatusRec) bean).setTSO((Double) newValue);
+                    return;
+                case 67039:  // CSO
+                    ((EngineStatusRec) bean).setCSO((Integer) newValue);
+                    return;
+                case 290415311:  // hrsPostInst
+                    ((EngineStatusRec) bean).setHrsPostInst((Double) newValue);
+                    return;
+                case -1612248755:  // cirsPostInst
+                    ((EngineStatusRec) bean).setCirsPostInst((Integer) newValue);
+                    return;
+                case 1906039106:  // lastRpDate
+                    ((EngineStatusRec) bean).setLastRpDate((Date) newValue);
+                    return;
+                case 1906557720:  // lastRpUnit
+                    ((EngineStatusRec) bean).setLastRpUnit((String) newValue);
+                    return;
+                case 2143044585:  // installDate
+                    ((EngineStatusRec) bean).setInstallDate((Date) newValue);
+                    return;
+                case 900410951:  // installANO
+                    ((EngineStatusRec) bean).setInstallANO((String) newValue);
+                    return;
+                case 900426425:  // installPos
+                    ((EngineStatusRec) bean).setInstallPos((String) newValue);
+                    return;
+                case -879510978:  // tdDate
+                    ((EngineStatusRec) bean).setTdDate((Date) newValue);
+                    return;
+                case 110172498:  // tdANO
+                    ((EngineStatusRec) bean).setTdANO((String) newValue);
+                    return;
+                case 110186762:  // tdPIS
+                    ((EngineStatusRec) bean).setTdPIS((String) newValue);
+                    return;
+                case -1495958567:  // tdCause
+                    ((EngineStatusRec) bean).setTdCause((String) newValue);
+                    return;
+                case 1439990710:  // engineStat
+                    ((EngineStatusRec) bean).setEngineStat((String) newValue);
+                    return;
+                case 1093305835:  // repDate
+                    ((EngineStatusRec) bean).setRepDate((Date) newValue);
+                    return;
+                case 1093824449:  // repUnit
+                    ((EngineStatusRec) bean).setRepUnit((String) newValue);
+                    return;
+                case 1081300062:  // recDate
+                    ((EngineStatusRec) bean).setRecDate((Date) newValue);
+                    return;
+                case -934624384:  // remark
+                    ((EngineStatusRec) bean).setRemark((String) newValue);
+                    return;
+                case -1298662846:  // engine
+                    ((EngineStatusRec) bean).setEngine((Engine) newValue);
+                    return;
+            }
+            super.propertySet(bean, propertyName, newValue, quiet);
+        }
+
+    }
+
+    ///CLOVER:ON
+    //-------------------------- AUTOGENERATED END --------------------------
 }

@@ -1,6 +1,6 @@
 package com.aedms.core.entities.source;
 
-import java.io.Serializable;
+import com.aedms.core.entities.AedmsEntity;
 import java.util.Date;
 import java.util.Set;
 
@@ -17,10 +17,20 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
-import com.aedms.core.entities.eo.EOOrder;
 
 import fr.lteconsulting.Mandatory;
 import fr.lteconsulting.UseBuilderGenerator;
+import org.joda.beans.BeanDefinition;
+import org.joda.beans.PropertyDefinition;
+import java.util.Map;
+import org.joda.beans.Bean;
+import org.joda.beans.BeanBuilder;
+import org.joda.beans.JodaBeanUtils;
+import org.joda.beans.MetaProperty;
+import org.joda.beans.Property;
+import org.joda.beans.impl.direct.DirectBeanBuilder;
+import org.joda.beans.impl.direct.DirectMetaProperty;
+import org.joda.beans.impl.direct.DirectMetaPropertyMap;
 
 
 
@@ -33,286 +43,965 @@ import fr.lteconsulting.UseBuilderGenerator;
 @Entity
 @Table(name="ENGINE")
 //@Audited // Cause error: An audited relation to a not audited entity
-public class Engine implements Serializable {
+@BeanDefinition
+public class Engine extends AedmsEntity {
 
     private static final long serialVersionUID = 1L;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
+    @PropertyDefinition
     private long id;
     
     @Column(name = "FLEET")
+    @PropertyDefinition
     private String fleet;
     
     @Column(name = "SUB_FLEET")
+    @PropertyDefinition
     private String subFleet;
     
     @Column(name = "SERIAL_NO")
+    @PropertyDefinition
     private String serialNo;
     
     @Column(name = "MODEL")
+    @PropertyDefinition
     private String model;
     
     @Column(name = "SN")
+    @PropertyDefinition
     private String SN;
     
     @Column(name = "MANUFACTURE_DATE")
     @Temporal(javax.persistence.TemporalType.DATE)
+    @PropertyDefinition
     private Date manufactureDate;
     
     @Column(name = "RENT_DATE")
     @Temporal(javax.persistence.TemporalType.DATE)
+    @PropertyDefinition
     private Date rentDate;
     
     @Column(name = "LEASE_HOLD")
+    @PropertyDefinition
     private String leaseHold;
     
     @Column(name = "LEASE_HOLDER")
+    @PropertyDefinition
     private String leaseHolder;
     
     @Column(name = "OPR")
+    @PropertyDefinition
     private String opr;
     
     @Column(name = "REMARK")
+    @PropertyDefinition
     private String remark;
 
-   
-    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="engine")
-    private Set<EngineOperationRec>   engineOprRecs; 
-	
-    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="engine")
-    private Set<EngineStatusRec>   engineStatRecs; 
+    //@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="engine")
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="engine")
+    @PropertyDefinition
+    private Set<EngineOperationRec> engineOprRecs; 
     
-	@ManyToOne
+    //@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="engine")
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="engine")
+    @PropertyDefinition
+    private Set<EngineStatusRec> engineStatRecs; 
+    
+    @ManyToOne
     @JoinColumn(name = "AIRCRAFT_ID")
-	private AirCraft aircraft;
+    @PropertyDefinition
+    private AirCraft aircraft;
     
-	/** Constructor block */
-	public Engine(){}
-	
-	
-	@UseBuilderGenerator
+    /** Constructor block */
+    public Engine(){}
+    
+    
+    @UseBuilderGenerator
     public Engine(@Mandatory String fleet, @Mandatory String subFleet, @Mandatory  String serialNo, @Mandatory  String model, @Mandatory  String sN, @Mandatory  Date manufactureDate,
-			Date rentDate, String leaseHold, String leaseHolder, String opr, String remark,
-			Set<EngineOperationRec> engineOprRecs, Set<EngineStatusRec> engineStatRecs, AirCraft aircraft) {
-		super();
-		this.fleet = fleet;
-		this.subFleet = subFleet;
-		this.serialNo = serialNo;
-		this.model = model;
-		SN = sN;
-		this.manufactureDate = manufactureDate;
-		this.rentDate = rentDate;
-		this.leaseHold = leaseHold;
-		this.leaseHolder = leaseHolder;
-		this.opr = opr;
-		this.remark = remark;
-		this.engineOprRecs = engineOprRecs;
-		this.engineStatRecs = engineStatRecs;
-		this.aircraft = aircraft;
-	}
-
-
-
-	public AirCraft getAircraft() {
-		return aircraft;
-	}
-
-
-	public void setAircraft(AirCraft aircraft) {
-		this.aircraft = aircraft;
-	}
-
-
-	@Override
-	public String toString() {
-		return "Engine [id=" + id + ", fleet=" + fleet + ", subFleet=" + subFleet + ", serialNo=" + serialNo
-				+ ", model=" + model + ", SN=" + SN + ", manufactureDate=" + manufactureDate + ", rentDate=" + rentDate
-				+ ", leaseHold=" + leaseHold + ", leaseHolder=" + leaseHolder + ", opr=" + opr + ", remark=" + remark
-				+ "]";
-	}
+            Date rentDate, String leaseHold, String leaseHolder, String opr, String remark,
+            Set<EngineOperationRec> engineOprRecs, Set<EngineStatusRec> engineStatRecs, AirCraft aircraft) {
+        super();
+        this.fleet = fleet;
+        this.subFleet = subFleet;
+        this.serialNo = serialNo;
+        this.model = model;
+        SN = sN;
+        this.manufactureDate = manufactureDate;
+        this.rentDate = rentDate;
+        this.leaseHold = leaseHold;
+        this.leaseHolder = leaseHolder;
+        this.opr = opr;
+        this.remark = remark;
+        this.engineOprRecs = engineOprRecs;
+        this.engineStatRecs = engineStatRecs;
+        this.aircraft = aircraft;
+    }
 
     
-	public Set<EngineStatusRec> getEngineStatRecs() {
-		return engineStatRecs;
-	}
+    //------------------------- AUTOGENERATED START -------------------------
+    ///CLOVER:OFF
+    /**
+     * The meta-bean for {@code Engine}.
+     * @return the meta-bean, not null
+     */
+    public static Engine.Meta meta() {
+        return Engine.Meta.INSTANCE;
+    }
 
+    static {
+        JodaBeanUtils.registerMetaBean(Engine.Meta.INSTANCE);
+    }
 
-	public void setEngineStatRecs(Set<EngineStatusRec> engineStatRecs) {
-		this.engineStatRecs = engineStatRecs;
-	}
+    @Override
+    public Engine.Meta metaBean() {
+        return Engine.Meta.INSTANCE;
+    }
 
-
-	public Set<EngineOperationRec> getEngineOprRecs() {
-		return engineOprRecs;
-	}
-
-
-	public void setEngineOprRecs(Set<EngineOperationRec> engineOprRecs) {
-		this.engineOprRecs = engineOprRecs;
-	}
-
-
-	public long getId() {
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the id.
+     * @return the value of the property
+     */
+    public long getId() {
         return id;
     }
 
+    /**
+     * Sets the id.
+     * @param id  the new value of the property
+     */
     public void setId(long id) {
         this.id = id;
     }
 
     /**
-     * @return the fleet
+     * Gets the the {@code id} property.
+     * @return the property, not null
+     */
+    public final Property<Long> id() {
+        return metaBean().id().createProperty(this);
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the fleet.
+     * @return the value of the property
      */
     public String getFleet() {
         return fleet;
     }
 
     /**
-     * @param fleet the fleet to set
+     * Sets the fleet.
+     * @param fleet  the new value of the property
      */
     public void setFleet(String fleet) {
         this.fleet = fleet;
     }
 
     /**
-     * @return the subFleet
+     * Gets the the {@code fleet} property.
+     * @return the property, not null
+     */
+    public final Property<String> fleet() {
+        return metaBean().fleet().createProperty(this);
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the subFleet.
+     * @return the value of the property
      */
     public String getSubFleet() {
         return subFleet;
     }
 
     /**
-     * @param subFleet the subFleet to set
+     * Sets the subFleet.
+     * @param subFleet  the new value of the property
      */
     public void setSubFleet(String subFleet) {
         this.subFleet = subFleet;
     }
 
     /**
-     * @return the serialNo
+     * Gets the the {@code subFleet} property.
+     * @return the property, not null
+     */
+    public final Property<String> subFleet() {
+        return metaBean().subFleet().createProperty(this);
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the serialNo.
+     * @return the value of the property
      */
     public String getSerialNo() {
         return serialNo;
     }
 
     /**
-     * @param serialNo the serialNo to set
+     * Sets the serialNo.
+     * @param serialNo  the new value of the property
      */
     public void setSerialNo(String serialNo) {
         this.serialNo = serialNo;
     }
 
     /**
-     * @return the model
+     * Gets the the {@code serialNo} property.
+     * @return the property, not null
+     */
+    public final Property<String> serialNo() {
+        return metaBean().serialNo().createProperty(this);
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the model.
+     * @return the value of the property
      */
     public String getModel() {
         return model;
     }
 
     /**
-     * @param model the model to set
+     * Sets the model.
+     * @param model  the new value of the property
      */
     public void setModel(String model) {
         this.model = model;
     }
 
     /**
-     * @return the SN
+     * Gets the the {@code model} property.
+     * @return the property, not null
+     */
+    public final Property<String> model() {
+        return metaBean().model().createProperty(this);
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the SN.
+     * @return the value of the property
      */
     public String getSN() {
         return SN;
     }
 
     /**
-     * @param SN the SN to set
+     * Sets the SN.
+     * @param SN  the new value of the property
      */
     public void setSN(String SN) {
         this.SN = SN;
     }
 
     /**
-     * @return the manufactureDate
+     * Gets the the {@code SN} property.
+     * @return the property, not null
+     */
+    public final Property<String> SN() {
+        return metaBean().SN().createProperty(this);
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the manufactureDate.
+     * @return the value of the property
      */
     public Date getManufactureDate() {
         return manufactureDate;
     }
 
     /**
-     * @param manufactureDate the manufactureDate to set
+     * Sets the manufactureDate.
+     * @param manufactureDate  the new value of the property
      */
     public void setManufactureDate(Date manufactureDate) {
         this.manufactureDate = manufactureDate;
     }
 
     /**
-     * @return the rentDate
+     * Gets the the {@code manufactureDate} property.
+     * @return the property, not null
+     */
+    public final Property<Date> manufactureDate() {
+        return metaBean().manufactureDate().createProperty(this);
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the rentDate.
+     * @return the value of the property
      */
     public Date getRentDate() {
         return rentDate;
     }
 
     /**
-     * @param rentDate the rentDate to set
+     * Sets the rentDate.
+     * @param rentDate  the new value of the property
      */
     public void setRentDate(Date rentDate) {
         this.rentDate = rentDate;
     }
 
     /**
-     * @return the leaseHold
+     * Gets the the {@code rentDate} property.
+     * @return the property, not null
+     */
+    public final Property<Date> rentDate() {
+        return metaBean().rentDate().createProperty(this);
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the leaseHold.
+     * @return the value of the property
      */
     public String getLeaseHold() {
         return leaseHold;
     }
 
     /**
-     * @param leaseHold the leaseHold to set
+     * Sets the leaseHold.
+     * @param leaseHold  the new value of the property
      */
     public void setLeaseHold(String leaseHold) {
         this.leaseHold = leaseHold;
     }
 
     /**
-     * @return the leaseHolder
+     * Gets the the {@code leaseHold} property.
+     * @return the property, not null
+     */
+    public final Property<String> leaseHold() {
+        return metaBean().leaseHold().createProperty(this);
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the leaseHolder.
+     * @return the value of the property
      */
     public String getLeaseHolder() {
         return leaseHolder;
     }
 
     /**
-     * @param leaseHolder the leaseHolder to set
+     * Sets the leaseHolder.
+     * @param leaseHolder  the new value of the property
      */
     public void setLeaseHolder(String leaseHolder) {
         this.leaseHolder = leaseHolder;
     }
 
     /**
-     * @return the opr
+     * Gets the the {@code leaseHolder} property.
+     * @return the property, not null
+     */
+    public final Property<String> leaseHolder() {
+        return metaBean().leaseHolder().createProperty(this);
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the opr.
+     * @return the value of the property
      */
     public String getOpr() {
         return opr;
     }
 
     /**
-     * @param opr the opr to set
+     * Sets the opr.
+     * @param opr  the new value of the property
      */
     public void setOpr(String opr) {
         this.opr = opr;
     }
 
     /**
-     * @return the remark
+     * Gets the the {@code opr} property.
+     * @return the property, not null
+     */
+    public final Property<String> opr() {
+        return metaBean().opr().createProperty(this);
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the remark.
+     * @return the value of the property
      */
     public String getRemark() {
         return remark;
     }
 
     /**
-     * @param remark the remark to set
+     * Sets the remark.
+     * @param remark  the new value of the property
      */
     public void setRemark(String remark) {
         this.remark = remark;
     }
+
+    /**
+     * Gets the the {@code remark} property.
+     * @return the property, not null
+     */
+    public final Property<String> remark() {
+        return metaBean().remark().createProperty(this);
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the engineOprRecs.
+     * @return the value of the property
+     */
+    public Set<EngineOperationRec> getEngineOprRecs() {
+        return engineOprRecs;
+    }
+
+    /**
+     * Sets the engineOprRecs.
+     * @param engineOprRecs  the new value of the property
+     */
+    public void setEngineOprRecs(Set<EngineOperationRec> engineOprRecs) {
+        this.engineOprRecs = engineOprRecs;
+    }
+
+    /**
+     * Gets the the {@code engineOprRecs} property.
+     * @return the property, not null
+     */
+    public final Property<Set<EngineOperationRec>> engineOprRecs() {
+        return metaBean().engineOprRecs().createProperty(this);
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the engineStatRecs.
+     * @return the value of the property
+     */
+    public Set<EngineStatusRec> getEngineStatRecs() {
+        return engineStatRecs;
+    }
+
+    /**
+     * Sets the engineStatRecs.
+     * @param engineStatRecs  the new value of the property
+     */
+    public void setEngineStatRecs(Set<EngineStatusRec> engineStatRecs) {
+        this.engineStatRecs = engineStatRecs;
+    }
+
+    /**
+     * Gets the the {@code engineStatRecs} property.
+     * @return the property, not null
+     */
+    public final Property<Set<EngineStatusRec>> engineStatRecs() {
+        return metaBean().engineStatRecs().createProperty(this);
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the aircraft.
+     * @return the value of the property
+     */
+    public AirCraft getAircraft() {
+        return aircraft;
+    }
+
+    /**
+     * Sets the aircraft.
+     * @param aircraft  the new value of the property
+     */
+    public void setAircraft(AirCraft aircraft) {
+        this.aircraft = aircraft;
+    }
+
+    /**
+     * Gets the the {@code aircraft} property.
+     * @return the property, not null
+     */
+    public final Property<AirCraft> aircraft() {
+        return metaBean().aircraft().createProperty(this);
+    }
+
+    //-----------------------------------------------------------------------
+    @Override
+    public Engine clone() {
+        return JodaBeanUtils.cloneAlways(this);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj != null && obj.getClass() == this.getClass()) {
+            Engine other = (Engine) obj;
+            return (getId() == other.getId()) &&
+                    JodaBeanUtils.equal(getFleet(), other.getFleet()) &&
+                    JodaBeanUtils.equal(getSubFleet(), other.getSubFleet()) &&
+                    JodaBeanUtils.equal(getSerialNo(), other.getSerialNo()) &&
+                    JodaBeanUtils.equal(getModel(), other.getModel()) &&
+                    JodaBeanUtils.equal(getSN(), other.getSN()) &&
+                    JodaBeanUtils.equal(getManufactureDate(), other.getManufactureDate()) &&
+                    JodaBeanUtils.equal(getRentDate(), other.getRentDate()) &&
+                    JodaBeanUtils.equal(getLeaseHold(), other.getLeaseHold()) &&
+                    JodaBeanUtils.equal(getLeaseHolder(), other.getLeaseHolder()) &&
+                    JodaBeanUtils.equal(getOpr(), other.getOpr()) &&
+                    JodaBeanUtils.equal(getRemark(), other.getRemark()) &&
+                    JodaBeanUtils.equal(getEngineOprRecs(), other.getEngineOprRecs()) &&
+                    JodaBeanUtils.equal(getEngineStatRecs(), other.getEngineStatRecs()) &&
+                    JodaBeanUtils.equal(getAircraft(), other.getAircraft()) &&
+                    super.equals(obj);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = hash * 31 + JodaBeanUtils.hashCode(getId());
+        hash = hash * 31 + JodaBeanUtils.hashCode(getFleet());
+        hash = hash * 31 + JodaBeanUtils.hashCode(getSubFleet());
+        hash = hash * 31 + JodaBeanUtils.hashCode(getSerialNo());
+        hash = hash * 31 + JodaBeanUtils.hashCode(getModel());
+        hash = hash * 31 + JodaBeanUtils.hashCode(getSN());
+        hash = hash * 31 + JodaBeanUtils.hashCode(getManufactureDate());
+        hash = hash * 31 + JodaBeanUtils.hashCode(getRentDate());
+        hash = hash * 31 + JodaBeanUtils.hashCode(getLeaseHold());
+        hash = hash * 31 + JodaBeanUtils.hashCode(getLeaseHolder());
+        hash = hash * 31 + JodaBeanUtils.hashCode(getOpr());
+        hash = hash * 31 + JodaBeanUtils.hashCode(getRemark());
+        hash = hash * 31 + JodaBeanUtils.hashCode(getEngineOprRecs());
+        hash = hash * 31 + JodaBeanUtils.hashCode(getEngineStatRecs());
+        hash = hash * 31 + JodaBeanUtils.hashCode(getAircraft());
+        return hash ^ super.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder buf = new StringBuilder(512);
+        buf.append("Engine{");
+        int len = buf.length();
+        toString(buf);
+        if (buf.length() > len) {
+            buf.setLength(buf.length() - 2);
+        }
+        buf.append('}');
+        return buf.toString();
+    }
+
+    @Override
+    protected void toString(StringBuilder buf) {
+        super.toString(buf);
+        buf.append("id").append('=').append(JodaBeanUtils.toString(getId())).append(',').append(' ');
+        buf.append("fleet").append('=').append(JodaBeanUtils.toString(getFleet())).append(',').append(' ');
+        buf.append("subFleet").append('=').append(JodaBeanUtils.toString(getSubFleet())).append(',').append(' ');
+        buf.append("serialNo").append('=').append(JodaBeanUtils.toString(getSerialNo())).append(',').append(' ');
+        buf.append("model").append('=').append(JodaBeanUtils.toString(getModel())).append(',').append(' ');
+        buf.append("SN").append('=').append(JodaBeanUtils.toString(getSN())).append(',').append(' ');
+        buf.append("manufactureDate").append('=').append(JodaBeanUtils.toString(getManufactureDate())).append(',').append(' ');
+        buf.append("rentDate").append('=').append(JodaBeanUtils.toString(getRentDate())).append(',').append(' ');
+        buf.append("leaseHold").append('=').append(JodaBeanUtils.toString(getLeaseHold())).append(',').append(' ');
+        buf.append("leaseHolder").append('=').append(JodaBeanUtils.toString(getLeaseHolder())).append(',').append(' ');
+        buf.append("opr").append('=').append(JodaBeanUtils.toString(getOpr())).append(',').append(' ');
+        buf.append("remark").append('=').append(JodaBeanUtils.toString(getRemark())).append(',').append(' ');
+        buf.append("engineOprRecs").append('=').append(JodaBeanUtils.toString(getEngineOprRecs())).append(',').append(' ');
+        buf.append("engineStatRecs").append('=').append(JodaBeanUtils.toString(getEngineStatRecs())).append(',').append(' ');
+        buf.append("aircraft").append('=').append(JodaBeanUtils.toString(getAircraft())).append(',').append(' ');
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * The meta-bean for {@code Engine}.
+     */
+    public static class Meta extends AedmsEntity.Meta {
+        /**
+         * The singleton instance of the meta-bean.
+         */
+        static final Meta INSTANCE = new Meta();
+
+        /**
+         * The meta-property for the {@code id} property.
+         */
+        private final MetaProperty<Long> id = DirectMetaProperty.ofReadWrite(
+                this, "id", Engine.class, Long.TYPE);
+        /**
+         * The meta-property for the {@code fleet} property.
+         */
+        private final MetaProperty<String> fleet = DirectMetaProperty.ofReadWrite(
+                this, "fleet", Engine.class, String.class);
+        /**
+         * The meta-property for the {@code subFleet} property.
+         */
+        private final MetaProperty<String> subFleet = DirectMetaProperty.ofReadWrite(
+                this, "subFleet", Engine.class, String.class);
+        /**
+         * The meta-property for the {@code serialNo} property.
+         */
+        private final MetaProperty<String> serialNo = DirectMetaProperty.ofReadWrite(
+                this, "serialNo", Engine.class, String.class);
+        /**
+         * The meta-property for the {@code model} property.
+         */
+        private final MetaProperty<String> model = DirectMetaProperty.ofReadWrite(
+                this, "model", Engine.class, String.class);
+        /**
+         * The meta-property for the {@code SN} property.
+         */
+        private final MetaProperty<String> SN = DirectMetaProperty.ofReadWrite(
+                this, "SN", Engine.class, String.class);
+        /**
+         * The meta-property for the {@code manufactureDate} property.
+         */
+        private final MetaProperty<Date> manufactureDate = DirectMetaProperty.ofReadWrite(
+                this, "manufactureDate", Engine.class, Date.class);
+        /**
+         * The meta-property for the {@code rentDate} property.
+         */
+        private final MetaProperty<Date> rentDate = DirectMetaProperty.ofReadWrite(
+                this, "rentDate", Engine.class, Date.class);
+        /**
+         * The meta-property for the {@code leaseHold} property.
+         */
+        private final MetaProperty<String> leaseHold = DirectMetaProperty.ofReadWrite(
+                this, "leaseHold", Engine.class, String.class);
+        /**
+         * The meta-property for the {@code leaseHolder} property.
+         */
+        private final MetaProperty<String> leaseHolder = DirectMetaProperty.ofReadWrite(
+                this, "leaseHolder", Engine.class, String.class);
+        /**
+         * The meta-property for the {@code opr} property.
+         */
+        private final MetaProperty<String> opr = DirectMetaProperty.ofReadWrite(
+                this, "opr", Engine.class, String.class);
+        /**
+         * The meta-property for the {@code remark} property.
+         */
+        private final MetaProperty<String> remark = DirectMetaProperty.ofReadWrite(
+                this, "remark", Engine.class, String.class);
+        /**
+         * The meta-property for the {@code engineOprRecs} property.
+         */
+        @SuppressWarnings({"unchecked", "rawtypes" })
+        private final MetaProperty<Set<EngineOperationRec>> engineOprRecs = DirectMetaProperty.ofReadWrite(
+                this, "engineOprRecs", Engine.class, (Class) Set.class);
+        /**
+         * The meta-property for the {@code engineStatRecs} property.
+         */
+        @SuppressWarnings({"unchecked", "rawtypes" })
+        private final MetaProperty<Set<EngineStatusRec>> engineStatRecs = DirectMetaProperty.ofReadWrite(
+                this, "engineStatRecs", Engine.class, (Class) Set.class);
+        /**
+         * The meta-property for the {@code aircraft} property.
+         */
+        private final MetaProperty<AirCraft> aircraft = DirectMetaProperty.ofReadWrite(
+                this, "aircraft", Engine.class, AirCraft.class);
+        /**
+         * The meta-properties.
+         */
+        private final Map<String, MetaProperty<?>> metaPropertyMap$ = new DirectMetaPropertyMap(
+                this, (DirectMetaPropertyMap) super.metaPropertyMap(),
+                "id",
+                "fleet",
+                "subFleet",
+                "serialNo",
+                "model",
+                "SN",
+                "manufactureDate",
+                "rentDate",
+                "leaseHold",
+                "leaseHolder",
+                "opr",
+                "remark",
+                "engineOprRecs",
+                "engineStatRecs",
+                "aircraft");
+
+        /**
+         * Restricted constructor.
+         */
+        protected Meta() {
+        }
+
+        @Override
+        protected MetaProperty<?> metaPropertyGet(String propertyName) {
+            switch (propertyName.hashCode()) {
+                case 3355:  // id
+                    return id;
+                case 97516878:  // fleet
+                    return fleet;
+                case -2102905106:  // subFleet
+                    return subFleet;
+                case 1366973141:  // serialNo
+                    return serialNo;
+                case 104069929:  // model
+                    return model;
+                case 2651:  // SN
+                    return SN;
+                case 416714767:  // manufactureDate
+                    return manufactureDate;
+                case -481068409:  // rentDate
+                    return rentDate;
+                case 1575025209:  // leaseHold
+                    return leaseHold;
+                case 1770740902:  // leaseHolder
+                    return leaseHolder;
+                case 110257:  // opr
+                    return opr;
+                case -934624384:  // remark
+                    return remark;
+                case 1275112338:  // engineOprRecs
+                    return engineOprRecs;
+                case -1945729351:  // engineStatRecs
+                    return engineStatRecs;
+                case -688838890:  // aircraft
+                    return aircraft;
+            }
+            return super.metaPropertyGet(propertyName);
+        }
+
+        @Override
+        public BeanBuilder<? extends Engine> builder() {
+            return new DirectBeanBuilder<Engine>(new Engine());
+        }
+
+        @Override
+        public Class<? extends Engine> beanType() {
+            return Engine.class;
+        }
+
+        @Override
+        public Map<String, MetaProperty<?>> metaPropertyMap() {
+            return metaPropertyMap$;
+        }
+
+        //-----------------------------------------------------------------------
+        /**
+         * The meta-property for the {@code id} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<Long> id() {
+            return id;
+        }
+
+        /**
+         * The meta-property for the {@code fleet} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<String> fleet() {
+            return fleet;
+        }
+
+        /**
+         * The meta-property for the {@code subFleet} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<String> subFleet() {
+            return subFleet;
+        }
+
+        /**
+         * The meta-property for the {@code serialNo} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<String> serialNo() {
+            return serialNo;
+        }
+
+        /**
+         * The meta-property for the {@code model} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<String> model() {
+            return model;
+        }
+
+        /**
+         * The meta-property for the {@code SN} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<String> SN() {
+            return SN;
+        }
+
+        /**
+         * The meta-property for the {@code manufactureDate} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<Date> manufactureDate() {
+            return manufactureDate;
+        }
+
+        /**
+         * The meta-property for the {@code rentDate} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<Date> rentDate() {
+            return rentDate;
+        }
+
+        /**
+         * The meta-property for the {@code leaseHold} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<String> leaseHold() {
+            return leaseHold;
+        }
+
+        /**
+         * The meta-property for the {@code leaseHolder} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<String> leaseHolder() {
+            return leaseHolder;
+        }
+
+        /**
+         * The meta-property for the {@code opr} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<String> opr() {
+            return opr;
+        }
+
+        /**
+         * The meta-property for the {@code remark} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<String> remark() {
+            return remark;
+        }
+
+        /**
+         * The meta-property for the {@code engineOprRecs} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<Set<EngineOperationRec>> engineOprRecs() {
+            return engineOprRecs;
+        }
+
+        /**
+         * The meta-property for the {@code engineStatRecs} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<Set<EngineStatusRec>> engineStatRecs() {
+            return engineStatRecs;
+        }
+
+        /**
+         * The meta-property for the {@code aircraft} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<AirCraft> aircraft() {
+            return aircraft;
+        }
+
+        //-----------------------------------------------------------------------
+        @Override
+        protected Object propertyGet(Bean bean, String propertyName, boolean quiet) {
+            switch (propertyName.hashCode()) {
+                case 3355:  // id
+                    return ((Engine) bean).getId();
+                case 97516878:  // fleet
+                    return ((Engine) bean).getFleet();
+                case -2102905106:  // subFleet
+                    return ((Engine) bean).getSubFleet();
+                case 1366973141:  // serialNo
+                    return ((Engine) bean).getSerialNo();
+                case 104069929:  // model
+                    return ((Engine) bean).getModel();
+                case 2651:  // SN
+                    return ((Engine) bean).getSN();
+                case 416714767:  // manufactureDate
+                    return ((Engine) bean).getManufactureDate();
+                case -481068409:  // rentDate
+                    return ((Engine) bean).getRentDate();
+                case 1575025209:  // leaseHold
+                    return ((Engine) bean).getLeaseHold();
+                case 1770740902:  // leaseHolder
+                    return ((Engine) bean).getLeaseHolder();
+                case 110257:  // opr
+                    return ((Engine) bean).getOpr();
+                case -934624384:  // remark
+                    return ((Engine) bean).getRemark();
+                case 1275112338:  // engineOprRecs
+                    return ((Engine) bean).getEngineOprRecs();
+                case -1945729351:  // engineStatRecs
+                    return ((Engine) bean).getEngineStatRecs();
+                case -688838890:  // aircraft
+                    return ((Engine) bean).getAircraft();
+            }
+            return super.propertyGet(bean, propertyName, quiet);
+        }
+
+        @SuppressWarnings("unchecked")
+        @Override
+        protected void propertySet(Bean bean, String propertyName, Object newValue, boolean quiet) {
+            switch (propertyName.hashCode()) {
+                case 3355:  // id
+                    ((Engine) bean).setId((Long) newValue);
+                    return;
+                case 97516878:  // fleet
+                    ((Engine) bean).setFleet((String) newValue);
+                    return;
+                case -2102905106:  // subFleet
+                    ((Engine) bean).setSubFleet((String) newValue);
+                    return;
+                case 1366973141:  // serialNo
+                    ((Engine) bean).setSerialNo((String) newValue);
+                    return;
+                case 104069929:  // model
+                    ((Engine) bean).setModel((String) newValue);
+                    return;
+                case 2651:  // SN
+                    ((Engine) bean).setSN((String) newValue);
+                    return;
+                case 416714767:  // manufactureDate
+                    ((Engine) bean).setManufactureDate((Date) newValue);
+                    return;
+                case -481068409:  // rentDate
+                    ((Engine) bean).setRentDate((Date) newValue);
+                    return;
+                case 1575025209:  // leaseHold
+                    ((Engine) bean).setLeaseHold((String) newValue);
+                    return;
+                case 1770740902:  // leaseHolder
+                    ((Engine) bean).setLeaseHolder((String) newValue);
+                    return;
+                case 110257:  // opr
+                    ((Engine) bean).setOpr((String) newValue);
+                    return;
+                case -934624384:  // remark
+                    ((Engine) bean).setRemark((String) newValue);
+                    return;
+                case 1275112338:  // engineOprRecs
+                    ((Engine) bean).setEngineOprRecs((Set<EngineOperationRec>) newValue);
+                    return;
+                case -1945729351:  // engineStatRecs
+                    ((Engine) bean).setEngineStatRecs((Set<EngineStatusRec>) newValue);
+                    return;
+                case -688838890:  // aircraft
+                    ((Engine) bean).setAircraft((AirCraft) newValue);
+                    return;
+            }
+            super.propertySet(bean, propertyName, newValue, quiet);
+        }
+
+    }
+
+    ///CLOVER:ON
+    //-------------------------- AUTOGENERATED END --------------------------
 }

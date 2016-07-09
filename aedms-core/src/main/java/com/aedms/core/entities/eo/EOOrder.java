@@ -1,6 +1,7 @@
 package com.aedms.core.entities.eo;
 
-import java.io.Serializable;
+import com.aedms.core.entities.AedmsEntity;
+import fr.lteconsulting.UseBuilderGenerator;
 import java.util.Date;
 
 import java.util.Map;
@@ -28,20 +29,16 @@ import org.joda.beans.MetaProperty;
 import org.joda.beans.Property;
 import org.joda.beans.PropertyDefinition;
 import org.joda.beans.impl.direct.DirectBeanBuilder;
-import org.joda.beans.impl.direct.DirectMetaBean;
 import org.joda.beans.impl.direct.DirectMetaProperty;
 import org.joda.beans.impl.direct.DirectMetaPropertyMap;
 
-import com.aedms.core.entities.source.Organization;
 
-import fr.lteconsulting.Mandatory;
-import fr.lteconsulting.UseBuilderGenerator;
 
 
 @Entity
 @Table(name = "EO_ORDER")
 @BeanDefinition
-public class EOOrder implements Serializable, Bean{
+public class EOOrder extends AedmsEntity {
 
     private static final long serialVersionUID = 1L;
 
@@ -279,13 +276,124 @@ public class EOOrder implements Serializable, Bean{
     
     public EOOrder(){}
     
+    /**
+     * 
+     * @param eoNumber
+     * @param eoType
+     * @param eoClass
+     * @param eoSubject
+     * @param description
+     * @param issueDate
+     * @param actionType
+     * @param ata
+     * @param stc
+     * @param mda
+     * @param acModelAffected
+     * @param apuModelAffected
+     * @param ldModelAffected
+     * @param engineModelAffected
+     * @param isReInspec
+     * @param finalLmtDescr
+     * @param finalLimit
+     * @param intervalLimit
+     * @param initialLimit
+     * @param initialLimitDescr
+     * @param timeIntervalDescr
+     * @param isWTORBLAffected
+     * @param isELDAffected
+     * @param isPubAffected
+     * @param eoAffectedPubs
+     * @param isSftwareAffected
+     * @param specificFeedback
+     * @param addressOfFeedback
+     * @param emailOfFeedback
+     * @param faxOfFeedback
+     * @param complexity
+     * @param customer
+     * @param isImpRefit
+     * @param isSTERequired
+     * @param isMONRequired
+     * @param revRecord
+     * @param revReason
+     * @param applDescription
+     * @param materialDescr
+     * @param eoStatus
+     * @param isClaimFH
+     * @param isClaimMAT
+     * @param isTechSupReq
+     * @param epReason
+     * @param isMatCostPredicate
+     * @param matCostPredicated
+     * @param matCostCurrency
+     * @param version
+     * @param airworthDirectives 
+     */
     @UseBuilderGenerator
-    public EOOrder(@Mandatory String eoNumber, @Mandatory String eoType, @Mandatory Date issueDate) {
-        super();
+    public EOOrder(String eoNumber, String eoType, String eoClass, String eoSubject,
+                    String description, Date issueDate, String actionType, String ata, String stc,
+                    String mda, String acModelAffected, String apuModelAffected, String ldModelAffected,
+                    String engineModelAffected, boolean isReInspec, String finalLmtDescr, Integer finalLimit,
+                    Integer intervalLimit, Integer initialLimit, String initialLimitDescr,String timeIntervalDescr,
+                    boolean isWTORBLAffected, boolean isELDAffected, boolean isPubAffected, 
+                    Set<EOAffectedPub> eoAffectedPubs, boolean isSftwareAffected, 
+                    String specificFeedback,String addressOfFeedback,
+                    String emailOfFeedback, String faxOfFeedback, Integer complexity, String customer,
+                    boolean isImpRefit, boolean isSTERequired, boolean isMONRequired, String revRecord,
+                    String revReason, String applDescription, String materialDescr, String eoStatus,
+                    boolean isClaimFH, boolean isClaimMAT, boolean isTechSupReq, String epReason,
+                    boolean isMatCostPredicate, Double matCostPredicated, String matCostCurrency, String version,
+                    Set<AirworthDirective> airworthDirectives) {
         this.eoNumber = eoNumber;
         this.eoType = eoType;
+        this.eoClass = eoClass;
+        this.eoSubject = eoSubject;
+        this.description = description;
         this.issueDate = issueDate;
+        this.actionType = actionType;
+        this.ata = ata;
+        this.stc = stc;
+        this.mda = mda;
+        this.acModelAffected = acModelAffected;
+        this.apuModelAffected = apuModelAffected;
+        this.ldModelAffected = ldModelAffected;
+        this.engineModelAffected = engineModelAffected;
+        this.isReInspec = isReInspec;
+        this.finalLmtDescr = finalLmtDescr;
+        this.finalLimit = finalLimit;
+        this.initialLimit = initialLimit;
+        this.intervalLimit = intervalLimit;
+        this.initialLimitDescr = initialLimitDescr;
+        this.timeIntervalDescr = timeIntervalDescr;
+        this.isWTORBLAffected = isWTORBLAffected;
+        this.isELDAffected = isELDAffected; 
+        this.isPubAffected = isPubAffected; 
+        this.eoAffectedPubs = eoAffectedPubs;
+        this.isSftwareAffected = isSftwareAffected;
+        this.specificFeedback = specificFeedback;
+        this.addressOfFeedback = addressOfFeedback;
+        this.emailOfFeedback = emailOfFeedback;
+        this.faxOfFeedback = faxOfFeedback;
+        this.complexity = complexity;
+        this.customer = customer;
+        this.isImpRefit = isImpRefit;
+        this.isSTERequired = isSTERequired;
+        this.isMONRequired = isMONRequired;
+        this.revReason = revReason;
+        this.revRecord = revRecord;
+        this.applDescription = applDescription;
+        this.materialDescr = materialDescr;
+        this.eoStatus = eoStatus;
+        this.isClaimFH = isClaimFH;
+        this.isClaimMAT = isClaimMAT;
+        this.isTechSupReq = isTechSupReq;
+        this.epReason = epReason;
+        this.isMatCostPredicate = isMatCostPredicate;
+        this.matCostPredicated = matCostPredicated;
+        this.matCostCurrency = matCostCurrency;
+        this.version = version;
+        this.airworthDirectives = airworthDirectives;
     }
+    
     //------------------------- AUTOGENERATED START -------------------------
     ///CLOVER:OFF
     /**
@@ -303,16 +411,6 @@ public class EOOrder implements Serializable, Bean{
     @Override
     public EOOrder.Meta metaBean() {
         return EOOrder.Meta.INSTANCE;
-    }
-
-    @Override
-    public <R> Property<R> property(String propertyName) {
-        return metaBean().<R>metaProperty(propertyName).createProperty(this);
-    }
-
-    @Override
-    public Set<String> propertyNames() {
-        return metaBean().metaPropertyMap().keySet();
     }
 
     //-----------------------------------------------------------------------
@@ -1627,14 +1725,15 @@ public class EOOrder implements Serializable, Bean{
                     JodaBeanUtils.equal(getMatCostPredicated(), other.getMatCostPredicated()) &&
                     JodaBeanUtils.equal(getMatCostCurrency(), other.getMatCostCurrency()) &&
                     JodaBeanUtils.equal(getVersion(), other.getVersion()) &&
-                    JodaBeanUtils.equal(getAirworthDirectives(), other.getAirworthDirectives());
+                    JodaBeanUtils.equal(getAirworthDirectives(), other.getAirworthDirectives()) &&
+                    super.equals(obj);
         }
         return false;
     }
 
     @Override
     public int hashCode() {
-        int hash = getClass().hashCode();
+        int hash = 7;
         hash = hash * 31 + JodaBeanUtils.hashCode(getId());
         hash = hash * 31 + JodaBeanUtils.hashCode(getEoNumber());
         hash = hash * 31 + JodaBeanUtils.hashCode(getEoType());
@@ -1685,7 +1784,7 @@ public class EOOrder implements Serializable, Bean{
         hash = hash * 31 + JodaBeanUtils.hashCode(getMatCostCurrency());
         hash = hash * 31 + JodaBeanUtils.hashCode(getVersion());
         hash = hash * 31 + JodaBeanUtils.hashCode(getAirworthDirectives());
-        return hash;
+        return hash ^ super.hashCode();
     }
 
     @Override
@@ -1701,7 +1800,9 @@ public class EOOrder implements Serializable, Bean{
         return buf.toString();
     }
 
+    @Override
     protected void toString(StringBuilder buf) {
+        super.toString(buf);
         buf.append("id").append('=').append(JodaBeanUtils.toString(getId())).append(',').append(' ');
         buf.append("eoNumber").append('=').append(JodaBeanUtils.toString(getEoNumber())).append(',').append(' ');
         buf.append("eoType").append('=').append(JodaBeanUtils.toString(getEoType())).append(',').append(' ');
@@ -1758,7 +1859,7 @@ public class EOOrder implements Serializable, Bean{
     /**
      * The meta-bean for {@code EOOrder}.
      */
-    public static class Meta extends DirectMetaBean {
+    public static class Meta extends AedmsEntity.Meta {
         /**
          * The singleton instance of the meta-bean.
          */
@@ -2020,7 +2121,7 @@ public class EOOrder implements Serializable, Bean{
          * The meta-properties.
          */
         private final Map<String, MetaProperty<?>> metaPropertyMap$ = new DirectMetaPropertyMap(
-                this, null,
+                this, (DirectMetaPropertyMap) super.metaPropertyMap(),
                 "id",
                 "eoNumber",
                 "eoType",
