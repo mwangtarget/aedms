@@ -18,5 +18,10 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
+		<dependency>
+              <groupId>org.eclipse.birt.runtime</groupId>
+              <artifactId>org.eclipse.birt.runtime</artifactId>
+              <version>4.5.0</version>
+        </dependency>
     </dependencies>
 </project>
