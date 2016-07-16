@@ -1,4 +1,4 @@
-package org.aedms;
+package org.aedms.reporting;
 
 
 import java.util.HashMap;
