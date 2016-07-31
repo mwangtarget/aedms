@@ -49,9 +49,9 @@ public class App {
 	public CommandLineRunner demoEngine(EngineRepo repository, EngineStatusRecRepo engineStatRepo,
 			EngineOperationRecRepo engineOprRepo, CMISSessionUtil cMISSessionUtil) {
 		return (args) -> {
-			InputStream inputStream = ClassLoader.getSystemResourceAsStream("application-h2.properties");
-			byte[] inputBytes = ByteStreams.toByteArray(inputStream);
-			cMISSessionUtil.createDocument("application-h2.properties", inputBytes);
+           //	InputStream inputStream = ClassLoader.getSystemResourceAsStream("application-h2.properties");
+           //	byte[] inputBytes = ByteStreams.toByteArray(inputStream);
+           //	cMISSessionUtil.createDocument("application-h2.properties", inputBytes);
 			Engine engine = repository
 					.save(EngineBuilder.withFleet("ShaftEngine").withSubFleet("Turbine").withSerialNo("HP-2016-05-15")
 							.withModel("HP").withSN("123456789").withManufactureDate(new Date()).build());

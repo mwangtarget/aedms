@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableMBeanExport;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -64,6 +65,7 @@ public class ConfigCore {
     }
 
 	@Bean
+	@Lazy //To reduce the memory usage of the aedms during dev testing
 	public Session cmisSession(){
 		SessionFactory sessionFactory = SessionFactoryImpl.newInstance();
 		Map<String, String> parameter = new HashMap<String, String>();
