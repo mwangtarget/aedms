@@ -18,12 +18,14 @@ import org.apache.chemistry.opencmis.commons.definitions.PropertyDefinition;
 import org.apache.chemistry.opencmis.commons.enums.VersioningState;
 import org.apache.chemistry.opencmis.commons.impl.dataobjects.ContentStreamImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 @Component(value = "cmisSessionUtil")
 public class CMISSessionUtil {
 
 	@Autowired
+	@Lazy
 	Session cmisSession;
 
 	public Document createDocument( String fileName,  byte[] content) throws Exception {
