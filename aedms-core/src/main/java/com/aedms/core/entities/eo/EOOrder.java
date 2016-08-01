@@ -1,6 +1,8 @@
 package com.aedms.core.entities.eo;
 
 import com.aedms.core.entities.AedmsEntity;
+
+import fr.lteconsulting.Mandatory;
 import fr.lteconsulting.UseBuilderGenerator;
 import java.util.Date;
 
@@ -18,6 +20,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
@@ -162,7 +165,7 @@ public class EOOrder extends AedmsEntity {
     @PropertyDefinition
     private Boolean isPubAffected;
     
-    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="eoder")
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="eoOrder")
     @PropertyDefinition
     private Set<EOAffectedPub> eoAffectedPubs; 
      
@@ -273,64 +276,18 @@ public class EOOrder extends AedmsEntity {
     @JoinTable(name = "EOORDER_AD")
     @PropertyDefinition
     public Set<AirworthDirective> airworthDirectives;
+
+    // Link to EOPostponment
+    @OneToOne(mappedBy = "eoOrder")
+    @PropertyDefinition
+    private EOPostponement eoPostponement;
     
     public EOOrder(){}
     
-    /**
-     * 
-     * @param eoNumber
-     * @param eoType
-     * @param eoClass
-     * @param eoSubject
-     * @param description
-     * @param issueDate
-     * @param actionType
-     * @param ata
-     * @param stc
-     * @param mda
-     * @param acModelAffected
-     * @param apuModelAffected
-     * @param ldModelAffected
-     * @param engineModelAffected
-     * @param isReInspec
-     * @param finalLmtDescr
-     * @param finalLimit
-     * @param intervalLimit
-     * @param initialLimit
-     * @param initialLimitDescr
-     * @param timeIntervalDescr
-     * @param isWTORBLAffected
-     * @param isELDAffected
-     * @param isPubAffected
-     * @param eoAffectedPubs
-     * @param isSftwareAffected
-     * @param specificFeedback
-     * @param addressOfFeedback
-     * @param emailOfFeedback
-     * @param faxOfFeedback
-     * @param complexity
-     * @param customer
-     * @param isImpRefit
-     * @param isSTERequired
-     * @param isMONRequired
-     * @param revRecord
-     * @param revReason
-     * @param applDescription
-     * @param materialDescr
-     * @param eoStatus
-     * @param isClaimFH
-     * @param isClaimMAT
-     * @param isTechSupReq
-     * @param epReason
-     * @param isMatCostPredicate
-     * @param matCostPredicated
-     * @param matCostCurrency
-     * @param version
-     * @param airworthDirectives 
-     */
+  
     @UseBuilderGenerator
-    public EOOrder(String eoNumber, String eoType, String eoClass, String eoSubject,
-                    String description, Date issueDate, String actionType, String ata, String stc,
+    public EOOrder(@Mandatory String eoNumber,  @Mandatory String eoType, String eoClass, String eoSubject,
+                    String description, @Mandatory  Date issueDate, String actionType, String ata, String stc,
                     String mda, String acModelAffected, String apuModelAffected, String ldModelAffected,
                     String engineModelAffected, boolean isReInspec, String finalLmtDescr, Integer finalLimit,
                     Integer intervalLimit, Integer initialLimit, String initialLimitDescr,String timeIntervalDescr,
@@ -1664,6 +1621,31 @@ public class EOOrder extends AedmsEntity {
     }
 
     //-----------------------------------------------------------------------
+    /**
+     * Gets the eoPostponement.
+     * @return the value of the property
+     */
+    public EOPostponement getEoPostponement() {
+        return eoPostponement;
+    }
+
+    /**
+     * Sets the eoPostponement.
+     * @param eoPostponement  the new value of the property
+     */
+    public void setEoPostponement(EOPostponement eoPostponement) {
+        this.eoPostponement = eoPostponement;
+    }
+
+    /**
+     * Gets the the {@code eoPostponement} property.
+     * @return the property, not null
+     */
+    public final Property<EOPostponement> eoPostponement() {
+        return metaBean().eoPostponement().createProperty(this);
+    }
+
+    //-----------------------------------------------------------------------
     @Override
     public EOOrder clone() {
         return JodaBeanUtils.cloneAlways(this);
@@ -1726,6 +1708,7 @@ public class EOOrder extends AedmsEntity {
                     JodaBeanUtils.equal(getMatCostCurrency(), other.getMatCostCurrency()) &&
                     JodaBeanUtils.equal(getVersion(), other.getVersion()) &&
                     JodaBeanUtils.equal(getAirworthDirectives(), other.getAirworthDirectives()) &&
+                    JodaBeanUtils.equal(getEoPostponement(), other.getEoPostponement()) &&
                     super.equals(obj);
         }
         return false;
@@ -1784,12 +1767,13 @@ public class EOOrder extends AedmsEntity {
         hash = hash * 31 + JodaBeanUtils.hashCode(getMatCostCurrency());
         hash = hash * 31 + JodaBeanUtils.hashCode(getVersion());
         hash = hash * 31 + JodaBeanUtils.hashCode(getAirworthDirectives());
+        hash = hash * 31 + JodaBeanUtils.hashCode(getEoPostponement());
         return hash ^ super.hashCode();
     }
 
     @Override
     public String toString() {
-        StringBuilder buf = new StringBuilder(1632);
+        StringBuilder buf = new StringBuilder(1664);
         buf.append("EOOrder{");
         int len = buf.length();
         toString(buf);
@@ -1853,6 +1837,7 @@ public class EOOrder extends AedmsEntity {
         buf.append("matCostCurrency").append('=').append(JodaBeanUtils.toString(getMatCostCurrency())).append(',').append(' ');
         buf.append("version").append('=').append(JodaBeanUtils.toString(getVersion())).append(',').append(' ');
         buf.append("airworthDirectives").append('=').append(JodaBeanUtils.toString(getAirworthDirectives())).append(',').append(' ');
+        buf.append("eoPostponement").append('=').append(JodaBeanUtils.toString(getEoPostponement())).append(',').append(' ');
     }
 
     //-----------------------------------------------------------------------
@@ -2118,6 +2103,11 @@ public class EOOrder extends AedmsEntity {
         private final MetaProperty<Set<AirworthDirective>> airworthDirectives = DirectMetaProperty.ofReadWrite(
                 this, "airworthDirectives", EOOrder.class, (Class) Set.class);
         /**
+         * The meta-property for the {@code eoPostponement} property.
+         */
+        private final MetaProperty<EOPostponement> eoPostponement = DirectMetaProperty.ofReadWrite(
+                this, "eoPostponement", EOOrder.class, EOPostponement.class);
+        /**
          * The meta-properties.
          */
         private final Map<String, MetaProperty<?>> metaPropertyMap$ = new DirectMetaPropertyMap(
@@ -2171,7 +2161,8 @@ public class EOOrder extends AedmsEntity {
                 "matCostPredicated",
                 "matCostCurrency",
                 "version",
-                "airworthDirectives");
+                "airworthDirectives",
+                "eoPostponement");
 
         /**
          * Restricted constructor.
@@ -2282,6 +2273,8 @@ public class EOOrder extends AedmsEntity {
                     return version;
                 case 1812179624:  // airworthDirectives
                     return airworthDirectives;
+                case -1915982658:  // eoPostponement
+                    return eoPostponement;
             }
             return super.metaPropertyGet(propertyName);
         }
@@ -2702,6 +2695,14 @@ public class EOOrder extends AedmsEntity {
             return airworthDirectives;
         }
 
+        /**
+         * The meta-property for the {@code eoPostponement} property.
+         * @return the meta-property, not null
+         */
+        public final MetaProperty<EOPostponement> eoPostponement() {
+            return eoPostponement;
+        }
+
         //-----------------------------------------------------------------------
         @Override
         protected Object propertyGet(Bean bean, String propertyName, boolean quiet) {
@@ -2806,6 +2807,8 @@ public class EOOrder extends AedmsEntity {
                     return ((EOOrder) bean).getVersion();
                 case 1812179624:  // airworthDirectives
                     return ((EOOrder) bean).getAirworthDirectives();
+                case -1915982658:  // eoPostponement
+                    return ((EOOrder) bean).getEoPostponement();
             }
             return super.propertyGet(bean, propertyName, quiet);
         }
@@ -2963,6 +2966,9 @@ public class EOOrder extends AedmsEntity {
                     return;
                 case 1812179624:  // airworthDirectives
                     ((EOOrder) bean).setAirworthDirectives((Set<AirworthDirective>) newValue);
+                    return;
+                case -1915982658:  // eoPostponement
+                    ((EOOrder) bean).setEoPostponement((EOPostponement) newValue);
                     return;
             }
             super.propertySet(bean, propertyName, newValue, quiet);

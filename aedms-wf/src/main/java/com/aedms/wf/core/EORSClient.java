@@ -22,7 +22,7 @@ public class EORSClient {
 		String eoType = (String) execution.getVariable("eo_type");
 		Date issueDate = (Date) execution.getVariable("eo_issue_date");
 
-		EOOrder eoOrder = EOOrderBuilder.create().withEoNumber(eoNumber).withEoType(eoType).withIssueDate(issueDate).build();
+		EOOrder eoOrder = EOOrderBuilder.withEoNumber(eoNumber).withEoType(eoType).withIssueDate(issueDate).build();
 
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.postForObject(environment.getRequiredProperty("aedms.rs.eo"), eoOrder, EOOrder.class);

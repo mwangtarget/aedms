@@ -56,7 +56,6 @@ public class Organization extends AedmsEntity {
     
     @Column(name = "PARENT_ORG_ID")
     @PropertyDefinition
-    @OneToOne
     private Organization parentOrg;
     
     @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy = "organization")
