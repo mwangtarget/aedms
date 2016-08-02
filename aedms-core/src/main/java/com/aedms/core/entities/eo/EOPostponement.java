@@ -46,11 +46,6 @@ public class EOPostponement extends AedmsEntity {
     @PropertyDefinition
     private String reportBase;
 
-//    @Column(name = "AFFECT_ID")
-//    @OneToOne
-//    @PropertyDefinition
-//    private Affect affect;
-
     /**
      * 延期次数
      */
@@ -62,11 +57,6 @@ public class EOPostponement extends AedmsEntity {
     @PropertyDefinition
     private String lastPPDate;
 
-    // 表设计中，是OneToMay的关系。 一个TimeLimit可以被多个EO_POSTPONEMENT对象使用
-//    @Column(name = "EXTEND_NO")
-//    @OneToOne(optional = false, fetch = FetchType.LAZY, mappedBy = "eoPostponement")
-//    @PropertyDefinition
-//    private TimeLimit timeLimt;
 
     @Column(name = "PPC_DESC", length = 4000)
     @PropertyDefinition
