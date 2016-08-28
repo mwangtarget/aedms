@@ -10,7 +10,10 @@ import com.google.common.util.concurrent.ServiceManager;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-import org.apache.log4j.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 /**
  * This is the polling service entrance. 
@@ -21,7 +24,7 @@ import org.apache.log4j.Logger;
  */
 public class PollingServer {
 
-    private final Logger logger = Logger.getLogger(PollingServer.class);
+    private final Logger logger = LoggerFactory.getLogger(PollingServer.class);
     private final Set<Service> services;
     private final ServiceManager serviceManager;
 
